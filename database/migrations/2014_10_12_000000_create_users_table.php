@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('authorization_level'); // add authorization_level so users can be customers or admin or something else
+            $table->integer('authorization_level')->nullable(); // add authorization_level so users can be customers or admin or something else
             $table->timestamps();
         });
     }
