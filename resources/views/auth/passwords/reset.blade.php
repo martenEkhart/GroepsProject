@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 @extends('opmaak.app')
-=======
-@extends('layouts.app')
->>>>>>> ac83ed2f2229d6cdfd199a167804f21fbe292eb2
 
 @section('content')
 <div class="container">
