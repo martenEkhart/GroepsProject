@@ -15,6 +15,11 @@ class CreateCustomisationsTable extends Migration
     {
         Schema::create('customisations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('picture');
+            $table->int('x');
+            $table->int('y');
+            $table->int('z_layer');
+            $table->boolean('visible');
             $table->timestamps();
         });
     }
