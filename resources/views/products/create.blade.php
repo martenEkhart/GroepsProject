@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-        {!! Form::open(['action' => ['ProductsController@store'], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['ProductsController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
             {{Form::label('name', 'Name of the product')}}
 
@@ -37,12 +37,12 @@
         <div class="form-group">
             {{Form::label('category', 'Category')}}
 
-            {{ Form::select('category', ['0' => 'Cat 1', '1' => 'Cat 2'] , ['Class' => 'form-control']) }}
+            {{ Form::select('category', $categories ,null, ['Class' => 'form-control', 'placeholder' => 'Pick a category...']) }}
 
         </div>
 
         <div class="form-group">
-            {{Form::file('cover_image')}}
+            {{Form::file('image_name')}}
 
         </div>
         
