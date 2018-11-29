@@ -71,7 +71,7 @@ class ProductsController extends Controller
         }
 
 
-        if($request->category == null) {
+        if(!isset($request->category)) {
             $category = 1;
         }
 
