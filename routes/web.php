@@ -11,21 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PagesController@getIndex');
+Route::get('/contact', 'PagesController@getContact');
+Route::get('/producten', 'PagesController@getProducten');
+Route::get('/klant', 'PagesController@getKlant');
 
-Route::get('/producten', function () {
-    return view('producten');
-});
-
-Route::get('/klant', function () {
-    return view('klant');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
 
 
 

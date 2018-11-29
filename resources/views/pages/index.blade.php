@@ -1,4 +1,4 @@
-@extends('opmaak.app')
+@extends('layouts.app')
 
 @section('content')
 <h1>Index</h1>
