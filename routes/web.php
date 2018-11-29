@@ -16,7 +16,7 @@ Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 
-
+Route::resource('product', 'ProductsController');
 
 
 Auth::routes();
