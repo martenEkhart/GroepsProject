@@ -27,7 +27,7 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-
+Route::resource('/product', 'ProductsController');
 
 Auth::routes();
 
