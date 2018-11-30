@@ -8,12 +8,13 @@
 
             <div class="panel-body">
               <ul class="list-group">
-                <li class="list-group-item active"><b style= "color:black"><h3>Category:  {{$category->name}}</b></h3></li>
+                <li class="list-group-item active"><b style= "color:black"><h3 style="text-align: center">Category-{{$category->name}}</b></h3></li>
+                <li class="list-group-item"><b style= "color:black"><h4>Category Description: </b></h4><h5> {{$category->description}}</h5></li>
               </ul>
               {{-- <hr> --}}
-              <div class="card"><b><h3>Category Description:</h3>
-                <h4>{{$category->description}}</h4></b>
-              </div>
+              {{-- <div class="card"><b><h4>Category Description:</h4>
+                <h5>{{$category->description}}</h5></b>
+              </div> --}}
             </div>
         </div>
     </div>

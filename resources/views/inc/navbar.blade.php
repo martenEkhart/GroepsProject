@@ -1,22 +1,22 @@
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-sm " style= "font-size: 22px">
+        {{-- <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a> --}}
+        <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+         <b style="font-size: 28px"><p style="color: black">Menu</p></b>
         </button>
   
-        <div class="collapse navbar-collapse" id="navbarsExample03">
+        <div class="collapse navbar-collapse" id="navbarsExample03" style="color: black">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="producten">Producten</a>
+              <a class="nav-link" style="color: black" href="producten">Producten</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link disabled" href="klant">Klant</a>
+              <a class="nav-link" style="color: black" href="klant">Klant</a>
             </li>
             <li class="nav-item active">
-                    <a class="nav-link disabled" href="contact">Contact</a>
+                    <a class="nav-link" style="color: black" href="contact">Contact</a>
                   </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -34,11 +34,11 @@
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link" style="color: black" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 <li class="nav-item active">
                     @if (Route::has('register'))
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link" style="color: black" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 </li>
             @else
