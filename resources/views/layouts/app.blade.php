@@ -5,7 +5,7 @@
     <link rel="stylesheet"  href="/css/app.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>JAAW</title>
 </head>
 <body>
     @include('inc.navbar')
@@ -16,8 +16,9 @@
          @if(Request::is('/'))   
          @include('inc.showcase')
          @endif
+         
          <div class="row">
-    
+          
     
            <div class="col-md-8 col-lg-8" style="padding-top: 10px;"> 
                     @yield('content')
