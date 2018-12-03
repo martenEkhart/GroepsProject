@@ -81,7 +81,7 @@ public function handle(Request $request) {
      if ($payment->isPaid())
      {
         
-        // $payment_status = Payment::where('mollie_id',$request->id);
+        $payment_status = Payment::where('mollie_id',$request->id);
         // $payment_status->status = 2;
         // $payment_status->save();
         // $payment_to_db = new Payment();
