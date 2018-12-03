@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Mollie;
 use App\Product; 
 use App\Category; 
-use App\Payments;
+use App\Payment;
 
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class PaymentsController extends Controller
 {
 
     public function __construct()
