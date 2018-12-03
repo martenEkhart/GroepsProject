@@ -71,7 +71,7 @@ public function handle(Request $request) {
     }
 echo "test";
     $payment = Mollie::api()->payments()->get($request->id);
-    $payment = $mollie->payments->get("tr_WDqYK6vllg");
+    $payment = $mollie->payments->get($request->id);
     $payment_to_db = new Payment();
     $payment_to_db->order_id = $request->id;
     $payment_to_db->save();
