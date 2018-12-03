@@ -77,12 +77,13 @@ public function handle(Request $request) {
      $payment_to_db->save();
 
      $payment = Mollie::api()->payments()->get($payment->id);
+        vardump ($payment);
      if ($payment->isPaid())
      {
         
-        $payment_status = Payment::where('mollie_id',$payment->id);
-        $payment_status->status = '2';
-        $payment_status->save();
+        // $payment_status = Payment::where('mollie_id',$payment->id);
+        // $payment_status->status = '2';
+        // $payment_status->save();
         // $payment_to_db = new Payment();
         // $payment_to_db->mollie_id = $request->id;
         // $payment_to_db->save();
