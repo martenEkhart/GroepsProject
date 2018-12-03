@@ -75,6 +75,18 @@ public function handle(Request $request) {
      $payment_to_db = new Payment();
      $payment_to_db->mollie_id = $request->id;
      $payment_to_db->save();
+
+     $payment = Mollie::api()->payments()->get($payment->id);
+     if ($payment->isPaid())
+     {
+        
+        $payment_status = Payment::where('mollie_id',$payment->id);
+        $payment_status->status = 'paid';
+        $payment_status->save();
+        // $payment_to_db = new Payment();
+        // $payment_to_db->mollie_id = $request->id;
+        // $payment_to_db->save();
+     }
     // $payment_to_db->order_id = $request->id;
     // $payment_to_db->save();
     // if($payment->isPaid()) {
