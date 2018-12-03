@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Mollie;
+use App\Product; 
+use App\Category; 
+use App\Payment;
 
 use Illuminate\Http\Request;
 
@@ -68,10 +71,20 @@ public function handle(Request $request) {
     }
 echo "test";
     $payment = Mollie::api()->payments()->get($request->id);
-
-    if($payment->isPaid()) {
-       echo "hietsrdsfsd";
-    }
+    $payment = $mollie->payments->get("tr_WDqYK6vllg");
+    $payment_to_db = new Payment();
+    $payment_to_db->order_id = $request->id;
+    $payment_to_db->save();
+    // if($payment->isPaid()) {
+    //     $payment = new Payment();
+    //     $payment->name = $request->name;
+    //     $payment->description = $request->description;
+    //     $payment->price = $request->price;
+    //     $payment->image_name = $fileNameToStore;
+    //     $payment->stock = $request->stock;
+    //     $payment->category_id = $request->category;
+    //     $payment->save();
+    // }
 }
 
 }
