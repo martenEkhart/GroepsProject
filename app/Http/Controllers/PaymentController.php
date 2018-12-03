@@ -15,7 +15,6 @@ class PaymentController extends Controller
     public function __construct()
 {
     
-    $this->payment = Mollie::api()->payments();
 }
 
     public function preparePayment()
