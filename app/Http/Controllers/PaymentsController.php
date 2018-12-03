@@ -77,7 +77,7 @@ public function handle(Request $request) {
      $payment_to_db->save();
 
      $payment = Mollie::api()->payments()->get($payment->id);
-        vardump ($payment);
+        // vardump ($payment);
      if ($payment->isPaid())
      {
         
