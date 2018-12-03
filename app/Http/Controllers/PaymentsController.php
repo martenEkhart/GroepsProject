@@ -80,22 +80,52 @@ public function handle(Request $request) {
      if ($payment->isPaid())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
-        $payment_status->status = '2';
+        $payment_status->status = '2'; // paid
         $payment_status->save();
      }
 
-     if ($payment->isOpen())
+     else if ($payment->isOpen())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
-        $payment_status->status = '0';
+        $payment_status->status = '0'; // open
         $payment_status->save();
      }
-     if ($payment->isCanceled())
+     else if ($payment->isCanceled())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
-        $payment_status->status = '1';
+        $payment_status->status = '1'; // canceled
         $payment_status->save();
      }
+     else if ($payment->isPending())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '3'; // pending
+        $payment_status->save();
+     }
+
+     else if ($payment->isAuthorized())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '4'; // canceled
+        $payment_status->save();
+     }
+
+     else if ($payment->isExpired())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '5'; // canceled
+        $payment_status->save();
+     }
+
+     else if ($payment->isFailed())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '6'; // canceled
+        $payment_status->save();
+     }
+
+
+     
 
 }
 
