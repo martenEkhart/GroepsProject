@@ -82,7 +82,7 @@ public function handle(Request $request) {
      {
         
         $payment_status = Payment::where('mollie_id',$request->id);
-        $payment_status->status = 2;
+        $payment_status->status = '2';
         $payment_status->save();
         // $payment_to_db = new Payment();
         // $payment_to_db->mollie_id = $request->id;
