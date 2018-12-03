@@ -77,7 +77,7 @@ class ProductsController extends Controller
             // upload the image
             $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
         } else {
-            $fileNameToStore = 'noImage.png';
+            $fileNameToStore = 'noImage.jpg';
         }
 
 
@@ -175,7 +175,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        if($product->image_name != 'noImage.png') {
+        if($product->image_name != 'noImage.jpg') {
             Storage::delete('public/product_images/'.$product->image_name);
         }
         $product->delete();
