@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Mollie;
 use App\Product; 
 use App\Category; 
-use App\Payment;
+use App\Payments;
 
 use Illuminate\Http\Request;
 
