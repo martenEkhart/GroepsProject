@@ -72,9 +72,9 @@ public function handle(Request $request) {
 
 
  
-    // $payment_to_db = new Payment();
-    // $payment_to_db->order_id = $request->id;
-    // $payment_to_db->save();
+    $payment_to_db = new Payment();
+    $payment_to_db->order_id = $request->id;
+    $payment_to_db->save();
     // if($payment->isPaid()) {
     //     $payment = new Payment();
     //     $payment->name = $request->name;
