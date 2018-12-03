@@ -19,6 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // Fix Mollie 419 http error
+        'webhooks/mollie'
+        
     ];
 }

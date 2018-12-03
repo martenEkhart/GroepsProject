@@ -25,9 +25,7 @@ Route::get('/payment', 'PaymentController@preparePayment');
 // Route::post('webhooks/mollie/{id}', 'PaymentController@testPayment')->name('webhooks.mollie.callback');
 
 Route::name('webhooks.mollie')->post('webhooks/mollie', 'PaymentController@handle');
-
-
-Route::get('order/succes/{id}', 'PaymentController@handle')->name('order.success');
+Route::get('order/succes/', 'PaymentController@handle')->name('order.success');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
