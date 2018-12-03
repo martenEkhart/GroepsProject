@@ -17,6 +17,7 @@ Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 
 Route::resource('product', 'ProductsController');
+Route::resource('category', 'CategoriesController');
 
 Route::get('/payment', 'PaymentController@preparePayment');
 // Route::post('/payment', 'PaymentConroller@preparePayment');
