@@ -10,13 +10,13 @@
               <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="producten">Producten</a>
+              <a class="nav-link" style="color: black" href="/producten">Producten</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="klant">Klant</a>
+              <a class="nav-link" style="color: black" href="/klant">Klant</a>
             </li>
             <li class="nav-item active">
-                    <a class="nav-link" style="color: black" href="contact">Contact</a>
+                    <a class="nav-link" style="color: black" href="/contact">Contact</a>
                   </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
