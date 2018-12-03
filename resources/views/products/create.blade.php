@@ -33,11 +33,10 @@
         <br>
         <br>
         <br>
-        {{-- TODO: GET catagoties from database... --}}
         <div class="form-group">
             {{Form::label('category', 'Category')}}
 
-            {{ Form::select('category', $categories ,null, ['Class' => 'form-control', 'placeholder' => 'Pick a category...']) }}
+            {{ Form::select('category', $categories ,null, ['Class' => 'form-control']) }}
 
         </div>
 
