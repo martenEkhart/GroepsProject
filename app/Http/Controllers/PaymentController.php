@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+
+    public function __construct()
+{
+    $this->payment = Mollie::api()->payments();
+}
+
     public function preparePayment()
 {
     $payment = Mollie::api()->payments()->create([
     'amount' => [
         'currency' => 'EUR',
-        'value' => '10.00', // You must send the correct number of decimals, thus we enforce the use of strings
+        'value' => '9.95', // You must send the correct number of decimals, thus we enforce the use of strings
     ],
     'description' => 'My first API payment',
     'webhookUrl' => route('webhooks.mollie'),

@@ -31,8 +31,17 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('name', 'id')->prepend('Choose a category', '');;
-        // dd($categories);
+        $categories = Category::pluck('name', 'id');
+
+        // if there is no category yet make a default category
+        if(count($categories) == 0) {
+            $category = new Category();
+            $category->name = 'Default category';
+            $category->description = 'This is the default category';
+            $category->save();
+        }
+        $categories = Category::pluck('name', 'id');
+
         return view('products.create')->with('categories', $categories);
     }
 
@@ -68,12 +77,7 @@ class ProductsController extends Controller
             // upload the image
             $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
         } else {
-            $fileNameToStore = 'noImage.png';
-        }
-
-
-        if(!isset($request->category)) {
-            $category = 1;
+            $fileNameToStore = 'noImage.jpg';
         }
 
 
@@ -111,13 +115,9 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $categories = Category::pluck('name', 'id');
-
-        $data = [
-            'product' => $product,
-            'categories' => $categories
-        ];
-        return view('products.edit')->with($data);
+        // find all categories and put the category of the current product first so it will be selected in the view
+        $categories = Category::pluck('name', 'id')->prepend($product->category->name, $product->category->id);
+        return view('products.edit')->with(['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -175,7 +175,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        if($product->image_name != 'noImage.png') {
+        if($product->image_name != 'noImage.jpg') {
             Storage::delete('public/product_images/'.$product->image_name);
         }
         $product->delete();
