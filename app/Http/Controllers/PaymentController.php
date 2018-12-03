@@ -14,6 +14,7 @@ class PaymentController extends Controller
 
     public function __construct()
 {
+    
     $this->payment = Mollie::api()->payments();
 }
 
@@ -70,6 +71,8 @@ public function handle(Request $request) {
         return;
     }
 echo "test";
+$mollie = new \Mollie\Api\MollieApiClient();
+
     $payment = Mollie::api()->payments()->get($request->id);
     $payment = $mollie->payments->get($request->id);
     $payment_to_db = new Payment();
