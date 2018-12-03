@@ -77,29 +77,26 @@ public function handle(Request $request) {
      $payment_to_db->save();
 
      $payment = Mollie::api()->payments()->get($request->id);
-        // vardump ($payment);
      if ($payment->isPaid())
      {
-        
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '2';
         $payment_status->save();
-        // $payment_to_db = new Payment();
-        // $payment_to_db->mollie_id = $request->id;
-        // $payment_to_db->save();
      }
-    // $payment_to_db->order_id = $request->id;
-    // $payment_to_db->save();
-    // if($payment->isPaid()) {
-    //     $payment = new Payment();
-    //     $payment->name = $request->name;
-    //     $payment->description = $request->description;
-    //     $payment->price = $request->price;
-    //     $payment->image_name = $fileNameToStore;
-    //     $payment->stock = $request->stock;
-    //     $payment->category_id = $request->category;
-    //     $payment->save();
-    // }
+
+     if ($payment->isOpen())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '0';
+        $payment_status->save();
+     }
+     if ($payment->isCanceled())
+     {
+        $payment_status = Payment::where('mollie_id',$request->id)->first();
+        $payment_status->status = '1';
+        $payment_status->save();
+     }
+
 }
 
 }
