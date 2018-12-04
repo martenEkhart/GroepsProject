@@ -44,12 +44,13 @@ public function handle(Request $request) {
         echo "test";
         return;
     }
-    
+    $payment = Mollie::api()->payments()->get($request->id);
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
+    $payment_to_db->order_id = Mollie::api()->payments()->get($request->metadata);
     $payment_to_db->save();
     // get status from mollie and determine what to do
-    $payment = Mollie::api()->payments()->get($request->id);
+    
     // switch oid van maken??:
      if ($payment->isPaid())
      {
