@@ -18,6 +18,9 @@
             <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/contact">Contact</a>
                   </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
+                  </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
               <div class="dropdown-menu" aria-labelledby="dropdown03">

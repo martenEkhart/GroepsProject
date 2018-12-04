@@ -1,16 +1,30 @@
-@extends('layouts.app')
+
+@extends('admin.index')
+
 @section('content')
-<div class="container">
-    <h1>Products</h1>
-    @if(count($products) > 0)
-        @foreach($products as $product)
-            <div class="row">
-            <a href="/product/{{$product->id}}">{{$product->name}}</a>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Latest Catagories</h3></div>
+
+                <div class="panel-body">
+                    @if(count($products))
+                        <ul class="list-group">
+                          @foreach($products as $product)
+                            <li class="list-group-item"><a href="/product/{{$product->id}}"><h4>{{$product->name}}</h4></a><p> in Stock: {{$product->stock}}</p>
+                                 <a href="/product/{{$product->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
+                            {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                            {{Form::hidden('_method','DELETE')}}
+                            {{Form::submit('Delete', ['class' => 'btn btn-danger btn-lg'])}}
+                         {!!Form::close()!!}
+                            </li>
+                            @endforeach
+                        </ul>
+                    @else
+                      <p>No Products Found</p>
+                    @endif
+                </div>
             </div>
-
-        @endforeach
-    @endif
-
-</div>
-
+        </div>
+    </div>
 @endsection

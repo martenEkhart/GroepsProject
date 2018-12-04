@@ -16,7 +16,7 @@
 
     <div class="container" style="margin-top: 10px;" >
          @if(Request::is('/'))   
-         @include('inc.showcase')
+         @include('inc.carousel')
          @endif
          
          <div class="row">
