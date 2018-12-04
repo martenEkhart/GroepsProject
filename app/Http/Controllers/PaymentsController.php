@@ -17,7 +17,7 @@ class PaymentsController extends Controller
     
 }
 
-    public function preparePayment()
+    public function preparePayment(Request $request)
 {
     $payment = Mollie::api()->payments()->create([
     'amount' => [
@@ -25,6 +25,7 @@ class PaymentsController extends Controller
         'value' => '9.95', // You must send the correct number of decimals, thus we enforce the use of strings
     ],
     'description' => 'My first API payment',
+    'metadata' =>  $request->id,
     'webhookUrl' => route('webhooks.mollie'),
     'redirectUrl' => route('order.success'),
     ]);
@@ -35,34 +36,7 @@ class PaymentsController extends Controller
     return redirect($payment->getCheckoutUrl(), 303);
 }
 
-public function testPayment(Request $request)
-{   
-    error_log($request);
-    echo "hoi";
-    die();
-    // $payment = Mollie::api()->payments()->get($payment->id);
 
-    if ($payment->isPaid())
-    {
-        echo "Payment received.";
-        // Do your thing ...
-    }
-}
-
-public function statusPayment(Request $request)
-{   
-    print_r ($request->id);
-    echo "hoi";
-
-    die();
-    // $payment = Mollie::api()->payments()->get($payment->id);
-
-    if ($payment->isPaid())
-    {
-        echo "Payment received.";
-        // Do your thing ...
-    }
-}
 
 public function handle(Request $request) {
     // Handles webhookfeedback from Mollie
@@ -76,14 +50,13 @@ public function handle(Request $request) {
     $payment_to_db->save();
     // get status from mollie and determine what to do
     $payment = Mollie::api()->payments()->get($request->id);
-    // switch van maken??:
+    // switch oid van maken??:
      if ($payment->isPaid())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '2'; // paid
         $payment_status->save();
      }
-
      else if ($payment->isOpen())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
@@ -102,28 +75,24 @@ public function handle(Request $request) {
         $payment_status->status = '3'; // pending
         $payment_status->save();
      }
-
      else if ($payment->isAuthorized())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '4'; // Authorized
         $payment_status->save();
      }
-
      else if ($payment->isExpired())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '5'; // Expired
         $payment_status->save();
      }
-
      else if ($payment->isFailed())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '6'; // Failed
         $payment_status->save();
      }
-
      else {
          // error, geen status terug gekregen van Moillie. What to do?
      }

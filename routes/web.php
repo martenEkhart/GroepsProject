@@ -19,7 +19,7 @@ Route::get('/klant', 'PagesController@getKlant');
 Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 
-Route::get('/payment', 'PaymentsController@preparePayment');
+Route::get('/payment/{id}', 'PaymentsController@preparePayment');
 // Route::post('/payment', 'PaymentConroller@preparePayment');
 // Route::get('webhooks/mollie/{id}', 'PaymentController@testPayment')->name('webhooks.mollie');
 // Route::post('webhooks/mollie/{id}', 'PaymentController@testPayment')->name('webhooks.mollie.callback');
