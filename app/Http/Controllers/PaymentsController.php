@@ -48,7 +48,7 @@ public function handle(Request $request) {
 
     $payment = Mollie::api()->payments()->get($request->id);
     $order_id = $payment->metadata;
-    $currency = $payment->currency;
+    $currency = $payment->amount;
 
     
     // Save data from Mollie to db: 
