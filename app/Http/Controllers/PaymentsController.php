@@ -47,7 +47,7 @@ public function handle(Request $request) {
 
 
     $payment = Mollie::api()->payments()->get($request->id);
-    $order_id = Mollie::api()->payments()->get($request->metadata);
+    // $order_id = Mollie::api()->payments()->get($request->metadata);
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
     // $payment_to_db->order_id = $order_id;
