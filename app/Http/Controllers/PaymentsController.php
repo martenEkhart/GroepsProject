@@ -25,7 +25,7 @@ class PaymentsController extends Controller
         'value' => '9.95', // You must send the correct number of decimals, thus we enforce the use of strings
     ],
     'description' => 'My first API payment',
-    'metadata' =>  $request->id,
+    'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
     'redirectUrl' => route('order.success'),
     ]);
@@ -47,7 +47,7 @@ public function handle(Request $request) {
 
 
     $payment = Mollie::api()->payments()->get($request->id);
-    $order_id = $payment->metadata->id;
+    $order_id = $payment->metadata->order_id;
 
     // $order_id = Mollie::api()->payments()->get($request->metadata);
     
