@@ -19,6 +19,9 @@ class PaymentsController extends Controller
 
     public function preparePayment(Request $request)
 {
+    // Amount & description uit Order Table halen!
+
+    
     $payment = Mollie::api()->payments()->create([
     'amount' => [
         'currency' => 'EUR',
@@ -41,7 +44,7 @@ class PaymentsController extends Controller
 public function handle(Request $request) {
     // Handles webhookfeedback from Mollie
     if (! $request->has('id')) {
-
+        // do something here when there is no id in the request
         return;
     }
 
@@ -60,7 +63,7 @@ public function handle(Request $request) {
     $payment_to_db->amount = $amount;
     $payment_to_db->method = $method;
     $payment_to_db->save();
-    // Get payment status from mollie and determine what to do
+    // Get payment status from Mollie and determine what to do
     
     // switch oid van maken?? + hoe dit terugkoppelen naar de gebruiker? view of views?:
      if ($payment->isPaid())
@@ -106,7 +109,7 @@ public function handle(Request $request) {
         $payment_status->save();
      }
      else {
-         // error, geen status terug gekregen van Moillie. What to do?
+         // error, geen status terug gekregen van Mollie. What to do?
      }
 
      
