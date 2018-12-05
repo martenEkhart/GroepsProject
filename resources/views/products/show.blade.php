@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <h1>{{$product->name}}</h1>
-    <img src="/storage/product_images/{{$product->image_name}}" alt="product image">
+    <img src="/product_images/{{$product->image_name}}" alt="product image">
     <div>
         Description: {{$product->description}}
     </div>
