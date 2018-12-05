@@ -48,17 +48,18 @@ public function handle(Request $request) {
 
     $payment = Mollie::api()->payments()->get($request->id);
     $order_id = $payment->metadata;
+    $currency = $payment->currency;
 
-    // $order_id = Mollie::api()->payments()->get($request->metadata);
     
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
     $payment_to_db->order_id = $order_id;
+    $payment_to_db->currency = $currency;
     $payment_to_db->save();
-    // get status from mollie and determine what to do
+    // Get payment status from mollie and determine what to do
     
-    // switch oid van maken??:
+    // switch oid van maken?? + hoe dit terugkoppelen naar de gebruiker? view of views?:
      if ($payment->isPaid())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
