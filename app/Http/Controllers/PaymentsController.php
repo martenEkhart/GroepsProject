@@ -54,7 +54,7 @@ public function handle(Request $request) {
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
-    // $payment_to_db->order_id = $order_id;
+    $payment_to_db->order_id = $order_id;
     $payment_to_db->save();
     // get status from mollie and determine what to do
     
