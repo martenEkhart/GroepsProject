@@ -1,4 +1,3 @@
-
 @extends('admin.index')
 
 @section('content')
@@ -8,12 +7,12 @@
                 <div class="panel-heading"><h3>Latest Catagories</h3></div>
 
                 <div class="panel-body">
-                    @if(count($products))
+                    @if(count($categories))
                         <ul class="list-group">
-                          @foreach($products as $product)
-                            <li class="list-group-item"><a href="/product/{{$product->id}}"><h4>{{$product->name}}</h4></a><p> in Stock: {{$product->stock}}</p>
-                                 <a href="/product/{{$product->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
-                            {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                          @foreach($categories as $category)
+                            <li class="list-group-item"><a href="/category/{{$category->id}}"><h4>{{$category->name}}</h4></a>
+                                 <a href="/category/{{$category->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
+                            {!!Form::open(['action' => ['CategoriesController@destroy', $category->id], 'method' => 'POST', 'class' => 'float-right'])!!}
                             {{Form::hidden('_method','DELETE')}}
                             {{Form::submit('Delete', ['class' => 'btn btn-danger btn-lg'])}}
                          {!!Form::close()!!}
@@ -21,7 +20,7 @@
                             @endforeach
                         </ul>
                     @else
-                      <p>No Products Found</p>
+                      <p>No Catagories Found</p>
                     @endif
                 </div>
             </div>

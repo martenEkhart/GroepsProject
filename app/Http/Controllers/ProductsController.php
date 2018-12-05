@@ -31,6 +31,11 @@ class ProductsController extends Controller
      */
     public function create()
     {
+
+        // if(Auth::user()->authorization_level != 1)
+        // {
+        //     return redirect('/login');
+        // }
         $categories = Category::pluck('name', 'id');
 
         // if there is no category yet make a default category
@@ -54,7 +59,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-
+        
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
@@ -75,9 +80,10 @@ class ProductsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
+            // $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
+            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
         } else {
-            $fileNameToStore = 'noImage.png';
+            $fileNameToStore = 'noImage.jpg';
         }
 
 
@@ -175,7 +181,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
 
-        if($product->image_name != 'noImage.png') {
+        if($product->image_name != 'noImage.jpg') {
             Storage::delete('public/product_images/'.$product->image_name);
         }
         $product->delete();

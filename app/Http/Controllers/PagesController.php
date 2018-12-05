@@ -23,5 +23,14 @@ class PagesController extends Controller
         return view('pages/klant');
     }
     
+    public function getAdmin () {
+        return view('admin/index');
+    }
+
+    public function getCategory () {
+        return view('category');
+    }
+
+
 
 }

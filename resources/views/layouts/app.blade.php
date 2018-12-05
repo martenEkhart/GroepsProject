@@ -10,11 +10,13 @@
 <body>
     @include('inc.navbar')
 
-   
+    <div class="container">
+        @include('inc.messages')
+    </div>
 
     <div class="container" style="margin-top: 10px;" >
          @if(Request::is('/'))   
-         @include('inc.showcase')
+         @include('inc.carousel')
          @endif
          
          <div class="row">
@@ -25,6 +27,7 @@
     </div>        
         </div> 
             </div> 
+           
 
             <footer id="footer" class="text-center" style= "margin-top: 45%;" >
                 <p><b>Copyright 2018 &copy; JAAW</b></p>
