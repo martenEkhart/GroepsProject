@@ -51,7 +51,7 @@ public function handle(Request $request) {
     $order_id = $payment->metadata;
     $currency = $payment->amount->currency;
     $amount = $payment->amount->value;
-    $method = $method->id;
+    $method = $methods->id;
     
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
