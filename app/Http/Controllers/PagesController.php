@@ -31,6 +31,4 @@ class PagesController extends Controller
         return view('category');
     }
 
-
-
 }

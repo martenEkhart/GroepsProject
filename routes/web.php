@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,7 @@ Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('category', 'PagesController@getCategory');
-
+// Route::get('/klant', 'PagesController@getSearch');
 Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 
@@ -31,3 +33,12 @@ Route::get('order/succes/', 'PaymentController@handle')->name('order.success');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Route::any('pages/klant',function(){
+//     $q = Input::get ( 'q' );
+//     $category = Category::where('name','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%')->get();
+//     if(count($category) > 0)
+//         return view('pages/klant')->withDetails($category)->withQuery ( $q );
+//     else return view ('pages/klant')->withMessage('No Details found. Try to search again !');
+// });
