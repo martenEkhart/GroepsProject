@@ -47,11 +47,10 @@ public function handle(Request $request) {
 
 
     $payment = Mollie::api()->payments()->get($request->id);
-    $method  = Mollie::api()->methods()->get($request->id);
     $order_id = $payment->metadata;
     $currency = $payment->amount->currency;
     $amount = $payment->amount->value;
-    $method = $methods->id;
+    $method = $payment->method;
     
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
@@ -59,7 +58,7 @@ public function handle(Request $request) {
     $payment_to_db->order_id = $order_id;
     $payment_to_db->currency = $currency;
     $payment_to_db->amount = $amount;
-    $payment_to_db->method = $method;
+    // $payment_to_db->method = $methods;
     $payment_to_db->save();
     // Get payment status from mollie and determine what to do
     
