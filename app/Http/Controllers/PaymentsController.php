@@ -41,7 +41,7 @@ class PaymentsController extends Controller
 public function handle(Request $request) {
     // Handles webhookfeedback from Mollie
     if (! $request->has('id')) {
-        echo "test";
+
         return;
     }
 
@@ -49,6 +49,7 @@ public function handle(Request $request) {
     $payment = Mollie::api()->payments()->get($request->id);
     $order_id = $payment->metadata;
     $currency = $payment->amount->currency;
+    $amount = $payment->amount->value;
 
     
     // Save data from Mollie to db: 
@@ -56,6 +57,7 @@ public function handle(Request $request) {
     $payment_to_db->mollie_id = $request->id;
     $payment_to_db->order_id = $order_id;
     $payment_to_db->currency = $currency;
+    $payment_to_db->amount = $amount;
     $payment_to_db->save();
     // Get payment status from mollie and determine what to do
     
