@@ -5,7 +5,7 @@
     <div class="row" style="margin-top: 20px;">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Latest Catagories</h3></div>
+                <div class="panel-heading"><h3>Latest Categories</h3></div>
 
                 <div class="panel-body">
                     @if(count($products))
