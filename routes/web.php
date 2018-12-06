@@ -19,18 +19,21 @@ Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
 
+Route::get('/m[m', 'CustomisationsController@dataToJavascript');
+
+
+
 
 // Route::get('product', 'PagesController@getProduct');
 Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 Route::resource('customer', 'CustomersController');
+Route::resource('customisation', 'CustomisationsController');
+
+
 
 
 Route::get('/payment/{order_id}', 'PaymentsController@preparePayment');
-// Route::post('/payment', 'PaymentConroller@preparePayment');
-// Route::get('webhooks/mollie/{id}', 'PaymentController@testPayment')->name('webhooks.mollie');
-// Route::post('webhooks/mollie/{id}', 'PaymentController@testPayment')->name('webhooks.mollie.callback');
-
 Route::name('webhooks.mollie')->post('webhooks/mollie', 'PaymentsController@handle');
 Route::get('order/succes/', 'PaymentsController@handle')->name('order.success');
 Auth::routes();
