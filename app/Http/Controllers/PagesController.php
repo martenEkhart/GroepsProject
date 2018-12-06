@@ -27,8 +27,4 @@ class PagesController extends Controller
         return view('admin/index');
     }
 
-    public function getCategory () {
-        return view('category');
-    }
-
 }

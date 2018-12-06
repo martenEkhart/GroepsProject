@@ -27,7 +27,7 @@
     </div>        
         </div> 
             </div> 
-           
+          
 
             <footer id="footer" class="text-center" style= "margin-top: 45%;" >
                 <p><b>Copyright 2018 &copy; JAAW</b></p>
