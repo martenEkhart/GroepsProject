@@ -24,6 +24,7 @@ Route::get('admin/index', 'PagesController@getAdmin');
 Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 Route::resource('customer', 'CustomersController');
+Route::resource('customisation', 'CustomisationsController');
 
 
 Route::get('/payment/{order_id}', 'PaymentsController@preparePayment');
