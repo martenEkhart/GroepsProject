@@ -9,6 +9,7 @@ class CustomisationsController extends Controller
 {
 
     public function dataToJavascript() {
+        //dd('klkl');
         $customisations = Customisation::all();
         return view('customisations.transfer', compact('customisations'));
     }
