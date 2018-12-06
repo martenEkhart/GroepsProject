@@ -153,7 +153,7 @@ class ProductsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
+            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
         }
 
         // create product
