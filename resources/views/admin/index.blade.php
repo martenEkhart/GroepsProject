@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+        @include('inc.navbar')
    <h1 style="text-align:center">Admin Page</h1> 
-   <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div>
    <div class="container" style="margin-top: 10px;" >
    <div class="row">
        <ul  class="list-group">

@@ -1,6 +1,5 @@
 <?php
 
-use App\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +17,14 @@ Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
-Route::get('category', 'PagesController@getCategory');
-// Route::get('/klant', 'PagesController@getSearch');
+
+
+
+// Route::get('product', 'PagesController@getProduct');
 Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
+Route::resource('customer', 'CustomersController');
+
 
 Route::get('/payment/{order_id}', 'PaymentsController@preparePayment');
 // Route::post('/payment', 'PaymentConroller@preparePayment');
@@ -34,11 +37,3 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-
-// Route::any('pages/klant',function(){
-//     $q = Input::get ( 'q' );
-//     $category = Category::where('name','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%')->get();
-//     if(count($category) > 0)
-//         return view('pages/klant')->withDetails($category)->withQuery ( $q );
-//     else return view ('pages/klant')->withMessage('No Details found. Try to search again !');
-// });
