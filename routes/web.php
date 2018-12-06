@@ -17,6 +17,7 @@ Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
+Route::get('/search', 'ProductsController@search');
 
 Route::get('/m[m', 'CustomisationsController@dataToJavascript');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product; 
 use App\Category; 
+
 use File;
 class ProductsController extends Controller
 {
@@ -49,6 +50,13 @@ class ProductsController extends Controller
         $categories = Category::pluck('name', 'id');
 
         return view('products.create')->with('categories', $categories);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $products = Product::where('name', 'like', '%'.$search.'%')->paginate(5);
+        return view('products.index')->with('products', $products);
     }
 
     /**
