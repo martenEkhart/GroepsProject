@@ -18,6 +18,9 @@ Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 
+Route::get('/m[m', 'CustomisationsController@dataToJavascript');
+
+
 
 
 // Route::get('product', 'PagesController@getProduct');
