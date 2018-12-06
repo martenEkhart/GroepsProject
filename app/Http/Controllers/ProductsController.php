@@ -56,7 +56,7 @@ class ProductsController extends Controller
     {
         $search = $request->get('search');
         $products = Product::where('name', 'like', '%'.$search.'%')->paginate(5);
-        return view('products.index')->with('products', $products);
+        return view('inc.customer')->with('products', $products);
     }
 
     /**
