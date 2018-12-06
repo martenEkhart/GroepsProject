@@ -20,7 +20,7 @@ class PaymentsController extends Controller
     public function preparePayment(Request $request)
 {
     // Amount & description uit Order Table halen!
-
+    
     
     $payment = Mollie::api()->payments()->create([
     'amount' => [
