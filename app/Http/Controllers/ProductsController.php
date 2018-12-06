@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product; 
 use App\Category; 
+use File;
 class ProductsController extends Controller
 {
 
@@ -182,9 +183,12 @@ class ProductsController extends Controller
         $product = Product::find($id);
 
         if($product->image_name != 'noImage.jpg') {
-            Storage::delete('public/product_images/'.$product->image_name);
+            if(File::exists('product_images/' . $product->image_name)) {
+                File::delete('product_images/' . $product->image_name);
+            }
         }
         $product->delete();
+
         return redirect('product')->with('success', 'Product deleted');
 
     }
