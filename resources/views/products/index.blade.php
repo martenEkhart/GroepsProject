@@ -20,20 +20,11 @@
 <div class="row" style="margin-top: 20px;">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-<<<<<<< HEAD
                 <div class="panel-heading"><h3>Latest Categories</h3></div>
-
-                <div class="panel-body">
-                    @if(count($products))
-                        <ul class="list-group">
-                          @foreach($products as $product)
-=======
-                <div class="panel-heading"><h3>Latest Catagories</h3></div>
                     <div class="panel-body">
                         @if(count($products))
                             <ul class="list-group">
                              @foreach($products as $product)
->>>>>>> 6b9d593687eab456bdc6b287ec2fc2ec2babdbbf
                             <li class="list-group-item"><a href="/product/{{$product->id}}"><h4>{{$product->name}}</h4></a><p> in Stock: {{$product->stock}}</p>
                                  <a href="/product/{{$product->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
                             {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'float-right'])!!}
