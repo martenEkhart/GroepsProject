@@ -8,11 +8,35 @@ use Illuminate\Http\Request;
 class CustomisationsController extends Controller
 {
 
+    public function updateCustomisation($customisation) {
+        $customisation = Customisation::find($customisation);
+        $customisation->image_name = $request->input('name');
+        $customisation->x = $customisation.x;
+    }
+
     public function dataToJavascript() {
         //dd('klkl');
         $customisations = Customisation::all();
         return view('customisations.transfer', compact('customisations'));
     }
+
+    public function changeData(Request $request) {
+     //   return $request->id;
+     $customisation = Customisation::find($request->id);
+     $customisation->x = $request->x;
+     $customisation->y = $request->y;
+     $customisation->save();
+    //  $customisation = Customisation::find($request->id);
+    //  $customisation->x = $request->x;
+    //  $customisation->y = $request->y;
+    //  $customisation->save();
+  return $request->x." ".$request->y;
+        // return json_decode($request,true);
+     // return array_values((array)$request);
+     
+    }
+ 
+    
 
 
     /**

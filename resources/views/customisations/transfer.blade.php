@@ -1,10 +1,9 @@
 @extends('layouts.custom')
 @section('content')
-<canvas id="canvas" style="width: 300px; height 150px; position:fixed" ></canvas>
+{{-- <canvas id="canvas" style="width: 300px; height 150px; position:fixed" ></canvas> --}}
 <div class="flex-container" style="display:flex; justify-content: space-between;">
         
     <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
-        {{-- <div id="name" style="font-size: 30px; color:blue"> </div> --}}
         <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
         <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
         <input style="height: 50px" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
@@ -69,11 +68,21 @@
    
 </div>
       
-{{-- <img id="img" src="../images/customisations/p2.png" alt="" height="auto" width="auto" style="left: 0px; position:absolute"> --}}
+{{-- <div class="flex-container" style="display:flex; justify-content: space-between;">
+        
+        <label id="name2" style="font-size: 30px; color:blue" for="btnTurnL2"></label>
+            <button id="btnTurnL2" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
+            <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
+            <input style="height: 50px" id="checkbox2" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
+                
+    
+</div> --}}
+@csrf
+<button onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')">send</button>
+    
 <div id="tixt">
 
 </div>
-
 <script>
 
 function createImg(nr) {
@@ -105,8 +114,15 @@ function createImg(nr) {
 //   im1 = document.getElementById("img");
   tixt = document.getElementById("tixt");
 
-  
+  var customisations = {!! json_encode($customisations->toArray()) !!};
+    document.getElementById("name").innerHTML = customisations[counter].name;
 
+  for(i=0; i<customisations.length; i++) {
+    createImg(i);   
+  }
+  
+  im1 = cm[0];
+   
     function updateForm() {
 
     }
@@ -127,6 +143,7 @@ function createImg(nr) {
 
     function fnVolgende(counter) {
         document.getElementById("name").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
+     //   document.getElementById("name2").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
         im1 = cm[counter];
         // im1.src = "../images/customisations/" + customisations[counter].image_name;
         // im1.style.left = customisations[counter].x;
@@ -136,6 +153,7 @@ function createImg(nr) {
         // im1.style.zIndex = customisations[counter].z_layer;
         // im1.style.opacity = customisations[counter].opacity/100;
         document.getElementById("checkbox").checked = customisations[counter].visible;
+     //   document.getElementById("checkbox2").checked = customisations[counter].visible;
     }
 
     function fnMouseZindex(e) {
@@ -146,6 +164,7 @@ function createImg(nr) {
 
     function fnMouseOpacity(e) {
         im1.style.opacity = (e.clientX-50)/(parseInt(document.getElementById("progressOpacity").style.width)*3);
+        
        // alert(e.clientX);
     }
 
@@ -170,21 +189,55 @@ function createImg(nr) {
     if(((parseInt(im1.height)<20)&&(size<1))||((parseInt(im1.style.width)>parseInt(window.innerWidth-100))&&(dx >1))) { return }  
     im1.height = im1.height*size;
     im1.width = im1.width*size;
-    //im1.style.height = parseInt(im1.style.height)*size+"px";
-      
-      
-      
-  }
+    //im1.style.height = parseInt(im1.style.height)*size+"px";     
+    }
   
-    
-  var customisations = {!! json_encode($customisations->toArray()) !!};
-    document.getElementById("name").innerHTML = customisations[counter].name;
+    function loadDoc(method, url, myFunction, div, input) {
+    if (window.XMLHttpRequest) {
+        var xhttp = new XMLHttpRequest();
+    } else {
+        var xhttp = new ActiveXObject();
+    }
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myFunction(this, div);
+        }                    
+    }
+    xhttp.open(method, url, true);
+    if (method == 'POST') {
+        alert(objToString(customisations[counter]));
+     //   alert(input);
+     //  var data = input + "=" + document.getElementById(input).value;
+        //  var data = "name=iets&waf=nog&beer=kroelie" //JSON.stringify(customisations[0]); //input + "=" + document.getElementById(input).value;
+        var data = objToString(customisations[counter]);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
+        xhttp.send(data);
+        
+    } else {
+        xhttp.send();
+    }
+}
 
-  for(i=0; i<customisations.length; i++) {
-    createImg(i);   
-  }
-  im1 = cm[0];
-   
+function buildData (nr) {
+    text = '';
+
+}
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '=' + obj[p] + '&';
+        }
+    }
+    return str;
+}
+
+function changeDiv(xhttp, div) {
+    document.getElementById(div).innerHTML = xhttp.responseText;
+}
+  
    
    </script>
 

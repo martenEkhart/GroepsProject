@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\User; 
+use Auth; 
 
 
 class CategoriesController extends Controller
 {
+
+    public function __construct()
+    {
+        // add exceptions to auth
+        $this->middleware('auth', ['except' => ['index', 'show', 'main']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +28,13 @@ class CategoriesController extends Controller
         return view('categories.index')->with('categories', $category);
     }
 
+    public function main()
+    {
+        $category = Category::All();
+    
+        return view('inc.categories')->with('categories', $category);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +42,10 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         return view('categories.create');
     }
 
@@ -39,6 +57,10 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required'
@@ -51,7 +73,7 @@ class CategoriesController extends Controller
 
           $category->save();
   
-          return redirect('/')->with('success', 'Category Added'); 
+          return redirect('/admin/index')->with('success', 'Category Added'); 
     }
 
     /**
@@ -74,6 +96,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $category = Category::find($id);
         return view('categories.edit')->with('category', $category);
     }
@@ -87,6 +113,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
       
        $category = Category::find($id);
        $category->name = $request->input('name');
@@ -95,7 +125,7 @@ class CategoriesController extends Controller
  
        $category->save();
  
-       return redirect('/')->with('success', 'Category Updated');
+       return redirect('/admin/index')->with('success', 'Category Updated');
     }
 
     /**
@@ -106,9 +136,13 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $category = category::find($id);
         $category->delete();
 
-        return redirect('/')->with('error', 'Category Removed');
+        return redirect('/admin/index')->with('error', 'Category Removed');
     }
 }

@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-sm " style= "font-size: 22px">
+  <nav class="navbar navbar-expand-sm sticky-top " style= "font-size: 22px">
         {{-- <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a> --}}
         <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
          <b style="font-size: 28px"><p style="color: black">Menu</p></b>
@@ -10,25 +10,30 @@
               <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/producten">Producten</a>
+              <a class="nav-link" style="color: black" href="/product">Producten</a>
             </li>
-            <li class="nav-item active">
+            {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/klant">Klant</a>
             </li>
             <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/contact">Contact</a>
-                  </li>
+                  </li> --}}
+                   @if(!Auth::guest())
+                   @if(Auth::user()->authorization_level == 1)
+                  
                   <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
                   </li>
-            <li class="nav-item dropdown active">
+                  @endif
+                  @endif
+            {{-- <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
               <div class="dropdown-menu" aria-labelledby="dropdown03">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
-            </li>
+            </li> --}}
           </ul>
           {{-- <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search">

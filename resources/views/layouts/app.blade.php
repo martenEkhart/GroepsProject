@@ -8,23 +8,16 @@
     <title>JAAW</title>
 </head>
 <body>
+    
     @include('inc.navbar')
 
     <div class="container">
         @include('inc.messages')
     </div>
-
-    <div class="col-md 6" style="margin-top: 20px;">
-            <form action="/search" method="get">
-              <div class="form-group">
-                  <input type="search" name="search" class="form-control">
-                  <span class="form-group-btn">
-                      <button type="submit" class="btn btn-primary">Search</button>
-                  </span>
-              </div>
-            </form>
-          </div>
-    <div class="container" style="margin-top: 10px;" >
+    @if(Request::is('/'))   
+    @include('inc.searchbar')
+    @endif
+    <div class="container" style="margin-top: 50px;" >
          @if(Request::is('/'))   
          @include('inc.carousel')
          @endif
@@ -37,8 +30,7 @@
     </div>        
         </div> 
             </div> 
-          
-
+         @yield('categories')
             <footer id="footer" class="text-center" style= "margin-top: 45%;" >
                 <p><b>Copyright 2018 &copy; JAAW</b></p>
             </footer>          
