@@ -12,23 +12,23 @@
             <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/producten">Producten</a>
             </li>
-            <li class="nav-item active">
+            {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/klant">Klant</a>
             </li>
             <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/contact">Contact</a>
-                  </li>
+                  </li> --}}
                   <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
                   </li>
-            <li class="nav-item dropdown active">
+            {{-- <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
               <div class="dropdown-menu" aria-labelledby="dropdown03">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
-            </li>
+            </li> --}}
           </ul>
           {{-- <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search">

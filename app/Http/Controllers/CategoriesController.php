@@ -13,7 +13,7 @@ class CategoriesController extends Controller
     public function __construct()
     {
         // add exceptions to auth
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'main']]);
     }
     /**
      * Display a listing of the resource.
