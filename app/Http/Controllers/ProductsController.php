@@ -70,7 +70,12 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
+
+
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
@@ -131,6 +136,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $product = Product::find($id);
         // find all categories and put the category of the current product first so it will be selected in the view
         $categories = Category::pluck('name', 'id')->prepend($product->category->name, $product->category->id);
@@ -146,6 +156,10 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
@@ -190,6 +204,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $product = Product::find($id);
 
         if($product->image_name != 'noImage.jpg') {
