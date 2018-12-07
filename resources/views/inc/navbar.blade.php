@@ -18,9 +18,14 @@
             <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/contact">Contact</a>
                   </li> --}}
+                   @if(!Auth::guest())
+                   @if(Auth::user()->authorization_level == 1)
+                  
                   <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
                   </li>
+                  @endif
+                  @endif
             {{-- <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
               <div class="dropdown-menu" aria-labelledby="dropdown03">
