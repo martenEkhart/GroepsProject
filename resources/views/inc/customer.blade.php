@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 
 @extends('layouts.app')
 @section('content')
 
 
-=======
-@extends('layouts.app')
-@section('content')
-
->>>>>>> 00fdf1479593fff821fe49893a0f3a6132ce7dab
 @if(count($products)) 
 @foreach($products as $product)
 <a href="/product/{{$product->id}}">
