@@ -1,4 +1,5 @@
-
+@extends('layouts.app')
+@section('content')
 
 @if(count($products)) 
 @foreach($products as $product)
@@ -13,3 +14,4 @@
 <small>Written on {{$product->created_at}} in {{$product->stock}}</small> 
 @endforeach
 @endif
+@endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product; 
 use App\Category; 
+use Auth;
 
 use File;
 class ProductsController extends Controller
@@ -13,7 +14,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         // add exceptions to auth
-        // $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
     /**
      * Display a listing of the resource.
@@ -34,10 +35,11 @@ class ProductsController extends Controller
     public function create()
     {
 
-        // if(Auth::user()->authorization_level != 1)
-        // {
-        //     return redirect('/login');
-        // }
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
+
         $categories = Category::pluck('name', 'id');
 
         // if there is no category yet make a default category
