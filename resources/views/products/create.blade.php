@@ -19,7 +19,7 @@
         <div class="form-group float-left">
             {{Form::label('price', 'Price of the product')}}
 
-            {{ Form::number('price', '' , ['Class' => 'form-control', 'placeholder' => 'Price']) }}
+            {{ Form::number('price', '' , ['Class' => 'form-control', 'placeholder' => 'Price', 'step'=>'any']) }}
 
         </div>
 

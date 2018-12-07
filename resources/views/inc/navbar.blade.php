@@ -10,7 +10,7 @@
               <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/producten">Producten</a>
+              <a class="nav-link" style="color: black" href="/product">Producten</a>
             </li>
             {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/klant">Klant</a>
