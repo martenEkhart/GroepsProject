@@ -14,7 +14,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         // add exceptions to auth
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
     }
     /**
      * Display a listing of the resource.
