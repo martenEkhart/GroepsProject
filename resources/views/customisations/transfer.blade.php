@@ -1,10 +1,9 @@
 @extends('layouts.custom')
 @section('content')
-<canvas id="canvas" style="width: 300px; height 150px; position:fixed" ></canvas>
+{{-- <canvas id="canvas" style="width: 300px; height 150px; position:fixed" ></canvas> --}}
 <div class="flex-container" style="display:flex; justify-content: space-between;">
         
     <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
-        {{-- <div id="name" style="font-size: 30px; color:blue"> </div> --}}
         <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
         <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
         <input style="height: 50px" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
@@ -69,7 +68,16 @@
    
 </div>
       
-{{-- <img id="img" src="../images/customisations/p2.png" alt="" height="auto" width="auto" style="left: 0px; position:absolute"> --}}
+{{-- <div class="flex-container" style="display:flex; justify-content: space-between;">
+        
+        <label id="name2" style="font-size: 30px; color:blue" for="btnTurnL2"></label>
+            <button id="btnTurnL2" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
+            <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
+            <input style="height: 50px" id="checkbox2" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
+                
+    
+    </div> --}}
+    
 <div id="tixt">
 
 </div>
@@ -105,8 +113,15 @@ function createImg(nr) {
 //   im1 = document.getElementById("img");
   tixt = document.getElementById("tixt");
 
-  
+  var customisations = {!! json_encode($customisations->toArray()) !!};
+    document.getElementById("name").innerHTML = customisations[counter].name;
 
+  for(i=0; i<customisations.length; i++) {
+    createImg(i);   
+  }
+  
+  im1 = cm[0];
+   
     function updateForm() {
 
     }
@@ -127,6 +142,7 @@ function createImg(nr) {
 
     function fnVolgende(counter) {
         document.getElementById("name").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
+     //   document.getElementById("name2").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
         im1 = cm[counter];
         // im1.src = "../images/customisations/" + customisations[counter].image_name;
         // im1.style.left = customisations[counter].x;
@@ -136,6 +152,7 @@ function createImg(nr) {
         // im1.style.zIndex = customisations[counter].z_layer;
         // im1.style.opacity = customisations[counter].opacity/100;
         document.getElementById("checkbox").checked = customisations[counter].visible;
+     //   document.getElementById("checkbox2").checked = customisations[counter].visible;
     }
 
     function fnMouseZindex(e) {
@@ -170,21 +187,11 @@ function createImg(nr) {
     if(((parseInt(im1.height)<20)&&(size<1))||((parseInt(im1.style.width)>parseInt(window.innerWidth-100))&&(dx >1))) { return }  
     im1.height = im1.height*size;
     im1.width = im1.width*size;
-    //im1.style.height = parseInt(im1.style.height)*size+"px";
-      
-      
-      
-  }
+    //im1.style.height = parseInt(im1.style.height)*size+"px";     
+    }
   
     
-  var customisations = {!! json_encode($customisations->toArray()) !!};
-    document.getElementById("name").innerHTML = customisations[counter].name;
-
-  for(i=0; i<customisations.length; i++) {
-    createImg(i);   
-  }
-  im1 = cm[0];
-   
+  
    
    </script>
 
