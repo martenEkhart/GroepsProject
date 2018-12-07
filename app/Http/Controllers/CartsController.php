@@ -19,8 +19,27 @@ class CartsController extends Controller
       
     }
 
-    public function addToCart(Request $request)
-    {
+        public function index(Request $request)
+        {
+            // to do: check if user id matches
+           
+            if (! Cart::where('id',$request->cart_id)->first()){
+                // when cart id doesnt exist, go back to products page
+                // other view eventually?
+                $products = Product::All();
+                return view('products.index')->with('products', $products);
+            }
+            else {
+               // go to cart page an show cart items
+                $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+                return view('carts.index')->with('cart_items', $cart_items);
+            }
+
+        }
+
+
+        public function addToCart(Request $request)
+        {
 
         // kijk of er al een winkelwagentje is voor deze sessie (?) zoniet maak er één aan
         // en voeg het product toe aan carts_products met het card_id en de user_id
