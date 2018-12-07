@@ -12,7 +12,7 @@
 |
 */
 
-Route::get('/', 'PagesController@getIndex')->name('HOME');
+Route::get('/', 'PagesController@getIndex')->name('home');
 Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
@@ -42,5 +42,6 @@ Auth::routes();
 Route::get('cart/{user_id}/add/{product_id}','CartsController@addToCart');
 Route::get('cart/delete/{cart_product_id}','CartsController@removeFromCart');
 Route::get('cart/empty/{cart_id}', 'CartsController@emptyCart');
+Route::get('cart/{cart_id}','CartsController@index');
 // Route::get('/home', 'HomeController@index')->name('home');
 

@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-sm " style= "font-size: 22px">
+  <nav class="navbar navbar-expand-sm sticky-top " style= "font-size: 22px">
         {{-- <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a> --}}
         <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
          <b style="font-size: 28px"><p style="color: black">Menu</p></b>

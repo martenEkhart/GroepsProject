@@ -19,8 +19,29 @@ class CartsController extends Controller
       
     }
 
-    public function addToCart(Request $request)
-    {
+        public function index(Request $request)
+        {
+            // to do: check if user id matches
+           
+            if (! Cart::where('id',$request->cart_id)->first()){
+                // when cart id doesnt exist, go back to products page
+                // other view eventually?
+                $products = Product::All();
+                return view('products.index')->with('products', $products);
+            }
+            else {
+               // go to cart page an show cart items
+                $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+                // return view('carts.index')->with('cart_items', $cart_items);
+var_dump ($cart_items->product_id);
+                // haal alle cart_items op -> haal van products alle producten op met dat product id
+            }
+
+        }
+
+
+        public function addToCart(Request $request)
+        {
 
         // kijk of er al een winkelwagentje is voor deze sessie (?) zoniet maak er één aan
         // en voeg het product toe aan carts_products met het card_id en de user_id
@@ -40,14 +61,23 @@ class CartsController extends Controller
             $this->cart_id = Cart::where('user_id',$user_id)->first();
         }
 
-        // voeg een item (product_id) toe aan carts_products met het juiste cart id. Ook checken of het cart_id hoort bij deze user
-        // amount nog verder uitwerken!
-        $target_cart = $this->cart_id->id;
-        $product_to_cart = new Cart_Product;
-        $product_to_cart->cart_id = $target_cart;
-        $product_to_cart->product_id = $request->product_id;
-        $product_to_cart->amount = "1";
-        $product_to_cart->save();
+        // voeg een item (product_id) toe aan carts_products met het juiste cart id. Ook checken of het cart_id hoort bij deze user en amount nog verder uitwerken!
+      
+        // wanneer cart_id en product_id al bestaan alleen de amount ophogen van een product
+
+        if (Cart_Product::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first()){
+            // wanneer cart_id en product_id al bestaan alleen de amount ophogen van een product
+            
+        }
+        else {
+            $target_cart = $this->cart_id->id;
+            $product_to_cart = new Cart_Product;
+            $product_to_cart->cart_id = $target_cart;
+            $product_to_cart->product_id = $request->product_id;
+            $product_to_cart->amount = "1";
+            $product_to_cart->save();
+        }
+       
     }
 
     public function removeFromCart(Request $request)
