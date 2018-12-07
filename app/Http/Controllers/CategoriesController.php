@@ -51,7 +51,7 @@ class CategoriesController extends Controller
 
           $category->save();
   
-          return redirect('/')->with('success', 'Category Added'); 
+          return redirect('/admin/index')->with('success', 'Category Added'); 
     }
 
     /**
@@ -95,7 +95,7 @@ class CategoriesController extends Controller
  
        $category->save();
  
-       return redirect('/')->with('success', 'Category Updated');
+       return redirect('/admin/index')->with('success', 'Category Updated');
     }
 
     /**
@@ -109,6 +109,6 @@ class CategoriesController extends Controller
         $category = category::find($id);
         $category->delete();
 
-        return redirect('/')->with('error', 'Category Removed');
+        return redirect('/admin/index')->with('error', 'Category Removed');
     }
 }

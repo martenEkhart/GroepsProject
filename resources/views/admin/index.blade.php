@@ -10,6 +10,7 @@
 <body>
         @include('inc.navbar')
    <h1 style="text-align:center">Admin Page</h1> 
+   @include('inc.messages')
    <div class="container" style="margin-top: 10px;" >
    <div class="row">
        <ul  class="list-group">
