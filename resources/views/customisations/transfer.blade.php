@@ -76,12 +76,13 @@
             <input style="height: 50px" id="checkbox2" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
                 
     
-    </div> --}}
+</div> --}}
+@csrf
+<button onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')">send</button>
     
 <div id="tixt">
 
 </div>
-
 <script>
 
 function createImg(nr) {
@@ -163,6 +164,7 @@ function createImg(nr) {
 
     function fnMouseOpacity(e) {
         im1.style.opacity = (e.clientX-50)/(parseInt(document.getElementById("progressOpacity").style.width)*3);
+        
        // alert(e.clientX);
     }
 
@@ -190,7 +192,51 @@ function createImg(nr) {
     //im1.style.height = parseInt(im1.style.height)*size+"px";     
     }
   
-    
+    function loadDoc(method, url, myFunction, div, input) {
+    if (window.XMLHttpRequest) {
+        var xhttp = new XMLHttpRequest();
+    } else {
+        var xhttp = new ActiveXObject();
+    }
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myFunction(this, div);
+        }                    
+    }
+    xhttp.open(method, url, true);
+    if (method == 'POST') {
+        alert(objToString(customisations[counter]));
+     //   alert(input);
+     //  var data = input + "=" + document.getElementById(input).value;
+        //  var data = "name=iets&waf=nog&beer=kroelie" //JSON.stringify(customisations[0]); //input + "=" + document.getElementById(input).value;
+        var data = objToString(customisations[counter]);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
+        xhttp.send(data);
+        
+    } else {
+        xhttp.send();
+    }
+}
+
+function buildData (nr) {
+    text = '';
+
+}
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '=' + obj[p] + '&';
+        }
+    }
+    return str;
+}
+
+function changeDiv(xhttp, div) {
+    document.getElementById(div).innerHTML = xhttp.responseText;
+}
   
    
    </script>
