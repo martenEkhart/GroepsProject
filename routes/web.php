@@ -22,6 +22,8 @@ Route::get('/main', 'CategoriesController@main');
 
 
 Route::get('/m[m', 'CustomisationsController@dataToJavascript');
+Route::post('/customisations/changedata', 'CustomisationsController@changeData');
+
 
 
 

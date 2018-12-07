@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    public function __construct()
+    {
+        // add exceptions to auth
+        $this->middleware('auth')->only('getAdmin');
+    }
+
 
     public function getContact(){
         return view('pages/contact');
@@ -24,6 +30,11 @@ class PagesController extends Controller
     }
     
     public function getAdmin () {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
+
         return view('admin/index');
     }
 

@@ -9,6 +9,12 @@ use App\User;
 
 class CategoriesController extends Controller
 {
+
+    public function __construct()
+    {
+        // add exceptions to auth
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +41,10 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         return view('categories.create');
     }
 
@@ -46,6 +56,10 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required'
@@ -81,6 +95,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $category = Category::find($id);
         return view('categories.edit')->with('category', $category);
     }
@@ -94,6 +112,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
       
        $category = Category::find($id);
        $category->name = $request->input('name');
@@ -113,6 +135,10 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
         $category = category::find($id);
         $category->delete();
 
