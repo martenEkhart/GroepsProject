@@ -21,6 +21,13 @@ class CategoriesController extends Controller
         return view('categories.index')->with('categories', $category);
     }
 
+    public function main()
+    {
+        $category = Category::All();
+    
+        return view('inc.categories')->with('categories', $category);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <link rel="stylesheet"  href="/css/app.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-        @include('inc.navbar')
+@extends('layouts.app')
+@section('content')
+
    <h1 style="text-align:center">Admin Page</h1> 
    @include('inc.messages')
    <div class="container" style="margin-top: 10px;" >
@@ -28,8 +20,4 @@
 </div>
    </div> 
     
-     @yield('content')
-        </div> 
-   <script src="{{ asset('js/app.js') }}" defer></script>
-</body>
-</html>
+   @endsection

@@ -15,14 +15,18 @@
     <div>
             
         Category: {{$product->category->name}}
-    </div>
-<a href="/product/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
+    </div> 
+    @if(!Auth::guest())
+    @if(Auth::user()->authorization_level != 1)
+    
+    @else
+   <a href="/product/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
 
 {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST', 'class' => 'float-right'])!!}
     {{Form::hidden('_method', 'DELETE')}}
     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 {!!Form::close()!!}
 
-</div>
-
+@endif
+@endif
 @endsection
