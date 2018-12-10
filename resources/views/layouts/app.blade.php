@@ -10,10 +10,10 @@
 <body>
     
     @include('inc.navbar')
-
-    <div class="container">
+ 
+     <div class="container">
         @include('inc.messages')
-    </div>
+    </div> 
     @if(Request::is('/'))   
     @include('inc.searchbar')
     @endif
@@ -25,7 +25,7 @@
          <div class="row">
           
     
-           <div class="col-md-8 col-lg-8" style="padding-top: 10px;"> 
+           <div class="col-md-8 col-lg-8"> 
                     @yield('content')
     </div>        
         </div> 
@@ -35,6 +35,7 @@
                 <p><b>Copyright 2018 &copy; JAAW</b></p>
             </footer>          
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
 </body>
 </html>
