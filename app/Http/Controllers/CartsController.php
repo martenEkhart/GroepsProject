@@ -32,13 +32,13 @@ class CartsController extends Controller
             else {
                // go to cart page an show cart items
                 $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
-                // return view('carts.index')->with('cart_items', $cart_items);
-                foreach ($cart_items as $cart_item) {
-                Product::where('id',$cart_item->product_id)->first();
-                echo ($cart_item->product_id) . "= Product id <br>";
-                echo ($cart_item->amount) . "= Amount<br>";
-                }
 
+                $cart_products = [];
+            foreach ($cart_items as $cart_item) {
+                array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
+            }
+        
+            return view('carts.index')->with('cart_items',$cart_products);
              
 
             // var_dump ($cart_items->product_id);
