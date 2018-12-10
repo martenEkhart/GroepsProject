@@ -30,23 +30,15 @@ class CartsController extends Controller
                 return view('products.index')->with('products', $products);
             }
             else {
-               // go to cart page an show cart items
-                $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
-
-                $cart_products = [];
+            // get data to pass to view from tables products and cart_products
+            $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+            $cart_products = [];
             foreach ($cart_items as $cart_item) {
                 array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
             }
-        
-            return view('carts.index')->with('cart_items',$cart_products);
-             
-
-            // var_dump ($cart_items->product_id);
-                // haal alle cart_items op -> haal van products alle producten op met dat product id
+            return view('carts.index')->with(['cart_items'=>$cart_products, 'zegeenswat'=> $cart_items]);
             }
-
         }
-
 
         public function addToCart(Request $request)
         {
