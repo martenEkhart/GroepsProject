@@ -2,8 +2,8 @@
 @section('content')
 
    <h1 style="text-align:center">Admin Page</h1> 
-   @include('inc.messages')
-   <div class="container" style="margin-top: 10px;" >
+  
+   <div class="container" style="margin-top: 80px;" >
    <div class="row">
        <ul  class="list-group">
             <li class="list-group-item active"><h2 style="text-align:center">Categories</h2></li>   

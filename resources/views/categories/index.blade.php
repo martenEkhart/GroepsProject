@@ -12,7 +12,7 @@
                           @foreach($categories as $category)
                             <li class="list-group-item"><a href="/category/{{$category->id}}"><h4>{{$category->name}}</h4></a>
                                  <a href="/category/{{$category->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
-                            {!!Form::open(['action' => ['CategoriesController@destroy', $category->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                            {!!Form::open(['action' => ['CategoriesController@destroy', $category->id], 'onsubmit' => 'return confirm("Do you want to delete this Category?")', 'method' => 'POST', 'class' => 'float-right'])!!}
                             {{Form::hidden('_method','DELETE')}}
                             {{Form::submit('Delete', ['class' => 'btn btn-danger btn-lg'])}}
                          {!!Form::close()!!}

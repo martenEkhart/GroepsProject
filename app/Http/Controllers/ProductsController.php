@@ -56,9 +56,10 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->get('search');
+        $search = $request->get('search');        
         $products = Product::where('name', 'like', '%'.$search.'%')->paginate(5);
         return view('inc.customer')->with('products', $products);
+    
     }
 
     /**
@@ -113,7 +114,7 @@ class ProductsController extends Controller
         $product->stock = $request->stock;
         $product->category_id = $request->category;
         $product->save();
-        return redirect('product')->with('success', 'Product created');
+        return redirect('/admin/index')->with('success', 'Product created');
     }
 
     /**
@@ -193,7 +194,7 @@ class ProductsController extends Controller
         $product->category_id = $request->category;
         $product->save();
 
-        return redirect('product')->with('success', 'Product updated');
+        return redirect('/admin/index')->with('success', 'Product updated');
     }
 
     /**
@@ -217,7 +218,7 @@ class ProductsController extends Controller
         }
         $product->delete();
 
-        return redirect('product')->with('success', 'Product deleted');
+        return redirect('/admin/index')->with('success', 'Product deleted');
 
     }
 }
