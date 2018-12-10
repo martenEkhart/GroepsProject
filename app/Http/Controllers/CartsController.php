@@ -21,7 +21,7 @@ class CartsController extends Controller
 
         public function index(Request $request)
         {
-            // to do: check if user id matches
+            // to do: check if user id matches with cart
            
             if (! Cart::where('id',$request->cart_id)->first()){
                 // when cart id doesnt exist, go back to products page
@@ -33,7 +33,15 @@ class CartsController extends Controller
                // go to cart page an show cart items
                 $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
                 // return view('carts.index')->with('cart_items', $cart_items);
-            var_dump ($cart_items->product_id);
+                foreach ($cart_items as $cart_item) {
+                Product::where('id',$cart_item->product_id)->first();
+                echo ($cart_item->product_id) . "= Product id <br>";
+                echo ($cart_item->amount) . "= Amount<br>";
+                }
+
+             
+
+            // var_dump ($cart_items->product_id);
                 // haal alle cart_items op -> haal van products alle producten op met dat product id
             }
 
