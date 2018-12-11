@@ -18,6 +18,8 @@ Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
+Route::get('/main', 'CategoriesController@main');
+
 
 Route::get('/m[m', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
@@ -31,7 +33,7 @@ Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 Route::resource('customer', 'CustomersController');
 Route::resource('customisation', 'CustomisationsController');
-
+Route::resource('address', 'AddressesController');
 
 
 

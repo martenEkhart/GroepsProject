@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <link rel="stylesheet"  href="/css/app.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-        @include('inc.navbar')
+@extends('layouts.app')
+@section('content')
+
    <h1 style="text-align:center">Admin Page</h1> 
-   @include('inc.messages')
-   <div class="container" style="margin-top: 10px;" >
+  
+   <div class="container" style="margin-top: 80px;" >
    <div class="row">
        <ul  class="list-group">
             <li class="list-group-item active"><h2 style="text-align:center">Categories</h2></li>   
@@ -25,11 +17,15 @@
              <li class="list-group-item"><a href="/product/create" class="btn btn-outline-primary"><h4>Create-Product</h4></a></li>
             </ul>
      </div>
+     <div class="row" style="margin-left:4px;">
+          <ul  class="list-group">
+                    
+               <li class="list-group-item active"><h2 style="text-align:center">Address</h2></li>
+               <li class="list-group-item"><a href="/address/1" class="btn btn-outline-primary"><h4>Show-Address</h4></a></li>   
+           <li class="list-group-item"><a href="/address/create" class="btn btn-outline-primary"><h4>Create-Address</h4></a></li>
+          </ul>
+   </div>
 </div>
    </div> 
     
-     @yield('content')
-        </div> 
-   <script src="{{ asset('js/app.js') }}" defer></script>
-</body>
-</html>
+   @endsection

@@ -8,6 +8,9 @@ use App\Order;
 use App\Cart;
 use App\Cart_Product;
 
+// Overall to do:
+// views op het einde van de functies defineren
+
 class CartsController extends Controller
 {
     //
@@ -21,30 +24,28 @@ class CartsController extends Controller
 
         public function index(Request $request)
         {
-            // to do: check if user id matches
+            // TODO: check if user id matches with cart
            
-            if (! Cart::where('id',$request->cart_id)->first()){
-                // when cart id doesnt exist, go back to products page
-                // other view eventually?
-                $products = Product::All();
-                return view('products.index')->with('products', $products);
+            if (!Cart::where('id',$request->cart_id)->first()){
+            // when cart id doesnt exist, go back to products page
+            // other view eventually?
+            $products = Product::All();
+            return redirect ('product');
             }
             else {
-               // go to cart page an show cart items
-                $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
-                // return view('carts.index')->with('cart_items', $cart_items);
-var_dump ($cart_items->product_id);
-                // haal alle cart_items op -> haal van products alle producten op met dat product id
+            // get data to pass to view from tables products and cart_products
+            $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+            $cart_products = [];
+            foreach ($cart_items as $cart_item) {
+                array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
             }
-
+            return view('carts.index')->with(['cart_items'=>$cart_products, 'zegeenswat'=> $cart_items]);
+            }
         }
-
 
         public function addToCart(Request $request)
         {
-
-        // kijk of er al een winkelwagentje is voor deze sessie (?) zoniet maak er één aan
-        // en voeg het product toe aan carts_products met het card_id en de user_id
+        // TODO: Als een product nog niet bestaat komt er een Foreign key error. Fixen!
         $user_id =  $request->user_id;
         $product_id = $request->product_id;
         // Make a new cart when current user does not have one:
@@ -61,15 +62,18 @@ var_dump ($cart_items->product_id);
             $this->cart_id = Cart::where('user_id',$user_id)->first();
         }
 
-        // voeg een item (product_id) toe aan carts_products met het juiste cart id. Ook checken of het cart_id hoort bij deze user en amount nog verder uitwerken!
-      
-        // wanneer cart_id en product_id al bestaan alleen de amount ophogen van een product
-
+        // add an item to a cart
         if (Cart_Product::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first()){
-            // wanneer cart_id en product_id al bestaan alleen de amount ophogen van een product
-            
+            // when product already exists in the cart, add one to the amount
+            $add_to_item = Cart_Product::where([
+                'cart_id' => $this->cart_id->id,
+                'product_id' => $product_id
+            ])->first();
+            $add_to_item->amount = $add_to_item->amount +1 ;
+            $add_to_item->save();
         }
         else {
+            // add new product to cart
             $target_cart = $this->cart_id->id;
             $product_to_cart = new Cart_Product;
             $product_to_cart->cart_id = $target_cart;
@@ -82,22 +86,35 @@ var_dump ($cart_items->product_id);
 
     public function removeFromCart(Request $request)
     {
-        // verwijder het desbetreffende product_id uit de carts_products
-        // checken of de user_id wel bij deze cart / cart_product hoort
+        // delete or substract one from amount if the count is higher than one
+        // TODO: extra checks
         if (! Cart_Product::find($request->cart_product_id)){
             echo "nothing to delete";
         }
         else {
-            $product_to_remove = Cart_Product::find($request->cart_product_id);
-            $product_to_remove->delete();
-            echo "succesfully deleted!";
+            
+        $product_to_remove = Cart_Product::find($request->cart_product_id);
+
+            if ($product_to_remove->amount > 1)
+            {
+                $product_to_remove->amount = $product_to_remove->amount -1;
+                $product_to_remove->save();
+                // return redirect ('cart/');
+                echo "Amount minus one";
+
+
+            }
+            else {
+                $product_to_remove->delete();
+                echo "succesfully deleted!";
+            }
         }
     }
 
     public function emptyCart(Request $request)
     {
-        // verwijder alle velden met het juiste cart_id uit carts_products
-        // ook hier extra checks uitvoeren
+        // Empty the cart
+        // TODO: extra checks
         $cart_to_empty = $request->cart_id;
         $items = Cart_Product::where('cart_id',$cart_to_empty)->get();
         foreach($items as $item) 
@@ -109,6 +126,6 @@ var_dump ($cart_items->product_id);
 
     public function checkoutCart()
     {
-        // sla een winkelwagentje op met alle producten naar de orders table 
+        // maak aan order adhv producten in een cart 
     }
 }
