@@ -8,6 +8,9 @@ use App\Order;
 use App\Cart;
 use App\Cart_Product;
 
+// Overall to do:
+// views op het einde van de functies defineren
+
 class CartsController extends Controller
 {
     //
@@ -21,13 +24,13 @@ class CartsController extends Controller
 
         public function index(Request $request)
         {
-            // to do: check if user id matches with cart
+            // TODO: check if user id matches with cart
            
-            if (! Cart::where('id',$request->cart_id)->first()){
-                // when cart id doesnt exist, go back to products page
-                // other view eventually?
-                $products = Product::All();
-                return view('products.index')->with('products', $products);
+            if (!Cart::where('id',$request->cart_id)->first()){
+            // when cart id doesnt exist, go back to products page
+            // other view eventually?
+            $products = Product::All();
+            return redirect ('product');
             }
             else {
             // get data to pass to view from tables products and cart_products
@@ -96,6 +99,10 @@ class CartsController extends Controller
             {
                 $product_to_remove->amount = $product_to_remove->amount -1;
                 $product_to_remove->save();
+                // return redirect ('cart/');
+                echo "Amount minus one";
+
+
             }
             else {
                 $product_to_remove->delete();
@@ -119,6 +126,6 @@ class CartsController extends Controller
 
     public function checkoutCart()
     {
-        // sla een winkelwagentje op met alle producten naar de orders table 
+        // maak aan order adhv producten in een cart 
     }
 }

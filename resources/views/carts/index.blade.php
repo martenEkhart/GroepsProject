@@ -18,8 +18,9 @@
                          @endphp
                         <li class="list-group-item"><a href="/cart_item/{{$cart_item->id}}"><h4>{{$cart_item->name}}</h4></a><p> in Stock: {{$cart_item->stock}}</p>
                              <a href="/cart_item/{{$cart_item->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
-                        {!!Form::open(['action' => ['ProductsController@destroy', $cart_item->id], 'method' => 'POST', 'class' => 'float-right'])!!}
-                        {{Form::hidden('_method','DELETE')}}
+                        {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET', 'class' => 'float-right'])!!}
+                        {{-- {{Form::hidden('_method','DELETE')}} --}}
+                        
                         {{Form::submit('Delete', ['class' => 'btn btn-danger btn-lg'])}}
                         {!!Form::close()!!}
                         </li>
