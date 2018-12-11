@@ -8,6 +8,9 @@ use App\Order;
 use App\Cart;
 use App\Cart_Product;
 
+// Overall to do:
+// views op het einde van de functies defineren
+
 class CartsController extends Controller
 {
     //
@@ -21,24 +24,24 @@ class CartsController extends Controller
 
         public function index(Request $request)
         {
-            // to do: check if user id matches
+            // TODO: check if user id matches with cart
            
-            if (! Cart::where('id',$request->cart_id)->first()){
-                // when cart id doesnt exist, go back to products page
-                // other view eventually?
-                $products = Product::All();
-                return view('products.index')->with('products', $products);
+            if (!Cart::where('id',$request->cart_id)->first()){
+            // when cart id doesnt exist, go back to products page
+            // other view eventually?
+            $products = Product::All();
+            return redirect ('product');
             }
             else {
-               // go to cart page an show cart items
-                $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
-                // return view('carts.index')->with('cart_items', $cart_items);
-            var_dump ($cart_items->product_id);
-                // haal alle cart_items op -> haal van products alle producten op met dat product id
+            // get data to pass to view from tables products and cart_products
+            $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+            $cart_products = [];
+            foreach ($cart_items as $cart_item) {
+                array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
             }
-
+            return view('carts.index')->with(['cart_items'=>$cart_products, 'zegeenswat'=> $cart_items]);
+            }
         }
-
 
         public function addToCart(Request $request)
         {
@@ -96,6 +99,10 @@ class CartsController extends Controller
             {
                 $product_to_remove->amount = $product_to_remove->amount -1;
                 $product_to_remove->save();
+                // return redirect ('cart/');
+                echo "Amount minus one";
+
+
             }
             else {
                 $product_to_remove->delete();
@@ -119,6 +126,6 @@ class CartsController extends Controller
 
     public function checkoutCart()
     {
-        // sla een winkelwagentje op met alle producten naar de orders table 
+        // maak aan order adhv producten in een cart 
     }
 }
