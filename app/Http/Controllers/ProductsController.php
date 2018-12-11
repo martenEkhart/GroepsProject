@@ -82,7 +82,7 @@ class ProductsController extends Controller
             'description' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'image_name' => 'image|nullable|max:1999'
+            'image_name' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1999'
         ]);
 
         // handle file upload
