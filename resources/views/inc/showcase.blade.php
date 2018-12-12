@@ -1,7 +1,9 @@
-<div class="album py-5 bg-light">
-  <div class="container">
 
-    <div class="row">
+
+<div class="album py-5">
+  <div class="container">
+<h3 style="text-align:center;">Our latest products</h3>
+    <div class="row" style="margin-top: 40px;">
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
           <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" style="background-color: #a1cff5;">
@@ -49,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="album py-5 bg-light">
+  <div class="album py-5">
     <div class="container">
   
       <div class="row">

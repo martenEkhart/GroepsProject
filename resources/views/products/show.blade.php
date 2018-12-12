@@ -25,7 +25,8 @@
     @else
    <a href="/product/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
 
-{!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'onsubmit' => 'return confirm("Do you want to delete this Product?")', 'method' => 'POST', 'class' => 'float-right'])!!}
+{!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'onsubmit' => 
+'return confirm("Do you want to delete this Product?")', 'method' => 'POST', 'class' => 'float-right'])!!}
     {{Form::hidden('_method', 'DELETE')}}
     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 {!!Form::close()!!}
