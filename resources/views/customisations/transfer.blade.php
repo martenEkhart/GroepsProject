@@ -63,6 +63,10 @@ function testest(){
   
   im1 = cm[0];
 
+  function makeCanvas() {
+    //   createElement
+  }
+
   function createImg(nr) {
     c = customisations[nr];
     cm[nr] = document.createElement('img');
