@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\User; 
 use App\Product; 
-
+use App\Address;
+use Auth;
 class CustomersController extends Controller
 {
+
+
+    public function __construct()
+    {
+        // add exceptions to auth
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +24,8 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        // $products = Product::All();
-        // return view('customer/index')->with('products', $products);
+        $addresses = Address::where('user_id', Auth::user()->id);
+        return view('pages.home')->with('addresses', $addresses);
     }
 
     /**
