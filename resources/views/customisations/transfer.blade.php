@@ -2,13 +2,14 @@
 @section('content')
 <div class="flex-container" style="display:flex; justify-content: space-between;">
         
-    <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
         <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
         <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
+        <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
         <input style="height: 50px" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
             
 
 </div>
+<br>
 
 <div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 20em; height:14em; border-style:dotted; border-width:2px">
         .... website borders
@@ -23,7 +24,7 @@
 		<div id="divLeft" class="box aLeft" onclick="fnLeft()">Left</div>
         <div id="divRight" class="box aRight" onclick="fnRight()">Right</div>
         <div id="divSmaller" class="boxSmallBig aSmaller" onclick="fnSmaller(5)">Smaller</div>
-        <div id="divBigger" class="boxSmallBig aBigger">Bigger</div>
+        <div id="divBigger" class="boxSmallBig aBigger" onclick="fnBigger()">Bigger</div>
         <div id="divDone" class="box aDone">Done</div>
         <div id="divTransparency" class="boxtransparency aTransparancy" onmousemove="fnMouseOpacity()">transparency</div>
         <div id="divZindex" class="box aZindex" onmousemove="fnMouseZindex()">back - front</div>
@@ -31,7 +32,7 @@
 
 
 @csrf
-<button onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')">send</button>
+<button id="btnSend" onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')">send</button>
     
 <div id="tixt">
 
@@ -51,6 +52,10 @@ function testest(){
 
   var customisations = {!! json_encode($customisations->toArray()) !!};
     document.getElementById("name").innerHTML = customisations[counter].name;
+
+  if (customisations.length == 0) {
+      alert("nog niets");
+  } 
 
   for(i=0; i<customisations.length; i++) {
     createImg(i);   
@@ -91,6 +96,7 @@ function testest(){
     }
 
     function fnVolgende(counter) {
+        document.getElementById("btnSend").onclick();
         document.getElementById("name").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
         im1 = cm[counter];
         document.getElementById("checkbox").checked = customisations[counter].visible;
@@ -98,12 +104,12 @@ function testest(){
 
     function fnMouseZindex() {
         im1.style.zIndex = Math.floor((event.offsetX/document.getElementById("divZindex").clientWidth - 0.5)*100 );
-       tixt.innerHTML = Math.floor((event.offsetX/document.getElementById("divZindex").clientWidth - 0.5)*100 );
+    //   tixt.innerHTML = Math.floor((event.offsetX/document.getElementById("divZindex").clientWidth - 0.5)*100 );
         // alert(e.clientX);
     }
 
     function fnMouseOpacity() {
-        tixt.innerHTML = event.offsetX/document.getElementById("divTransparency").clientWidth;
+  //      tixt.innerHTML = event.offsetX/document.getElementById("divTransparency").clientWidth;
         im1.style.opacity = (event.offsetX/document.getElementById("divTransparency").clientWidth)*1.5-0.05;
         
        // alert(e.clientX);
@@ -153,14 +159,27 @@ function testest(){
     if(((parseInt(im1.height)<20)&&(size<1))||((parseInt(im1.style.width)>parseInt(window.innerWidth-100))&&(dx >1))) { return }  
     im1.height = im1.height*size;
     im1.width = im1.width*size;
-    //im1.style.height = parseInt(im1.style.height)*size+"px";     
+    //im1.style.height = parseInt(im1.style.height)*size+"px";   
+    tixt.innerHTML = im1.clientWidth+" "+im1.clientWidth;  
     }
 
     function fnSmaller(e) {
-      tixt.innerHTML = e+"tetjjjk";
-  }
+        let dx = (event.offsetX/document.getElementById("divSmaller").clientWidth)/10;
+        fnSize(1/(1+dx));
+
+   }
   
+    function fnBigger(e) {
+        let dx = (event.offsetX/document.getElementById("divBigger").clientWidth)/10;
+        fnSize(1+dx+0.01);
+    }
   
+    function maakKlaar() {
+        customisations[counter].width = im1.clientWidth;
+        customisations[counter].height = im1.clientHeight;
+        if (customisations[counter].opacity > 1) { customisations[counter].opacity = 1 }
+    }
+
     function loadDoc(method, url, myFunction, div, input) {
     if (window.XMLHttpRequest) {
         var xhttp = new XMLHttpRequest();
@@ -174,7 +193,8 @@ function testest(){
     }
     xhttp.open(method, url, true);
     if (method == 'POST') {
-        alert(objToString(customisations[counter]));
+        maakKlaar();
+  //      alert(objToString(customisations[counter]));
         var data = objToString(customisations[counter]);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));

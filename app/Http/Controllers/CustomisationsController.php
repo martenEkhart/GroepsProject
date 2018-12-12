@@ -22,11 +22,19 @@ class CustomisationsController extends Controller
 
     public function changeData(Request $request) {
      //   return $request->id;
+
+  
      $customisation = Customisation::find($request->id);
      $customisation->x = $request->x;
      $customisation->y = $request->y;
+     $customisation->width  = $request->width;
+     $customisation->height  = $request->height;
+     $customisation->opacity  = floor($request->opacity * 100);
+     $customisation->z_layer  = $request->z_layer;
+     $customisation->visible  = $request->visible;
      $customisation->save();
-    //  $customisation = Customisation::find($request->id);
+    //  dd($request->width." ".$request->height);
+    // //  $customisation = Customisation::find($request->id);
     //  $customisation->x = $request->x;
     //  $customisation->y = $request->y;
     //  $customisation->save();
@@ -76,8 +84,7 @@ class CustomisationsController extends Controller
             $customisation->save();
         }
         $customisations = Customisation::pluck('name', 'id');
-
-        return view('customisations.create')->with('customisations', $customisations);
+         return view('customisations.create')->with('customisations', $customisations);
 
     }
 

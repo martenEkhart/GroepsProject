@@ -19,9 +19,19 @@
         }
 
         div {
-            text-align: center
+            text-align: center;
+            user-select: none;
         }
         .box {
+		background-color: rgb(120,70,123);
+		border: 5px solid rgb(88,55,112);
+		color: #fff;
+		border-radius: 5px;
+		padding: 0px;
+		font: 150%/1.3 Lucida Grande,Lucida Sans Unicode,Lucida Sans,Geneva,Verdana,sans-serif;
+
+	}
+    button {
 		background-color: rgb(120,70,123);
 		border: 5px solid rgb(88,55,112);
 		color: #fff;
