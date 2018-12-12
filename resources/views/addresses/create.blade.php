@@ -7,7 +7,7 @@
         <div class="panel panel-default">
             
                 <div class="panel-heading"><h3>New Address</h3></div>
-            <div class="panel-body" style="margin-top: 40px;>
+            <div class="panel-body" style="margin-top: 40px;">
                   
                 {!!Form::open(['action' => 'AddressesController@store','method' => 'POST'])!!}
 
@@ -29,7 +29,7 @@
                 <div class="form-group">
                 {{Form::text('phone_number ','',['placeholder' => 'Phone Number', 'Class' => 'form-control'])}}
                 </div>    
-                {{Form::submit('submit', ['class' => 'btn btn-primary', 'Class' => 'form-control'])}}
+                {{Form::submit('submit', ['class' => 'btn btn-primary'])}}
                 {!! Form::close() !!}
                 </div> 
             </div>
