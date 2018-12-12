@@ -10,7 +10,8 @@
     <title>JAAW</title>
 </head>
 <body>
-    
+    <div id='app'></div>
+
     @include('inc.navbar')
  
      <div class="container">
