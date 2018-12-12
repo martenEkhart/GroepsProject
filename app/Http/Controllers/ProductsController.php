@@ -100,7 +100,7 @@ class ProductsController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
             // $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
-            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('images/products'), $fileNameToStore);
         } else {
             $fileNameToStore = 'noImage.jpg';
         }
@@ -181,7 +181,7 @@ class ProductsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('images/products'), $fileNameToStore);
         }
 
         // create product
@@ -214,8 +214,8 @@ class ProductsController extends Controller
         $product = Product::find($id);
 
         if($product->image_name != 'noImage.jpg') {
-            if(File::exists('product_images/' . $product->image_name)) {
-                File::delete('product_images/' . $product->image_name);
+            if(File::exists('images/products/' . $product->image_name)) {
+                File::delete('images/products/' . $product->image_name);
             }
         }
         $product->delete();
