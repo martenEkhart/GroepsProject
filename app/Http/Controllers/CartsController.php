@@ -55,7 +55,6 @@ class CartsController extends Controller
             $cart->user_id = $request->user_id;
             $cart->save();
             $this->cart_id = Cart::where('user_id',$user_id)->first();
-
         }
         else {
             // Get cart_id to pass on to addToCart function
@@ -84,6 +83,19 @@ class CartsController extends Controller
        
     }
 
+    public function changeAmount(Request $request)
+    {
+        // verander aantal van product in cart_product mbv ajax
+        $change_amount = Cart_Product::find($request->cart_product_id);
+        
+        $bestand = fopen("test.txt","w");
+        fwrite ($bestand, $request->amount);
+        fclose($bestand);
+
+        $change_amount->amount =$request->amount;
+        $change_amount->save();
+        // return $request->succes;
+    }
     public function removeFromCart(Request $request)
     {
         // delete or substract one from amount if the count is higher than one
@@ -92,22 +104,9 @@ class CartsController extends Controller
             echo "nothing to delete";
         }
         else {
-            
         $product_to_remove = Cart_Product::find($request->cart_product_id);
-
-            if ($product_to_remove->amount > 1)
-            {
-                $product_to_remove->amount = $product_to_remove->amount -1;
-                $product_to_remove->save();
-                // return redirect ('cart/');
-                echo "Amount minus one";
-
-
-            }
-            else {
-                $product_to_remove->delete();
-                echo "succesfully deleted!";
-            }
+        // $product_to_remove->delete();
+        return redirect ('cart/'{$request->cart_product_id});
         }
     }
 
