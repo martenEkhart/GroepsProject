@@ -13,9 +13,23 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct()
     {
+        $this->middleware('auth');
+    } 
+
+
+    public function index()
+    {   
+
         $address = Address::All();
+        // Check for correct user
+        if(Auth::user()->id !==$address->user_id){
+            return redirect('/')->with('error', 'Unauthorized Page');
+        }
+        
+
         return view('addresses.index')->with('address', $address);
     }
 
@@ -82,6 +96,13 @@ class AddressesController extends Controller
     public function edit($id)
     {
         $address = Address::find($id);
+
+        // Check for correct user
+        if(Auth::user()->id !==$address->user_id){
+            return redirect('/')->with('error', 'Unauthorized To Edit');
+        }
+
+        
         return view('addresses.edit')->with('address', $address);
     }
 
@@ -125,9 +146,16 @@ class AddressesController extends Controller
      */
     public function destroy($id)
     {
-        $address = Address::find($id);
+           $address = Address::find($id);
+
+           // Check for correct user
+           if(Auth::user()->id !==$address->user_id){
+            return redirect('/')->with('error', 'Unauthorized to Delete');
+        }
+
+        
         $address->delete();
 
-        return redirect('/')->with('error', 'Address Removed');
+        return redirect('/admin/index')->with('error', 'Address Removed');
     }
 }
