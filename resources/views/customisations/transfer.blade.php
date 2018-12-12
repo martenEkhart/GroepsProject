@@ -28,6 +28,9 @@
         <div id="divDone" class="box aDone">Done</div>
         <div id="divTransparency" class="boxtransparency aTransparancy" onmousemove="fnMouseOpacity()">transparency</div>
         <div id="divZindex" class="box aZindex" onmousemove="fnMouseZindex()">back - front</div>
+        
+        <a href="/customisation/create" target="_parent"><div id="divNew" class="boxnew aNew" onclick="fnNew()">new image</div></a>
+
 </div>
 
 
@@ -41,6 +44,7 @@
 function testest(){
     alert("testst");
 }
+ 
 
  var counter = 0;
  var cm = [];
@@ -101,7 +105,7 @@ function testest(){
 
     function fnVolgende(counter) {
         document.getElementById("btnSend").onclick();
-        document.getElementById("name").innerHTML = customisations[counter].name+ " id:"+customisations[counter].id;
+        document.getElementById("name").innerHTML = customisations[counter].name;
         im1 = cm[counter];
         document.getElementById("checkbox").checked = customisations[counter].visible;
     }
