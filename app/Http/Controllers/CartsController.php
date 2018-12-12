@@ -84,6 +84,19 @@ class CartsController extends Controller
        
     }
 
+    public function changeAmount(Request $request)
+    {
+        // verander aantal van product in cart_product mbv ajax
+        $change_amount = Cart_Product::find($request->cart_product_id);
+        
+        $bestand = fopen("test.txt","w");
+        fwrite ($bestand, $request->amount);
+        fclose($bestand);
+
+        $change_amount->amount =$request->amount;
+        $change_amount->save();
+        // return $request->succes;
+    }
     public function removeFromCart(Request $request)
     {
         // delete or substract one from amount if the count is higher than one
