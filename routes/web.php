@@ -18,10 +18,8 @@ Route::get('/producten', 'PagesController@getProducten');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
-Route::get('/main', 'CategoriesController@main');
 
-
-Route::get('/m[m', 'CustomisationsController@dataToJavascript');
+Route::get('/customisation/manage', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
 
 
@@ -37,6 +35,7 @@ Route::resource('address', 'AddressesController');
 
 
 
+
 Route::get('/payment/{order_id}', 'PaymentsController@preparePayment');
 Route::name('webhooks.mollie')->post('webhooks/mollie', 'PaymentsController@handle');
 Route::get('order/succes/', 'PaymentsController@handle')->name('order.success');
@@ -45,5 +44,5 @@ Route::get('cart/{user_id}/add/{product_id}','CartsController@addToCart');
 Route::get('cart/delete/{cart_product_id}','CartsController@removeFromCart');
 Route::get('cart/empty/{cart_id}', 'CartsController@emptyCart');
 Route::get('cart/{cart_id}','CartsController@index');
+Route::post('cart/changeamount/{cart_product_id}/{amount}','CartsController@changeAmount');
 // Route::get('/home', 'HomeController@index')->name('home');
-

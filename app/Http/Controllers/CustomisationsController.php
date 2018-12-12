@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customisation;
 use Illuminate\Http\Request;
+use Auth;
 
 class CustomisationsController extends Controller
 {
@@ -22,11 +23,19 @@ class CustomisationsController extends Controller
 
     public function changeData(Request $request) {
      //   return $request->id;
+
+  
      $customisation = Customisation::find($request->id);
      $customisation->x = $request->x;
      $customisation->y = $request->y;
+     $customisation->width  = $request->width;
+     $customisation->height  = $request->height;
+     $customisation->opacity  = floor($request->opacity * 100);
+     $customisation->z_layer  = $request->z_layer;
+     $customisation->visible  = $request->visible;
      $customisation->save();
-    //  $customisation = Customisation::find($request->id);
+    //  dd($request->width." ".$request->height);
+    // //  $customisation = Customisation::find($request->id);
     //  $customisation->x = $request->x;
     //  $customisation->y = $request->y;
     //  $customisation->save();
@@ -76,8 +85,7 @@ class CustomisationsController extends Controller
             $customisation->save();
         }
         $customisations = Customisation::pluck('name', 'id');
-
-        return view('customisations.create')->with('customisations', $customisations);
+         return view('customisations.create')->with('customisations', $customisations);
 
     }
 
@@ -89,9 +97,23 @@ class CustomisationsController extends Controller
      */
     public function store(Request $request)
     {
+  
+
+        // handle file upload
+
+
+
+        // create the produc
+
+        if(Auth::user()->authorization_level != 1)
+        {
+            return redirect('/login')->with("error", "Unauthorized authentication");
+        }
+
+
         $this->validate($request, [
             'name' => 'required',
-            'image_name' => 'image|nullable|max:1999'
+            'image_name' => 'image|required|mimes:jpeg,png,jpg,gif,svg|max:1999'
         ]);
 
         // handle file upload
@@ -106,10 +128,10 @@ class CustomisationsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $path = $request->file('image_name')->storeAs('public/customisation_images', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noImage.jpg';
-        }
+            $request->file('image_name')->move(public_path('images/customisations'), $fileNameToStore);
+            
+
+ 
 
 
         // create the product
@@ -117,15 +139,18 @@ class CustomisationsController extends Controller
         $customisation = new Customisation();
         $customisation->name = $request->name;
         $customisation->image_name = $fileNameToStore;
-        $customisation->x = $request->x;
-        $customisation->y = $request->y;
-        $customisation->width = $request->width;
-        $customisation->height = $request->height;
-        $customisation->z_layer = $request->z_layer;
-        $customisation->opacity = $request->opacity;
-        $customisation->visible = $request->visible;
+        $customisation->x = 100;
+        $customisation->y = 100;
+        $customisation->width = 100;
+        $customisation->height = 100;
+        $customisation->z_layer = 70;
+        $customisation->opacity = 100;
+        $customisation->visible = 1;
         $customisation->save();
-        return redirect('customisation')->with('success', 'Customisation created');
+        return redirect('customisations/manage')->with('success', 'Customisation created');
+    } else {
+        $fileNameToStore = 'noImage.jpg';
+    }
     }
 
     /**
