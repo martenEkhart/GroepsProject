@@ -1,12 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<a href="/customisation/manage" target="_parent"><button>Manage your customisations</button></a>
+
 <div class="container">
         {!! Form::open(['action' => ['CustomisationsController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <br>
-        <div class="form-group">
-                {{Form::label('name2', 'Make customisations with your own images')}}
+        <br>
+                <div class="form-group">
+                {{Form::label('name2', 'Make a new customisation')}}
 
-                <br>
+
                 <br>
 
                 {{Form::label('name', 'Give your image a name/description')}}
@@ -15,13 +18,15 @@
     
             </div>
 
-        <br>
+  
         Select image
 
         <div class="form-group">
             {{Form::file('image_name')}}
 
         </div>
+
+        
         
 
 
