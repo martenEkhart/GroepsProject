@@ -30,12 +30,16 @@
     </div>        
         </div> 
             </div> 
-         @yield('categories')
-            <footer id="footer" class="text-center" style= "margin-top: 45%;" >
-                <p><b>Copyright 2018 &copy; JAAW</b></p>
-            </footer>          
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    
+            @if(Request::is('/'))   
+            @include('inc.showcase')
+            @endif
 
+         @yield('categories')
+         
+              
+    <script src="{{ asset('js/app.js') }}" defer></script>
+       
+    @include('inc.footer')
+    
 </body>
 </html>
