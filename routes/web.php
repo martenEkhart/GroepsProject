@@ -31,6 +31,7 @@ Route::resource('product', 'ProductsController');
 Route::resource('category', 'CategoriesController');
 Route::resource('customer', 'CustomersController');
 Route::resource('customisation', 'CustomisationsController');
+Route::resource('address', 'AddressesController');
 
 
 
