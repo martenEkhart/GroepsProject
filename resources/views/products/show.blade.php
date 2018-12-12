@@ -14,7 +14,7 @@
 </div>  
 <br>
 <small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
-<a href="/" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
+<a href="/cart/{{Auth::user()->id}}/add/{{$product->id}}" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
 <hr>
 
     

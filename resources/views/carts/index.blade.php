@@ -4,7 +4,7 @@
 <div class="row" style="margin-top: 20px;">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Winkelwagentje</h3></div>
+            <div class="panel-heading"><h3>Shoppingcard</h3></div>
                 <div class="panel-body">
                    @csrf
                     @if(count($cart_items))
@@ -13,17 +13,18 @@
                          @foreach($cart_items as $cart_item)
                         
                         <li class="list-group-item"><a href="/product/{{$zegeenswat[$loop->index]->product_id}}"><h4>{{$cart_item->name}}</h4></a>
-                        Aantal in wagentje:<input type="number" name="amount" min="1" value="{{ $zegeenswat[$loop->index]->amount}}"  onchange="loadDoc('POST' ,'{{$zegeenswat[$loop->index]->id}}', 'getAmount', '{{$loop->index}}');"></p>                     
+                        Amount:<input type="number" name="amount" min="1" value="{{ $zegeenswat[$loop->index]->amount}}"  onchange="loadDoc('POST' ,'{{$zegeenswat[$loop->index]->id}}', 'getAmount', '{{$loop->index}}');"></p>                     
                         
                         {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
-                        {{Form::submit('Verwijder uit winkelwagentje', ['class' => 'btn btn-danger btn-lg'])}}
+                        {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
                         {!!Form::close()!!}
                         </li>
+                        <a href="empty/ {{$zegeenswat[$loop->index]->cart_id}} ">Empty your shopping cart</a>
                         @endforeach
                     </ul>
-                <a href="#">Maak je winkelwagentje leeg</a>
+                
                 @else
-                  <p>Je winkelwagen is leeg!. <a href="products/">Start je shopping spree!</a></p>
+                  <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
                 @endif
             </div>
         </div>
@@ -58,7 +59,6 @@
     }
 }
     function getAmount(xhttp, ct) {
-        alert("reeeeeeeeeeeee");
         document.getElementsByName("amount")[ct].value;
 }
 </script>

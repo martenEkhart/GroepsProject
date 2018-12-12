@@ -10,6 +10,7 @@ use App\Cart_Product;
 
 // Overall to do:
 // views op het einde van de functies defineren
+// mensen die niet ingelogd zijn moeten ook dingen kunnen toevoegen!!!!!
 
 class CartsController extends Controller
 {
@@ -60,14 +61,15 @@ class CartsController extends Controller
             // Get cart_id to pass on to addToCart function
             $this->cart_id = Cart::where('user_id',$user_id)->first();
         }
-
-        // add an item to a cart
+      // add an item to a cart
         if (Cart_Product::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first()){
             // when product already exists in the cart, add one to the amount
             $add_to_item = Cart_Product::where([
                 'cart_id' => $this->cart_id->id,
                 'product_id' => $product_id
             ])->first();
+            // print_r ($add_to_item);
+            // die();
             $add_to_item->amount = $add_to_item->amount +1 ;
             $add_to_item->save();
         }
@@ -80,18 +82,13 @@ class CartsController extends Controller
             $product_to_cart->amount = "1";
             $product_to_cart->save();
         }
-       
+        return redirect ('product')->with('success', 'Product added to shopping cart');
     }
 
     public function changeAmount(Request $request)
     {
         // verander aantal van product in cart_product mbv ajax
         $change_amount = Cart_Product::find($request->cart_product_id);
-        
-        $bestand = fopen("test.txt","w");
-        fwrite ($bestand, $request->amount);
-        fclose($bestand);
-
         $change_amount->amount =$request->amount;
         $change_amount->save();
         // return $request->succes;
