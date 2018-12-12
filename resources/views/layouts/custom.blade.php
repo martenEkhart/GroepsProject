@@ -51,6 +51,16 @@
 
 	}
 
+    .boxnew {
+		background-color: rgb(218, 191, 40);
+		border: 5px solid rgb(179, 156, 25);
+		color: #fff;
+		border-radius: 5px;
+		padding: 0px;
+		font: 150%/1.3 Lucida Grande,Lucida Sans Unicode,Lucida Sans,Geneva,Verdana,sans-serif;
+
+	}
+
 	.boxSmallBig {
 		background-color: rgb(60, 129, 161);
 		border: 5px solid rgb(88,55,112);
@@ -105,6 +115,12 @@
 		grid-column: 3 / 4; 
 		grid-row: 1 / 2 ;
 	}
+	.aNew { 
+		grid-column: 4 / 5; 
+		grid-row: 2 / 3 ;
+	}
+
+    
 
     </style>
 </head>

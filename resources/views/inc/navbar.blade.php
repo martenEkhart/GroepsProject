@@ -3,7 +3,7 @@
         <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
          <b style="font-size: 28px"><p style="color: black">Menu</p></b>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample03" style="color: black">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -20,10 +20,13 @@
                   </li> --}}
                    @if(!Auth::guest())
                    @if(Auth::user()->authorization_level == 1)
-                  
-                  <li class="nav-item active">
-                    <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
-                  </li>
+
+                   <li class="nav-item active">
+                     <a class="nav-link" style="color: black" href="/customisation/manage">Customisations</a>
+                   </li>
+                   <li class="nav-item active">
+                     <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
+                   </li>
                   @endif
                   @endif
             {{-- <li class="nav-item dropdown active">
@@ -51,7 +54,7 @@
                 </li>
             @else
                 <li class="nav-item dropdown">
-                    
+
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>

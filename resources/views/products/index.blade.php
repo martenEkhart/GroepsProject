@@ -19,15 +19,15 @@
                                 @if(!Auth::guest())
                                 @if(Auth::user()->authorization_level != 1)
     
-                                    @else
-                                 <a href="/product/{{$product->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
+                            @else
+                            <a href="/product/{{$product->id}}/edit" class="btn btn-secondary btn-lg" style= "float:right">Edit</a>
                             {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'onsubmit' => 'return confirm("Do you want to delete this Product?")', 'method' => 'POST', 'class' => 'float-right'])!!}
                             {{Form::hidden('_method','DELETE')}}
                             {{Form::submit('Delete', ['class' => 'btn btn-danger btn-lg'])}}
                             {!!Form::close()!!}
                             @endif
                             @endif
-                            </li>
+                            </li><br>
                             @endforeach
                         </ul></div>
                     @else
