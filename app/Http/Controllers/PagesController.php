@@ -6,7 +6,19 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Product;
+<<<<<<< HEAD
  
+=======
+=======
+use Auth; 
+use App\Product; 
+
+<<<<<<< HEAD
+=======
+>>>>>>> 4725180a904c1bcef5072a9cc45d9601c1cb7f85
+>>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
+>>>>>>> ea6b4e749f7c6f4f5faa597219117a064dd06cfb
+>>>>>>> 718c1f98b350631eb00c25b6fe77e7ec393e30b8
 
 class PagesController extends Controller
 {
