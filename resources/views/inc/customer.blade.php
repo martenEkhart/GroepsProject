@@ -29,7 +29,7 @@
 <small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
 <a href="/" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
 <hr>
-
+ 
     
 
 @endforeach
@@ -40,4 +40,5 @@
 
 
 @endif
+<div class="container" id="paginate"> {{$products->links()}}</div> 
 @endsection
