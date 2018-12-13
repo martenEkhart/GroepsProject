@@ -147,7 +147,7 @@ class CustomisationsController extends Controller
         $customisation->opacity = 100;
         $customisation->visible = 1;
         $customisation->save();
-        return redirect('customisations/manage')->with('success', 'Customisation created');
+        return redirect('customisation/manage')->with('success', 'Customisation created');
     } else {
         $fileNameToStore = 'noImage.jpg';
     }

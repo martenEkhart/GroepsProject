@@ -70,8 +70,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        dd("hallo");
+        
     
         if(Auth::user()->authorization_level != 1)
         {

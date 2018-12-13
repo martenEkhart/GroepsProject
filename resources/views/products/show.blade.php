@@ -1,10 +1,10 @@
-@extends('admin.index')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     
 <h1>{{$product->name}}</h1>
 <img style="max-width:200px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail">
-</a>  
+ 
 <br><br>
 <div>
     {{-- zorgt er voor dat je de html kan zien --}}

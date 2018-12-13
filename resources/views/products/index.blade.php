@@ -27,7 +27,7 @@
                             {!!Form::close()!!}
                             @endif
                             @endif
-                            </li><br>
+                            </li>
                             @endforeach
                         </ul></div>
                     @else
