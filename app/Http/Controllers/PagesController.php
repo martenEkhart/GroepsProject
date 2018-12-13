@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth; 
+use Auth;
+use App\Product;
 
 class PagesController extends Controller
 {
@@ -21,15 +22,20 @@ class PagesController extends Controller
     public function getIndex () {
         return view('pages/index');
     }
-    
+
     public function getProducten() {
         return view('pages/producten');
     }
-    
+
+    public function getProductenTRaoul() {
+      $products = Product::all();
+        return view('pages/productenTRaoul', compact('products'));
+    }
+
     public function getKlant () {
         return view('pages/klant');
     }
-    
+
     public function getAdmin () {
         if(Auth::user()->authorization_level != 1)
         {

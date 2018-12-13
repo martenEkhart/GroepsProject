@@ -5,7 +5,7 @@
         <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
         <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
         <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
-        <input style="height: 50px" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
+        <input style="position:relative; top:-18px; height: 50px; zoom: 3;" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
             
 
 </div>
@@ -15,7 +15,7 @@
         
         
 </div>  
-<br /><br /><br />
+
 <div class="wrapper4">
 		<div id="divUp" class="box aUp" onclick="fnVert(-1)">Up</div>
 		<div id="divDown" class="box aDown" onclick="fnVert(1)">Down</div>
@@ -90,7 +90,7 @@ function createWebsiteBorders() {
     webBorder.style.position = "absolute";
     webBorder.src = "../images/customisations/website-borders.png" ;
     webBorder.style.left = 200+  "px";
-    webBorder.style.top = 160 +  "px";
+    webBorder.style.top = 185 +  "px";
     webBorder.height = 230;
     webBorder.width = 370;
     webBorder.style.zIndex = 0;
