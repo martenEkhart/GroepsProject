@@ -48,6 +48,10 @@ function testest(){
  var counter = 0;
  var cim = [];
 
+ var mouseHold = false;
+ var mouseCorX = 0;
+ var mouseCorY = 0;
+
  var dotted = document.getElementById("dott").getBoundingClientRect();
 
   var tel = 0;
@@ -97,7 +101,28 @@ function createWebsiteBorders() {
     document.body.appendChild(webBorder);
 }
 
-    function updateForm() {
+//  walter_1544627116.jpg
+
+    function mouseDown() {
+        if (mouseHold) {mouseHold = false; return}
+        let afstandX = Math.abs(event.clientX - parseInt(cim[counter].style.left) - Math.floor(cim[counter].clientWidth/2));
+        let afstandY = Math.abs(event.clientY - parseInt(cim[counter].style.top) - Math.floor(cim[counter].clientHeight/2));
+        if (afstandX * afstandX + afstandY * afstandY < 1000) {
+           mouseCorX = event.clientX - parseInt(cim[counter].style.left);
+           mouseCorY = event.clientY - parseInt(cim[counter].style.top);
+           mouseHold = true;
+        }
+     tixt.innerHTML = afstandX * afstandX + afstandY * afstandY;
+    //    tixt.innerHTML = Math.abs(event.clientX - parseInt(cim[counter].style.left))+ " " +Math.floor(cim[counter].clientWidth);
+       //alert(Math.abs(event.clientX - parseInt(cim[counter].style.left) - Math.floor(cim[counter].clientWidth/3))  );
+    }   
+
+    function mouseMove() {
+       if (mouseHold) {
+           tixt.innerHTML = cim[counter].style.left = event.clientX + mouseCorX +"px";
+           cim[counter].style.left = event.clientX - mouseCorX +"px";
+           cim[counter].style.top = event.clientY - mouseCorY +"px";
+       }
 
     }
 
