@@ -124,7 +124,7 @@
 
     </style>
 </head>
-<body>
+<body onmousedown="mouseDown()" onmousemove="mouseMove()">
     @include('inc.navbar')
 
    
