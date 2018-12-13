@@ -139,9 +139,6 @@
         </div> 
             </div> 
 
-            <footer id="footer" class="text-center" style= "margin-top: 1%;" >
-                <p><b>Copyright 2018 &copy; JAAW</b></p>
-            </footer>          
     <script src="{{ asset('js/app.js') }}" defer></script>
     
 
