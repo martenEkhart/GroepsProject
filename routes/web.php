@@ -15,12 +15,9 @@
 Route::get('/', 'PagesController@getIndex')->name('home');
 Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
-<<<<<<< HEAD
 Route::get('/productenTRaoul', 'PagesController@getProductenTRaoul');
 Route::get('/klant', 'PagesController@getKlant');
-=======
 Route::get('/', 'PagesController@getKlant');
->>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
 
