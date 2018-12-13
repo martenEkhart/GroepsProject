@@ -31,6 +31,7 @@ class CustomisationsController extends Controller
      $customisation->width  = $request->width;
      $customisation->height  = $request->height;
      $customisation->opacity  = floor($request->opacity * 100);
+  //   dd($customisation->opacity);
      $customisation->z_layer  = $request->z_layer;
      $customisation->visible  = $request->visible;
      $customisation->save();
