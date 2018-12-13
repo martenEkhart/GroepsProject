@@ -8,10 +8,10 @@
                 <div class="panel-body">
                    @csrf
                    @if(Auth::guest())
-                    {{$user_id = "0" }}
-                    @else
-                    {{$user_id = Auth::user()->id}}
-                    @endif
+                   @php $user_id = "0"; @endphp
+                   @else
+                   @php $user_id = Auth::user()->id; @endphp
+                   @endif
                     @if(count($cart_items))
 
                         <ul class="list-group">

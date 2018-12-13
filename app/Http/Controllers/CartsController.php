@@ -117,8 +117,8 @@ class CartsController extends Controller
             {
                 $item->delete();
             }
-        echo "winkelwagentje geleegd!";
-    }
+            return redirect ('product')->with('success', 'Your shopping cart is empty again!');
+        }
 
     public function checkoutCart()
     {
