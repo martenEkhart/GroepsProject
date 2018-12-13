@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth; 
-<<<<<<< HEAD
-use App\Product;
-=======
 use App\Product; 
 
->>>>>>> 4725180a904c1bcef5072a9cc45d9601c1cb7f85
 
 class PagesController extends Controller
 {
