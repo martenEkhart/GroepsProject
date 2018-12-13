@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+use Auth;
+use App\Product;
+=======
 use Auth; 
 use App\Product; 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 4725180a904c1bcef5072a9cc45d9601c1cb7f85
+>>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
+>>>>>>> ea6b4e749f7c6f4f5faa597219117a064dd06cfb
 
 class PagesController extends Controller
 {
@@ -25,16 +34,21 @@ class PagesController extends Controller
         $products = Product::All();
         return view('pages.index')->with('products', $products);
     }
-    
+
     public function getProducten() {
         return view('pages/producten');
     }
-    
+
+    public function getProductenTRaoul() {
+      $products = Product::all();
+        return view('pages/productenTRaoul', compact('products'));
+    }
+
     public function getKlant () {
         $products = Product::all();
         return view('pages/index' , compact('products'));
     }
-    
+
     public function getAdmin () {
         if(Auth::user()->authorization_level != 1)
         {
