@@ -10,20 +10,25 @@
     <title>JAAW</title>
 </head>
 <body>
-    
+    <div id='app'></div>
+
     @include('inc.navbar')
- 
-     <div class="container">
+  
         @include('inc.messages')
-    </div> 
-    @if(Request::is('/'))   
+        <div class="container"> 
+            
+    
+        @if(Request::is('/')) 
+        @include('inc.header') 
     @include('inc.searchbar')
     @endif
-    <div class="container" style="margin-top: 50px;" >
+   
+    
+   <div class="container" style="margin-top: 40px;">
          @if(Request::is('/'))   
          @include('inc.carousel')
          @endif
-         
+        </div>
          <div class="row">
           
     
@@ -42,6 +47,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
        
     @include('inc.footer')
-    
+</div> 
 </body>
 </html>

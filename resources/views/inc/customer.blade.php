@@ -7,7 +7,7 @@
 <div class="container">
     
 <h1>{{$product->name}}</h1>
-<img style="max-width:120px;" src="/product_images/{{$product->image_name}}" class="img-fluid img-thumbnail">
+<img style="max-width:120px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail">
 </a>  
 <br><br>
 <div>

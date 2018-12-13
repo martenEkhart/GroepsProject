@@ -1,10 +1,10 @@
-@extends('admin.index')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     
 <h1>{{$product->name}}</h1>
 <img style="max-width:200px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail">
-</a>  
+ 
 <br><br>
 <div>
     {{-- zorgt er voor dat je de html kan zien --}}
@@ -13,8 +13,13 @@
   <b>Product description:</b>  {!!$product->description!!} 
 </div>  
 <br>
+@if(Auth::guest())
+{{$user_id = "0" }}
+@else
+{{$user_id = Auth::user()->id}}
+@endif
 <small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
-<a href="/" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
+<a href="/cart/{{$user_id}}/add/{{$product->id}}" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
 <hr>
 
     
@@ -25,7 +30,8 @@
     @else
    <a href="/product/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
 
-{!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'onsubmit' => 'return confirm("Do you want to delete this Product?")', 'method' => 'POST', 'class' => 'float-right'])!!}
+{!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'onsubmit' => 
+'return confirm("Do you want to delete this Product?")', 'method' => 'POST', 'class' => 'float-right'])!!}
     {{Form::hidden('_method', 'DELETE')}}
     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 {!!Form::close()!!}

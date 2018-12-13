@@ -1,17 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);#foot {
-  height: 180px;
-  max-width: 100%;
-  margin-bottom: 0%;
-}
-
-html body {
+@import url(https://fonts.googleapis.com/css?family=Nunito);html body {
   margin: 0;
   padding: 0;
 }
 
 #copyright {
   font-size: 26px;
-  margin-top: 140px;
+  text-align: center;
 }
 
 /*!
