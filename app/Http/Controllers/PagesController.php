@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth; 
+use App\Product;
 
 class PagesController extends Controller
 {
@@ -27,7 +28,8 @@ class PagesController extends Controller
     }
     
     public function getKlant () {
-        return view('pages/klant');
+        $products = Product::all();
+        return view('pages/index' , compact('products'));
     }
     
     public function getAdmin () {
