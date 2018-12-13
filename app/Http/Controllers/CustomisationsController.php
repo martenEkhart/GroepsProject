@@ -31,6 +31,7 @@ class CustomisationsController extends Controller
      $customisation->width  = $request->width;
      $customisation->height  = $request->height;
      $customisation->opacity  = floor($request->opacity * 100);
+  //   dd($customisation->opacity);
      $customisation->z_layer  = $request->z_layer;
      $customisation->visible  = $request->visible;
      $customisation->save();
@@ -147,7 +148,7 @@ class CustomisationsController extends Controller
         $customisation->opacity = 100;
         $customisation->visible = 1;
         $customisation->save();
-        return redirect('customisations/manage')->with('success', 'Customisation created');
+        return redirect('customisation/manage')->with('success', 'Customisation created');
     } else {
         $fileNameToStore = 'noImage.jpg';
     }

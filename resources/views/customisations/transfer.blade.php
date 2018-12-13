@@ -11,11 +11,11 @@
 </div>
 <br>
 
-<div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 20em; height:14em; border-style:dotted; border-width:2px">
-        .... website borders
+<div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
+        
         
 </div>  
-<br />
+<br /><br /><br />
 <div class="wrapper4">
 		<div id="divUp" class="box aUp" onclick="fnVert(-1)">Up</div>
 		<div id="divDown" class="box aDown" onclick="fnVert(1)">Down</div>
@@ -60,7 +60,7 @@ function testest(){
   if (customisations.length == 0) {
       alert("nog niets");
   } 
-
+  createWebsiteBorders();
   for(i=0; i<customisations.length; i++) {
     createImg(i);   
   }
@@ -83,6 +83,19 @@ function testest(){
     cm[nr].style.zIndex = c.z_layer;
     cm[nr].style.opacity = c.opacity/100;
     document.body.appendChild(cm[nr]);    
+}   
+
+function createWebsiteBorders() {
+    webBorder = document.createElement('img');
+    webBorder.style.position = "absolute";
+    webBorder.src = "../images/customisations/website-borders.png" ;
+    webBorder.style.left = 200+  "px";
+    webBorder.style.top = 160 +  "px";
+    webBorder.height = 230;
+    webBorder.width = 370;
+    webBorder.style.zIndex = 0;
+    webBorder.style.opacity = 1;
+    document.body.appendChild(webBorder);    
 }   
 
     function updateForm() {
@@ -183,9 +196,16 @@ function testest(){
     }
   
     function maakKlaar() {
+    //    customisations[counter].x = im1.style.left;
+    //    customisations[counter].y = im1.style.top;
         customisations[counter].width = im1.clientWidth;
         customisations[counter].height = im1.clientHeight;
-        if (customisations[counter].opacity > 1) { customisations[counter].opacity = 1 }
+        customisations[counter].opacity = im1.style.opacity;
+        customisations[counter].z_layer = im1.style.zIndex;
+        if(customisations[counter].opacity > 1) {customisations[counter].opacity = 1}
+     //   alert(customisations[counter].opacity);
+     //   if (cm[counter].style.opacity > 1) { cm[counter].style.opacity = 1 }
+
     }
 
     function loadDoc(method, url, myFunction, div, input) {
@@ -201,8 +221,9 @@ function testest(){
     }
     xhttp.open(method, url, true);
     if (method == 'POST') {
+    //   alert(cm[counter].style.opacity);
         maakKlaar();
-  //      alert(objToString(customisations[counter]));
+    //    alert(objToString(customisations[counter]));
         var data = objToString(customisations[counter]);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
