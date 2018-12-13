@@ -12,6 +12,17 @@
             <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/product">Producten</a>
             </li>
+            <li class="nav-item active">
+       
+          
+            {{-- @if ($carts)
+            @php echo "hoi"; @endphp
+            (Cart::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first())
+            @endif --}}
+            @if(!Auth::guest())
+                <a class="nav-link" style="color: black" href="/cart/{{Auth::user()->id}}">Shopping cart</a>
+            @endif
+            </li>
             {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/klant">Klant</a>
             </li>

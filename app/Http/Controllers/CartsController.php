@@ -7,6 +7,7 @@ use App\Product;
 use App\Order;
 use App\Cart;
 use App\Cart_Product;
+use Auth;
 
 // Overall to do:
 // views op het einde van de functies defineren
@@ -26,16 +27,18 @@ class CartsController extends Controller
         public function index(Request $request)
         {
             // TODO: check if user id matches with cart
-           
-            if (!Cart::where('id',$request->cart_id)->first()){
+            $current_cart = Cart::where('user_id',$request->user_id)->first();
+
+            if (!$current_cart){
             // when cart id doesnt exist, go back to products page
             // other view eventually?
             $products = Product::All();
             return redirect ('product');
             }
             else {
-            // get data to pass to view from tables products and cart_products
-            $cart_items = Cart_Product::where('cart_id',$request->cart_id)->get();
+            
+            // get data from tables products and cart_products to pass to view 
+            $cart_items = Cart_Product::where('cart_id',$current_cart->id)->get();
             $cart_products = [];
             foreach ($cart_items as $cart_item) {
                 array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
@@ -97,13 +100,14 @@ class CartsController extends Controller
     {
         // delete or substract one from amount if the count is higher than one
         // TODO: extra checks
+        $user_id =  Auth::user()->id;
         if (! Cart_Product::find($request->cart_product_id)){
-            echo "nothing to delete";
+            return redirect ('product');
         }
         else {
         $product_to_remove = Cart_Product::find($request->cart_product_id);
-        // $product_to_remove->delete();
-        return redirect ('cart/'{$request->cart_product_id});
+        $product_to_remove->delete();
+        return redirect ('cart/' . $user_id);
         }
     }
 
