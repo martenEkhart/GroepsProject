@@ -30,7 +30,33 @@ html body {
     padding: 0;
 }
 
+#hoofd {
+    text-align:center;
+    margin-top: 30px;
+}
+
 #copyright{
     font-size: 26px;
    text-align: center;
+}
+
+#product{
+    margin-left: 40px;
+    margin-top: 40px;
+}
+
+#link {
+    color:inherit;
+  text-decoration: none;
+}
+
+#product-image {
+
+    max-width:150px;
+    margin-top: 30px;
+}
+
+#paginate {
+    margin-top: 30px;
+    
 }

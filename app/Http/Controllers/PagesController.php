@@ -9,6 +9,7 @@ use App\Product;
 use App\Cart;
 
 
+
 class PagesController extends Controller
 {
     public function __construct()
@@ -39,7 +40,7 @@ class PagesController extends Controller
     }
 
     public function getKlant () {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->paginate(8);
         return view('pages/index' , compact('products'));
     }
 
