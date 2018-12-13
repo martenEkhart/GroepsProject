@@ -13,8 +13,13 @@
   <b>Product description:</b>  {!!$product->description!!} 
 </div>  
 <br>
+@if(Auth::guest())
+{{$user_id = "0" }}
+@else
+{{$user_id = Auth::user()->id}}
+@endif
 <small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
-<a href="/cart/{{Auth::user()->id}}/add/{{$product->id}}" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
+<a href="/cart/{{$user_id}}/add/{{$product->id}}" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
 <hr>
 
     

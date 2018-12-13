@@ -124,4 +124,8 @@ class CartsController extends Controller
     {
         // maak aan order adhv producten in een cart 
     }
+
+    public function guestCart(){
+        
+    }
 }
