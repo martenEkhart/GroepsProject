@@ -7,6 +7,11 @@
             <div class="panel-heading"><h3>Shoppingcard</h3></div>
                 <div class="panel-body">
                    @csrf
+                   @if(Auth::guest())
+                    {{$user_id = "0" }}
+                    @else
+                    {{$user_id = Auth::user()->id}}
+                    @endif
                     @if(count($cart_items))
 
                         <ul class="list-group">
@@ -19,8 +24,10 @@
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
                         {!!Form::close()!!}
                         </li>
-                        <a href="empty/ {{$zegeenswat[$loop->index]->cart_id}} ">Empty your shopping cart</a>
+                        
                         @endforeach
+                        <a href="empty/ {{$zegeenswat[0]->cart_id}} ">Empty your shopping cart</a><br>
+                        <a href="cart/checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
                     </ul>
                 
                 @else
