@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+use Auth;
+use App\Product;
+
+
+
+=======
 
 use Auth;
 use App\Product;
@@ -19,6 +26,7 @@ use App\Product;
 >>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
 >>>>>>> ea6b4e749f7c6f4f5faa597219117a064dd06cfb
 >>>>>>> 718c1f98b350631eb00c25b6fe77e7ec393e30b8
+>>>>>>> 5c376b42025bd23ba81058cee1a61f7a3c5b100e
 
 class PagesController extends Controller
 {
@@ -49,7 +57,7 @@ class PagesController extends Controller
     }
 
     public function getKlant () {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->paginate(8);
         return view('pages/index' , compact('products'));
     }
 
