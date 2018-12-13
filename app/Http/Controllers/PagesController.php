@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
+
 use Auth;
 use App\Product;
-=======
-use Auth; 
-<<<<<<< HEAD
-use App\Product;
-=======
-use App\Product; 
-
->>>>>>> 4725180a904c1bcef5072a9cc45d9601c1cb7f85
->>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
+ 
 
 class PagesController extends Controller
 {
