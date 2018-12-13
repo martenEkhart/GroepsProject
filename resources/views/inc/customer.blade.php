@@ -1,12 +1,21 @@
 @extends('layouts.app')
 @section('content')
-
+<div class="container">
+  <div class="col-md 6" style="margin-top: 20px;">
+    <form action="/search" method="get">
+      <div class="row">
+            <span class="form-group-btn">
+                    <button type="submit" class="btn btn-primary" style="width:110px;"><b>Search</b></button>
+                </span>
+          <input required type="search" name="search" class="form-control" placeholder="Search Products" style="width: 70%;">
+          
+      </div>
+    </form>
+  </div>
 @if(count($products)) 
 @foreach($products as $product)
 <a href="/product/{{$product->id}}">
-<div class="container">
-    
-<h1>{{$product->name}}</h1>
+<h1 style="margin-top: 30px;">{{$product->name}}</h1>
 <img style="max-width:120px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail">
 </a>  
 <br><br>

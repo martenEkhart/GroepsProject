@@ -14,9 +14,9 @@
 </div>  
 <br>
 @if(Auth::guest())
-{{$user_id = "0" }}
+@php $user_id = "0"; @endphp
 @else
-{{$user_id = Auth::user()->id}}
+@php $user_id = Auth::user()->id; @endphp
 @endif
 <small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
 <a href="/cart/{{$user_id}}/add/{{$product->id}}" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>

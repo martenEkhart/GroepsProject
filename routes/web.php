@@ -15,8 +15,12 @@
 Route::get('/', 'PagesController@getIndex')->name('home');
 Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
+<<<<<<< HEAD
 Route::get('/productenTRaoul', 'PagesController@getProductenTRaoul');
 Route::get('/klant', 'PagesController@getKlant');
+=======
+Route::get('/', 'PagesController@getKlant');
+>>>>>>> 98575147b3abaf9a38b2ec4ac1d3bfbb04846406
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
 
@@ -46,4 +50,5 @@ Route::get('cart/delete/{cart_product_id}','CartsController@removeFromCart');
 Route::get('cart/empty/{cart_id}', 'CartsController@emptyCart');
 Route::get('cart/{cart_id}','CartsController@index');
 Route::post('cart/changeamount/{cart_product_id}/{amount}','CartsController@changeAmount');
+Route::post('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
 // Route::get('/home', 'HomeController@index')->name('home');
