@@ -15,7 +15,7 @@ use Auth;
 
 class CartsController extends Controller
 {
-    //
+    
 
     var $cart_id;
 
@@ -71,8 +71,6 @@ class CartsController extends Controller
                 'cart_id' => $this->cart_id->id,
                 'product_id' => $product_id
             ])->first();
-            // print_r ($add_to_item);
-            // die();
             $add_to_item->amount = $add_to_item->amount +1 ;
             $add_to_item->save();
         }
@@ -124,9 +122,40 @@ class CartsController extends Controller
             return redirect ('product')->with('success', 'Your shopping cart is empty again!');
         }
 
-    public function checkoutCart()
+    public function checkoutCart(Request $request)
     {
-        // maak aan order adhv producten in een cart 
+
+        // TO DO:     laat gebruiker adres kiezen?
+        $user_id = $request->user_id;
+        $cart_id =  $request->cart_id;
+        $address_id = "1";
+        // get all products in cart:
+        $cart_items = Cart_Product::where('cart_id',$cart_id)->get();
+        $cart_products = [];
+        $total_cost = 0;
+        
+        // get info about products in cart:
+        foreach ($cart_items as $cart_item) {
+            $current_product = Product::where('id',$cart_item->product_id)->first();
+            array_push($cart_products,$current_product);
+            $cart_products[$cart_item->amount] = $current_product;
+            $total_cost += $cart_item->amount * $current_product->price; 
+        }
+     
+        // create a new order and save it to db
+        $new_order = new Order;
+        $new_order->user_id = $user_id;
+        $new_order->address_id = $address_id;
+        $new_order->cart_id = $cart_id;
+        $new_order->totalcost = $total_cost;
+        $new_order->save();
+
+        $order_id = $new_order->id;
+
+        //Force two decimals because of Mollie amount format
+        $total_cost_mollie = number_format((float)$total_cost, 2, '.', '');
+        //Show Mollie payment screen
+       return redirect("payment/".$order_id."/".$total_cost_mollie);
     }
 
     public function guestCart(){

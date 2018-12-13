@@ -15,6 +15,7 @@
 Route::get('/', 'PagesController@getIndex')->name('home');
 Route::get('/contact', 'PagesController@getContact');
 Route::get('/producten', 'PagesController@getProducten');
+Route::get('/productenTRaoul', 'PagesController@getProductenTRaoul');
 Route::get('/klant', 'PagesController@getKlant');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
@@ -36,7 +37,8 @@ Route::resource('address', 'AddressesController');
 
 
 
-Route::get('/payment/{order_id}', 'PaymentsController@preparePayment');
+Route::get('/payment/{order_id}/{amount}', 'PaymentsController@preparePayment');
+Route::post('/payment/{order_id}/{amount}', 'PaymentsController@preparePayment');
 Route::name('webhooks.mollie')->post('webhooks/mollie', 'PaymentsController@handle');
 Route::get('order/succes/', 'PaymentsController@handle')->name('order.success');
 Auth::routes();
@@ -46,4 +48,5 @@ Route::get('cart/empty/{cart_id}', 'CartsController@emptyCart');
 Route::get('cart/{user_id}','CartsController@index');
 Route::post('cart/changeamount/{cart_product_id}/{amount}','CartsController@changeAmount');
 Route::post('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
+Route::get('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
 // Route::get('/home', 'HomeController@index')->name('home');
