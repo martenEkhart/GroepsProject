@@ -48,6 +48,7 @@ public function handle(Request $request) {
         return;
     }
 
+    // TO DO: checken of een mollie id al bestaat, dan die updaten
 
     $payment = Mollie::api()->payments()->get($request->id);
     $order_id = $payment->metadata;
@@ -72,9 +73,9 @@ public function handle(Request $request) {
         $payment_status->status = '2'; // paid
         $payment_status->save();
 
-        $order_status = Order::where('id',$order_id)->first();
-        $order_status->payment_status = '2';
-        $order_status->save();
+        // $order_status = Order::where('id',$order_id)->first();
+        // $order_status->payment_status = '2';
+        // $order_status->save();
         
        // return view('payment.status')->with('payment', $payment_status);
      }
