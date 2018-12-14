@@ -28,8 +28,26 @@
                     </div>
                         @endforeach
                         <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
-                        <a href="checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
                     </ul>
+                    @if(count($addresses) > 0)
+                    <div class="form-group">
+                        {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
+
+                        {{Form::label('address', 'Category')}}
+            
+                        {{ Form::select('address', $addresses ,null, ['Class' => 'form-control']) }}
+                        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+
+                        {!! Form::close() !!}
+                
+                    </div>
+                    <a href="checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
+
+                    @else
+                        <a href="/address/create">Create new Address</a>
+                    @endif
+                <h1>Total price = ${{$cart->getTotal()}}</h1>
+
                 @php
                     $foo = "1.";
                     echo number_format((float)$foo, 2, '.', '');
