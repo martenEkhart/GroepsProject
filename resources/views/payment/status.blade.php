@@ -6,9 +6,21 @@
                        
                          @foreach($payments as $payment)
                          <div class="for-wrapper">
-                        Order id:
+                        <b>Order id:</b><br>
                         {{$payment->order_id}}
-                        Payment status:
+                        <b>Payment status:</b><br>
+                         @switch($payment->status)
+                            @case(0)
+                                Payment open
+                            @break
+                            @case(1)
+                                Payment cancelled
+                             @break
+                            @case(2)
+                                Payment received!
+                                @break
+                            @default
+                        @endswitch
                         {{$payment->status}}
                         
                         </li>
