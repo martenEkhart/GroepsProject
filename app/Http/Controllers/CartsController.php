@@ -96,7 +96,7 @@ class CartsController extends Controller
     {
         // verander aantal van product in cart_product mbv ajax
         $change_amount = Cart_Product::find($request->cart_product_id);
-        $change_amount->amount =$request->amount;
+        $change_amount->amount = $request->amount;
         $change_amount->save();
         // return $request->succes;
     }
@@ -134,13 +134,16 @@ class CartsController extends Controller
     {
         // Empty the cart
         // TODO: extra checks
-        $cart_to_empty = $request->cart_id;
-        $items = Cart_Product::where('cart_id',$cart_to_empty)->get();
-        foreach($items as $item) 
-            {
-                $item->delete();
-            }
-            return redirect ('product')->with('success', 'Your shopping cart is empty again!');
+        $cart = Cart::find($request->cart_id);
+        $cart->deleteAllItems();
+
+        // $cart_to_empty = $request->cart_id;
+        // $items = Cart_Product::where('cart_id',$cart_to_empty)->get();
+        // foreach($items as $item) 
+        //     {
+        //         $item->delete();
+        //     }
+        return redirect ('product')->with('success', 'Your shopping cart is empty again!');
         }
 
     public function checkoutCart(Request $request)
@@ -148,18 +151,18 @@ class CartsController extends Controller
 
         // TO DO:     laat gebruiker adres kiezen?
         $user =  Auth::user();
-        $cart_products = $user->cart->cart_product;
+        //$cart_products = $user->cart->cart_product;
         $total_cost = $user->cart->getTotal();
-        // foreach ($cart_products as $cart_item) {
-        //     $total_cost += $cart_item->amount * $cart_item->product->price;
-        // }
+
+        // make new Order
         $new_order = new Order();
         $new_order->user_id = $user->id;
         $new_order->address_id = $user->address[$request->address]->id;
         $new_order->cart_id = $user->cart->id;
         $new_order->total_cost = $total_cost;
         $new_order->save();
-
+        // empty cart:
+        $user->cart->deleteAllItems();
         $order_id = $new_order->id;
         //Force two decimals because of Mollie amount format
         $total_cost_mollie = number_format((float)$total_cost, 2, '.', '');
