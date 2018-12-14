@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@if(count($payments))
+
 
                         <ul class="list-group">
                          @foreach($payments as $payment)
@@ -13,5 +13,4 @@
                         </li>
                     </div>
                         @endforeach
-@endif
 @endsection
