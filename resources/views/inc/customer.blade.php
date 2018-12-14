@@ -14,10 +14,10 @@
   </div>
 @if(count($products)) 
 @foreach($products as $product)
-<a href="/product/{{$product->id}}">
+<a id="link" href="/product/{{$product->id}}">
 <h1 style="margin-top: 30px;">{{$product->name}}</h1>
 <img style="max-width:120px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail">
-</a>  
+
 <br><br>
 
     {{-- zorgt er voor dat je de html kan zien --}}
@@ -26,7 +26,7 @@
   <b>Product description:</b>  {!!$product->description!!} 
   
 <br>
-<small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> 
+<small><b>Products in stock:</b>  {{$product->stock}} <br><b>Product Added:</b>  {{$product->created_at}} </small> </a>  
 <a href="/" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a>
 <hr>
  

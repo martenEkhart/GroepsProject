@@ -9,13 +9,13 @@
                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                        <div class="carousel-item active"><a href="/product/8">
+                        <div class="carousel-item active"><a href="/product/5">
                                 <img class="d-block w-100" src="images/reclame_2.png" alt="First slide"></a>
                               </div>
-                              <div class="carousel-item"><a href="/product/4">
+                              <div class="carousel-item"><a href="/product/11">
                                 <img class="d-block w-100" src="images/reclame_3.png" alt="Second slide"></a>
                               </div>
-                              <div class="carousel-item"><a href="/product/5">
+                              <div class="carousel-item"><a href="/product/2">
                                 <img class="d-block w-100" src="images/reclame_4.png" alt="Third slide"></a>
                               </div>
                             </div>

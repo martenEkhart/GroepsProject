@@ -58,6 +58,7 @@ class ProductsController extends Controller
     {
         $search = $request->get('search');        
         $products = Product::where('name', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->paginate(3);
+        $products->appends(['search' => $search]);
         return view('inc.customer')->with('products', $products);
         
     }
