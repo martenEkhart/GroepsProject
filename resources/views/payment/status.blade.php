@@ -19,7 +19,10 @@
                             @case(2)
                                 Payment received!
                                 @break
-                            @default
+                                @case(5)
+                                Payment Expired!
+                                @break
+                            
                         @endswitch
                      
                         </li>
