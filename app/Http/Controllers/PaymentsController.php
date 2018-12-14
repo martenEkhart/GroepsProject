@@ -30,7 +30,7 @@ class PaymentsController extends Controller
     'description' => 'Order#' . $request->order_id,
     'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
-    'redirectUrl' => route('payment.status')->with('order_id', $request->order_id),
+    'redirectUrl' => route('payment.status'),
     ]);
 
     $payment = Mollie::api()->payments()->get($payment->id);
