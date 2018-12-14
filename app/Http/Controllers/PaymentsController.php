@@ -158,8 +158,8 @@ public function handle(Request $request) {
 public function result(Request $request){
     $user_id = Auth::user()->id;
 
-   $payments = Payment::where('user_id',$user_id);
-   dd($payments);
+   $payments = Payment::where('user_id',$user_id)->get();
+//    dd($payments);
     return view('payment.status')->with('payments', $payments);
 }  
 
