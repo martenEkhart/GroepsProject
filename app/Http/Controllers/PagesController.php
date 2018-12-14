@@ -6,13 +6,6 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Product;
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 8574c6c83af720d90a6f2bca2780b56bf4f8f27c
 class PagesController extends Controller
 {
     public function __construct()
