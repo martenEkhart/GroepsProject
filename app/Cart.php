@@ -25,4 +25,9 @@ class Cart extends Model
         }
         return $total;
     }
+    public function deleteAllItems() {
+        foreach($this->cart_product as $cart_product) {
+            $cart_product->delete();
+        }
+    }
 }
