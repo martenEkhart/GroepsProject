@@ -6,6 +6,7 @@ use Mollie;
 use App\Product; 
 use App\Category; 
 use App\Payment;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -55,11 +56,13 @@ public function handle(Request $request) {
     $currency = $payment->amount->currency;
     $amount = $payment->amount->value;
     $method = $payment->method;
+    $user_id = Auth::user()->id;
     
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
     $payment_to_db->order_id = $order_id;
+    $payment_to_db->user_id= $user_id;
     $payment_to_db->currency = $currency;
     $payment_to_db->amount = $amount;
     $payment_to_db->method = $method;
@@ -74,7 +77,7 @@ public function handle(Request $request) {
         $payment_status->save();
 
         $order_status = Order::where('id',$order_id)->first();
-        $order_status->payment_status = '2';
+        $order_status->payment_status = 2;
         $order_status->save();
         
        // return view('payment.status')->with('payment', $payment_status);
