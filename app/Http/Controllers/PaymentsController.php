@@ -6,6 +6,8 @@ use Mollie;
 use App\Product; 
 use App\Category; 
 use App\Payment;
+use Auth;
+use App\Order;
 
 use Illuminate\Http\Request;
 
@@ -30,7 +32,7 @@ class PaymentsController extends Controller
     'description' => 'Order#' . $request->order_id,
     'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
-    'redirectUrl' => route('order.success'),
+    'redirectUrl' => route('payment.status'),
     ]);
 
     $payment = Mollie::api()->payments()->get($payment->id);
@@ -48,17 +50,19 @@ public function handle(Request $request) {
         return;
     }
 
+    // TO DO: checken of een mollie id al bestaat, dan die updaten
 
     $payment = Mollie::api()->payments()->get($request->id);
     $order_id = $payment->metadata;
     $currency = $payment->amount->currency;
     $amount = $payment->amount->value;
     $method = $payment->method;
-    
+    $user_id = Auth::user()->id;
     // Save data from Mollie to db: 
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
     $payment_to_db->order_id = $order_id;
+    $payment_to_db->user_id= $user_id;
     $payment_to_db->currency = $currency;
     $payment_to_db->amount = $amount;
     $payment_to_db->method = $method;
@@ -71,6 +75,12 @@ public function handle(Request $request) {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '2'; // paid
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '2';
+        $order_status->save();
+        
+       // return view('payment.status')->with('payment', $payment_status);
      }
      else if ($payment->isOpen())
      {
@@ -111,12 +121,18 @@ public function handle(Request $request) {
      else {
          // error, geen status terug gekregen van Mollie. What to do?
      }
+    }
 
-     
+
+
+public function result(Request $request){
+   
+    return view('payment.status');
+}  
 
 
 
 
 }
 
-}
+

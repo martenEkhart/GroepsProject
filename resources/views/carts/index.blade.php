@@ -23,7 +23,7 @@
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
                         {!!Form::close()!!} --}}
-                        <button onclick="deleteData({{$zegeenswat[$loop->index]->id}}, {{$loop->index}})">Delete</button>
+                        <button onclick="deleteData({{$zegeenswat[$loop->index]->id}}, {{$loop->index}})">Remove from your cart</button>
                         </li>
                     </div>
                         @endforeach

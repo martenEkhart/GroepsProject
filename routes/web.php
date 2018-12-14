@@ -42,6 +42,7 @@ Route::get('/payment/{order_id}/{amount}', 'PaymentsController@preparePayment');
 Route::post('/payment/{order_id}/{amount}', 'PaymentsController@preparePayment');
 Route::name('webhooks.mollie')->post('webhooks/mollie', 'PaymentsController@handle');
 Route::get('order/succes/', 'PaymentsController@handle')->name('order.success');
+Route::get('payment/status', 'PaymentsController@result')->name('payment.status');;
 Auth::routes();
 Route::delete('cart/{cart_product_id}', 'CartsController@deleteFromCart');
 Route::get('cart/{user_id}/add/{product_id}','CartsController@addToCart');
