@@ -6,7 +6,7 @@
                        
                          @foreach($payments as $payment)
                          <div class="for-wrapper">
-                        <b>Order id:</b><br>
+                        <b>Order id:</b>
                         {{$payment->order_id}}
                         <b>Payment status:</b><br>
                          @switch($payment->status)
@@ -21,8 +21,7 @@
                                 @break
                             @default
                         @endswitch
-                        {{$payment->status}}
-                        
+                     
                         </li>
                     </div>
                         @endforeach
