@@ -20,14 +20,14 @@ class PaymentsController extends Controller
     public function preparePayment(Request $request)
 {
     // Amount & description uit Order Table halen!
-    
+    echo $request->amount;
     
     $payment = Mollie::api()->payments()->create([
     'amount' => [
         'currency' => 'EUR',
-        'value' => '9.95', // You must send the correct number of decimals, thus we enforce the use of strings
+        'value' => $request->amount, // You must send the correct number of decimals, thus we enforce the use of strings
     ],
-    'description' => 'My first API payment',
+    'description' => 'Order#' . $request->order_id,
     'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
     'redirectUrl' => route('order.success'),

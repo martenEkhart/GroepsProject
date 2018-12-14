@@ -4,7 +4,7 @@
 <div class="row" style="margin-top: 20px;">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Shoppingcard</h3></div>
+            <div class="panel-heading"><h3>Your shopping cart</h3></div>
                 <div class="panel-body">
                    @csrf
                    @if(Auth::guest())
@@ -27,9 +27,12 @@
                         
                         @endforeach
                         <a href="empty/ {{$zegeenswat[0]->cart_id}} ">Empty your shopping cart</a><br>
-                        <a href="cart/checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
+                        <a href="checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
                     </ul>
-                
+                @php
+                    $foo = "1.";
+                    echo number_format((float)$foo, 2, '.', '');
+                @endphp
                 @else
                   <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
                 @endif
