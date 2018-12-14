@@ -7,6 +7,7 @@ use App\Product;
 use App\Category; 
 use App\Payment;
 use Auth;
+use App\Order;
 
 use Illuminate\Http\Request;
 
