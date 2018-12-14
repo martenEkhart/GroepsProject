@@ -23,18 +23,14 @@
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
                         {!!Form::close()!!} --}}
-                        <button onclick="deleteData({{$zegeenswat[$loop->index]->id}}, {{$loop->index}})">Delete</button>
+                        <button onclick="deleteData({{$zegeenswat[$loop->index]->id}}, {{$loop->index}})">Remove from your cart</button>
                         </li>
                     </div>
                         @endforeach
                         <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
                         <a href="checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
                     </ul>
-                @php
-                    $foo = "1.";
-                    echo number_format((float)$foo, 2, '.', '');
-                @endphp
-                @else
+                 @else
                   <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
                 @endif
             </div>

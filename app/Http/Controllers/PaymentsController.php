@@ -30,7 +30,7 @@ class PaymentsController extends Controller
     'description' => 'Order#' . $request->order_id,
     'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
-    'redirectUrl' => route('order.success'),
+    'redirectUrl' => route('payment.status'),
     ]);
 
     $payment = Mollie::api()->payments()->get($payment->id);
@@ -71,6 +71,12 @@ public function handle(Request $request) {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '2'; // paid
         $payment_status->save();
+
+        $order_status = Order::where('order_id',$order_id)->first();
+        $order_status->payment_status = '2';
+        $order_status->save();
+        
+        return view('payment.status')->with('payment', $payment_status);
      }
      else if ($payment->isOpen())
      {
