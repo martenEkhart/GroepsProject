@@ -50,6 +50,6 @@ Route::get('cart/delete/{cart_product_id}','CartsController@removeFromCart');
 Route::get('cart/empty/{cart_id}', 'CartsController@emptyCart');
 Route::get('cart/{user_id}','CartsController@index');
 Route::post('cart/changeamount/{cart_product_id}/{amount}','CartsController@changeAmount');
-Route::post('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
-Route::get('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
+Route::post('cart/checkout','CartsController@checkoutCart');
+// Route::get('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
 // Route::get('/home', 'HomeController@index')->name('home');
