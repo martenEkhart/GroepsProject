@@ -122,8 +122,8 @@ public function handle(Request $request) {
 
 
 public function result(Request $request){
-    $order_status = Order::where('order_id',$request->order_id)->first();
-    return view('payment.status')->with('order_status',$order_status);
+   
+    return view('payment.status');
 }  
 
 
