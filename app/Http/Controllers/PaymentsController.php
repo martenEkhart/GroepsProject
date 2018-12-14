@@ -30,7 +30,7 @@ class PaymentsController extends Controller
     'description' => 'Order#' . $request->order_id,
     'metadata' =>  $request->order_id,
     'webhookUrl' => route('webhooks.mollie'),
-    'redirectUrl' => route('payment.status'),
+    'redirectUrl' => route('payment.status')->with('order_id', $request->order_id),
     ]);
 
     $payment = Mollie::api()->payments()->get($payment->id);
@@ -117,12 +117,18 @@ public function handle(Request $request) {
      else {
          // error, geen status terug gekregen van Mollie. What to do?
      }
+    }
 
-     
+
+
+public function result(Request $request){
+    $order_status = Order::where('order_id',$request->order_id)->first();
+    return view('payment.status')->with('order_status',$order_status);
+}  
 
 
 
 
 }
 
-}
+
