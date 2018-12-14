@@ -24,7 +24,7 @@
         <div id="divRight" class="box aRight" onclick="fnRight()">Right</div>
         <div id="divSmaller" class="boxSmallBig aSmaller" onclick="fnSmaller(5)">Smaller</div>
         <div id="divBigger" class="boxSmallBig aBigger" onclick="fnBigger()">Bigger</div>
-        <div id="divDone" class="box aDone" onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')">Done</div>
+        <div id="divDone" class="box aDone" onclick="doeSave()">Done</div>
         <div id="divTransparency" class="boxtransparency aTransparancy" onmousemove="fnMouseOpacity()">transparency</div>
         <div id="divZindex" class="box aZindex" onmousemove="fnMouseZindex()">back - front</div>
 
@@ -34,11 +34,11 @@
 
 
 @csrf
-<button id="btnSend" onclick="loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')" style="display:none">send</button>
 
 <div id="tixt">
 
 </div>
+<canvas id="canvas"  width="1584" height="748" style="position:fixed; display:none"></canvas>
 <script>
 function testest(){
     alert("testst");
@@ -68,10 +68,21 @@ function testest(){
     createImg(i);
   }
 
+  function markeer() {
+    let canvas = document.getElementById("canvas");
+    canvas.style.display = "block";
+    let i = cim[counter];
+    canvas.width = i.clientWidth + 10;
+    canvas.height = i.clientHeight + 10;
+    canvas.style.left = parseInt(i.style.left) -2+"px"; 
+    canvas.style.top = parseInt(i.style.top) -2 +"px"; 
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.rect(1,1,i.clientWidth+4, i.clientHeight+4);
+    ctx.stroke();
+// ctx.fillStyle = "#FF0000";
+// ctx.fillRect(20, 20, 150, 100);
 
-
-  function makeCanvas() {
-    //   createElement
   }
 
   function createImg(nr) {
@@ -104,14 +115,32 @@ function createWebsiteBorders() {
 //  walter_1544627116.jpg
 
     function mouseDown() {
-        if (mouseHold) {mouseHold = false; return}
-        let afstandX = Math.abs(event.clientX - parseInt(cim[counter].style.left) - Math.floor(cim[counter].clientWidth/2));
-        let afstandY = Math.abs(event.clientY - parseInt(cim[counter].style.top) - Math.floor(cim[counter].clientHeight/2));
-        if (afstandX * afstandX + afstandY * afstandY < 1000) {
-           mouseCorX = event.clientX - parseInt(cim[counter].style.left);
-           mouseCorY = event.clientY - parseInt(cim[counter].style.top);
-           mouseHold = true;
+        if (mouseHold) {
+            document.getElementById("canvas").style.display = "none";
+            doeSave();
+            return
         }
+        var laagste = 3000;
+        var keuze = -1;
+        for (i=0; i<cim.length; i++) {
+            let afstandX = Math.abs(event.clientX - parseInt(cim[i].style.left) - Math.floor(cim[i].clientWidth/2));
+            let afstandY = Math.abs(event.clientY - parseInt(cim[i].style.top) - Math.floor(cim[i].clientHeight/2));
+            let deze = afstandX * afstandX + afstandY * afstandY;
+            if (deze < laagste) { 
+                laagste = deze;
+                keuze = i;
+            }
+        }
+        if (laagste < 1400) {
+            counter = keuze;     
+            fnVolgende(counter);           
+            mouseCorX = event.clientX - parseInt(cim[counter].style.left);
+            mouseCorY = event.clientY - parseInt(cim[counter].style.top);
+            markeer();
+            mouseHold = true;
+            return
+        }
+        
      tixt.innerHTML = afstandX * afstandX + afstandY * afstandY;
     //    tixt.innerHTML = Math.abs(event.clientX - parseInt(cim[counter].style.left))+ " " +Math.floor(cim[counter].clientWidth);
        //alert(Math.abs(event.clientX - parseInt(cim[counter].style.left) - Math.floor(cim[counter].clientWidth/3))  );
@@ -127,7 +156,7 @@ function createWebsiteBorders() {
     }
 
     function fnTurn(nr) {
-        document.getElementById("btnSend").onclick();
+        doeSave();
         if((counter <= 0)&&(nr == -1)) {
             counter = customisations.length-1;
         } else {
@@ -189,7 +218,7 @@ function createWebsiteBorders() {
   }
 
     function fnDone() {
-    loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name')
+    doeSave();
   }
 
   function fnVert (dy) {
@@ -215,7 +244,8 @@ function createWebsiteBorders() {
         fnSize(1+dx+0.01);
     }
 
-    function maakKlaar() {
+    function doeSave() {
+        mouseHold = false;
         customisations[counter].x = parseInt(cim[counter].style.left);
         customisations[counter].y = parseInt(cim[counter].style.top);
         customisations[counter].width = cim[counter].clientWidth;
@@ -223,6 +253,7 @@ function createWebsiteBorders() {
         customisations[counter].opacity = cim[counter].style.opacity;
         customisations[counter].z_layer = cim[counter].style.zIndex;
         if(customisations[counter].opacity > 1) {customisations[counter].opacity = 1}
+        loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name');
     }
 
     function loadDoc(method, url, myFunction, div, input) {
@@ -239,7 +270,6 @@ function createWebsiteBorders() {
     xhttp.open(method, url, true);
     if (method == 'POST') {
     //   alert(cim[counter].style.opacity);
-        maakKlaar();
      //   alert(objToString(customisations[counter]));
         var data = objToString(customisations[counter]);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
