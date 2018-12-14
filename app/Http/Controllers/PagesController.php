@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Product;
 
-
+use App\Category;
 
 
 
@@ -39,10 +39,13 @@ class PagesController extends Controller
         return view('pages/productenTRaoul', compact('products'));
     }
 
-    public function getKlant () {
+    public function getAdds () {
+        $category = Category::pluck('name', 'id');
         $products = Product::orderBy('created_at', 'desc')->paginate(8);
-        return view('pages/index' , compact('products'));
+        return view('pages/index' , compact('products', 'category'));
     }
+
+
 
     public function getAdmin () {
         if(Auth::user()->authorization_level != 1)

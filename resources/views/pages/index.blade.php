@@ -6,7 +6,15 @@
     @include('inc.searchbar')
     <br>
     @include('inc.carousel')
-    
+   
+{{-- TODO: GET catagoties from database... --}}
+{{-- <div class="form-group">
+  {{Form::label('category', 'Category')}}
+
+  {{ Form::select('category', $category ,null, ['Class' => 'form-control']) }}
+
+</div> --}}
+
       <h3 id="hoofd"><b>Our latest products</b></h3>
       <div class="row" style="margin-top: 30px;">
       @if(count($products))
