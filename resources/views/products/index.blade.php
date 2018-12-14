@@ -14,7 +14,7 @@
                         @if(count($products))
                             <ul class="list-group">
                              @foreach($products as $product)
-                            <li class="list-group-item"><a href="/product/{{$product->id}}"><h3>{{$product->name}} 
+                            <li class="list-group-item"><a id="link " href="/product/{{$product->id}}"><h3>{{$product->name}} 
                            <div> <img style="max-width:100px;" src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail"></h3></a>
                                 @if(!Auth::guest())
                                 @if(Auth::user()->authorization_level != 1)
