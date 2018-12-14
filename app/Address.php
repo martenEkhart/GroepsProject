@@ -10,7 +10,7 @@ class Address extends Model
     protected $table = 'addresses';
     
     public function address() {
-        return $this->hasMany('App\user');
+        return $this->hasOne('App\user');
     }
 
 }

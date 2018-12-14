@@ -7,6 +7,7 @@ use App\Product;
 use App\Order;
 use App\Cart;
 use App\Cart_Product;
+use App\Address;
 use Auth;
 
 // Overall to do:
@@ -28,22 +29,27 @@ class CartsController extends Controller
         {
             // TODO: check if user id matches with cart
             $current_cart = Cart::where('user_id',$request->user_id)->first();
-
+            $addresses = Address::where('user_id', $request->user_id)->get();
+            // echo(count($addresses));
+            // dd($addresses);
             if (!$current_cart){
-            // when cart id doesnt exist, go back to products page
-            // other view eventually?
-            $products = Product::All();
-            return redirect ('product');
+                // when cart id doesnt exist, go back to products page
+                // other view eventually?
+                $products = Product::All();
+                return redirect ('product');
             }
             else {
-            
-            // get data from tables products and cart_products to pass to view 
-            $cart_items = Cart_Product::where('cart_id',$current_cart->id)->get();
-            $cart_products = [];
-            foreach ($cart_items as $cart_item) {
-                array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
-            }
-            return view('carts.index')->with(['cart_items'=>$cart_products, 'zegeenswat'=> $cart_items]);
+                // $totalPrice = 0;
+                // foreach($current_cart->cart_product as $cart_product) {
+                //     $totalPrice += $cart_product->amount * $cart_product->product->price;
+                // }
+                // get data from tables products and cart_products to pass to view 
+                $cart_items = Cart_Product::where('cart_id',$current_cart->id)->get();
+                $cart_products = [];
+                foreach ($cart_items as $cart_item) {
+                    array_push($cart_products,Product::where('id',$cart_item->product_id)->first());
+                }
+                return view('carts.index')->with(['cart_items'=>$cart_products, 'zegeenswat'=> $cart_items, 'addresses' => $addresses, 'cart' => $current_cart]);
             }
         }
 
@@ -141,32 +147,20 @@ class CartsController extends Controller
     {
 
         // TO DO:     laat gebruiker adres kiezen?
-        $user_id = $request->user_id;
-        $cart_id =  $request->cart_id;
-        $address_id = "1";
-        // get all products in cart:
-        $cart_items = Cart_Product::where('cart_id',$cart_id)->get();
-        $cart_products = [];
-        $total_cost = 0;
-        
-        // get info about products in cart:
-        foreach ($cart_items as $cart_item) {
-            $current_product = Product::where('id',$cart_item->product_id)->first();
-            array_push($cart_products,$current_product);
-            $cart_products[$cart_item->amount] = $current_product;
-            $total_cost += $cart_item->amount * $current_product->price; 
-        }
-     
-        // create a new order and save it to db
-        $new_order = new Order;
-        $new_order->user_id = $user_id;
-        $new_order->address_id = $address_id;
-        $new_order->cart_id = $cart_id;
+        $user =  Auth::user();
+        $cart_products = $user->cart->cart_product;
+        $total_cost = $user->cart->getTotal();
+        // foreach ($cart_products as $cart_item) {
+        //     $total_cost += $cart_item->amount * $cart_item->product->price;
+        // }
+        $new_order = new Order();
+        $new_order->user_id = $user->id;
+        $new_order->address_id = $user->address[$request->address]->id;
+        $new_order->cart_id = $user->cart->id;
         $new_order->total_cost = $total_cost;
         $new_order->save();
 
         $order_id = $new_order->id;
-
         //Force two decimals because of Mollie amount format
         $total_cost_mollie = number_format((float)$total_cost, 2, '.', '');
         //Show Mollie payment screen
