@@ -94,20 +94,35 @@ class CartsController extends Controller
         $change_amount->save();
         // return $request->succes;
     }
-    public function removeFromCart(Request $request)
+
+    public function deleteFromCart(Request $request)
     {
-        // delete or substract one from amount if the count is higher than one
-        // TODO: extra checks
-        $user_id =  Auth::user()->id;
-        if (! Cart_Product::find($request->cart_product_id)){
-            return redirect ('product');
+        $cart_product = Cart_Product::find($request->cart_product_id);
+        if($cart_product){
+            $cart_product->delete();
+            return response($cart_product)
+                ->header('Content-Type', 'application/json');
         }
         else {
-        $product_to_remove = Cart_Product::find($request->cart_product_id);
-        $product_to_remove->delete();
-        return redirect ('cart/' . $user_id);
+            return response([])
+                ->header('Content-Type', 'application/json');
         }
     }
+
+    // public function removeFromCart(Request $request)
+    // {
+    //     // delete or substract one from amount if the count is higher than one
+    //     // TODO: extra checks
+    //     $user_id =  Auth::user()->id;
+    //     if (! Cart_Product::find($request->cart_product_id)){
+    //         return redirect ('product');
+    //     }
+    //     else {
+    //     $product_to_remove = Cart_Product::find($request->cart_product_id);
+    //     $product_to_remove->delete();
+    //     return redirect ('cart/' . $user_id);
+    //     }
+    // }
 
     public function emptyCart(Request $request)
     {
