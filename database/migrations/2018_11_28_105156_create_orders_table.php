@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->integer('cart_id')->unsigned();
             $table->foreign('cart_id')->references('id')->on('carts');
-            $table->decimal('total_cost');
+            $table->decimal('total_cost')->nullable();
             $table->integer('payment_status')->nullable();
             $table->timestamps();
         });
