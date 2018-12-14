@@ -76,7 +76,7 @@ public function handle(Request $request) {
         $order_status->payment_status = '2';
         $order_status->save();
         
-        return view('payment.status')->with('payment', $payment_status);
+       // return view('payment.status')->with('payment', $payment_status);
      }
      else if ($payment->isOpen())
      {
