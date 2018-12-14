@@ -147,7 +147,7 @@ class CartsController extends Controller
         $new_order->user_id = $user_id;
         $new_order->address_id = $address_id;
         $new_order->cart_id = $cart_id;
-        $new_order->totalcost = $total_cost;
+        $new_order->total_cost = $total_cost;
         $new_order->save();
 
         $order_id = $new_order->id;
