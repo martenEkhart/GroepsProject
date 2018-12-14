@@ -159,7 +159,7 @@ public function result(Request $request){
     $user_id = Auth::user()->id;
 
    $payments = Payment::where('user_id',$user_id);
-    return view('payment.status');
+    return view('payment.status','payments', $payments);
 }  
 
 
