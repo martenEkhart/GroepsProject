@@ -3,7 +3,7 @@
 
 
                         <ul class="list-group">
-                        @php var_dump ($payments); @endphp
+                        @php var_dump ($payments); die(); @endphp
                          @foreach($payments as $payment)
                          <div class="for-wrapper">
                         Order id:
