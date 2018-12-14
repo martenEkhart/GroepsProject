@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Just An Affordable WebShop</title>
+    <link rel="icon" type="image/png" href="images/customisations/logo3.ico"/>
 </head>
 <body>
     <div id='app'></div>
