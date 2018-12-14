@@ -26,10 +26,7 @@ class PaymentsController extends Controller
     
     $user_id = Auth::user()->id;
     $payment = Mollie::api()->payments()->create([
-    'data' => [
-        'order_id' => $request->order_id,
-        'user_id'=> $user_id,
-    ],
+  
     'amount' => [
         'currency' => 'EUR',
         'value' => $request->amount, // You must send the correct number of decimals, thus we enforce the use of strings
