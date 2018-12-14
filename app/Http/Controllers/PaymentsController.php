@@ -93,36 +93,60 @@ public function handle(Request $request) {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '0'; // open
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '0';
+        $order_status->save();
      }
      else if ($payment->isCanceled())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '1'; // canceled
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '1';
+        $order_status->save();
      }
      else if ($payment->isPending())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '3'; // pending
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '3';
+        $order_status->save();
      }
      else if ($payment->isAuthorized())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '4'; // Authorized
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '4';
+        $order_status->save();
      }
      else if ($payment->isExpired())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '5'; // Expired
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '5';
+        $order_status->save();
      }
      else if ($payment->isFailed())
      {
         $payment_status = Payment::where('mollie_id',$request->id)->first();
         $payment_status->status = '6'; // Failed
         $payment_status->save();
+
+        $order_status = Order::where('id',$order_id)->first();
+        $order_status->payment_status = '6';
+        $order_status->save();
      }
      else {
          // error, geen status terug gekregen van Mollie. What to do?
@@ -132,7 +156,9 @@ public function handle(Request $request) {
 
 
 public function result(Request $request){
-   
+    $user_id = Auth::user()->id;
+
+   $payments = Payment::where('user_id',$user_id);
     return view('payment.status');
 }  
 
