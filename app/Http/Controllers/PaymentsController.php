@@ -24,13 +24,21 @@ class PaymentsController extends Controller
     // Amount & description uit Order Table halen!
     echo $request->amount;
     
+    $user_id = Auth::user()->id;
     $payment = Mollie::api()->payments()->create([
+    'data' => [
+        'order_id' => $request->order_id,
+        'user_id'=> $user_id,
+    ],
     'amount' => [
         'currency' => 'EUR',
         'value' => $request->amount, // You must send the correct number of decimals, thus we enforce the use of strings
     ],
     'description' => 'Order#' . $request->order_id,
-    'metadata' =>  $request->order_id,
+    'metadata' =>  [
+        'order_id' => $request->order_id,
+        'user_id'=> $user_id,
+    ],
     'webhookUrl' => route('webhooks.mollie'),
     'redirectUrl' => route('payment.status'),
     ]);
@@ -53,7 +61,8 @@ public function handle(Request $request) {
     // TO DO: checken of een mollie id al bestaat, dan die updaten
 
     $payment = Mollie::api()->payments()->get($request->id);
-    $order_id = $payment->metadata;
+    $order_id = $payment->metadata->order_id;
+    $user_id =  $payment->metadata->user_id;
     $currency = $payment->amount->currency;
     $amount = $payment->amount->value;
     $method = $payment->method;
@@ -62,7 +71,7 @@ public function handle(Request $request) {
     $payment_to_db = new Payment();
     $payment_to_db->mollie_id = $request->id;
     $payment_to_db->order_id = $order_id;
-  
+    $payment_to_db->user_id = $user_id;
     $payment_to_db->currency = $currency;
     $payment_to_db->amount = $amount;
     $payment_to_db->method = $method;
