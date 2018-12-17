@@ -22,7 +22,7 @@ Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
 Route::get('/customisation/manage', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
-
+Route::get('carts/index', 'PagesController@getAddress');
 
 
 
