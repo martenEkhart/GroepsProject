@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);#foot {
   background-color: #7c7c7c75;
-  height: 170px;
+  height: 140px;
 }
 
 html body {
@@ -16,6 +16,10 @@ html body {
 #copyright {
   font-size: 26px;
   text-align: center;
+}
+
+#contact {
+  float: right;
 }
 
 #product {
@@ -35,14 +39,6 @@ html body {
 
 #paginate {
   margin-top: 30px;
-}
-
-.feedback_okay{
-  color:green;
-}
-
-.feedback_warning{
-  color:red;
 }
 
 /*!
@@ -89,8 +85,6 @@ html body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-
-
 
 html {
   font-family: sans-serif;

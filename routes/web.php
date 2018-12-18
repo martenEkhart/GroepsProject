@@ -20,11 +20,13 @@ Route::get('/klant', 'PagesController@getKlant');
 Route::get('/', 'PagesController@getAdds');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
-Route::get('/customisation/manage', 'CustomisationsController@dataToJavascript');
+Route::get('/customisation/manage/{name}', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
+Route::delete('/customisation/{id}', 'CustomisationsController@deleteItem');
 Route::get('carts/index', 'PagesController@getAddress');
 
-
+Route::get('contact-us', 'ContactUsController@contactUs');
+Route::post('contact-us', 'ContactUsController@store');
 
 
 // Route::get('product', 'PagesController@getProduct');
@@ -33,7 +35,7 @@ Route::resource('category', 'CategoriesController');
 Route::resource('customer', 'CustomersController');
 Route::resource('customisation', 'CustomisationsController');
 Route::resource('address', 'AddressesController');
-
+Route::resource('contactus', 'ContactUsController');
 
 
 

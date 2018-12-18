@@ -31,7 +31,7 @@
         <a href="/customisation/create" target="_parent"><div id="divNew" class="boxnew aNew" onclick="fnNew()">new image</div></a>
 
 </div>
-
+<button onclick="deleteData(1, 2)">DELETE</button>
 
 @csrf
 
@@ -299,6 +299,26 @@ function objToString (obj) {
 function changeDiv(xhttp, div) {
     document.getElementById(div).innerHTML = xhttp.responseText;
 }
+
+function deleteData(item, indexToRemove) {
+        return fetch('/customisation/' + item, {
+            method: 'delete',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        .then(response => response.json())
+        .then(function(myJson) {
+            console.log(JSON.stringify(myJson));
+            console.log(myJson);
+            if(myJson.id == item){
+                // document.getElementsByClassName("for-wrapper")[indexToRemove].innerHTML = "";
+                console.log("oke");
+            } else {
+                console.log("nietoke");
+            }
+        });
+        }
 
    </script>
 
