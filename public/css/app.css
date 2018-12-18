@@ -40,10 +40,10 @@ html body {
 #paginate {
   margin-top: 30px;
 }
-#feedback_okay{
+.feedback_okay{
   color:green;
 }
-#feedback_warning{
+.feedback_warning{
   color:red;
 }
 

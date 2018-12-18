@@ -58,16 +58,15 @@
                                 
                                 </div>
                                 @endforeach
-                                @endif
                                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                                 {!!Form::close()!!}
                             </div>
                         </div>
                     </div>
 
-                  {{-- @else
+                  @else
                         <a href="/address/create">Create new Address</a>
-                    @endif --}}
+                    @endif
                 <h1>Total price = €{{$cart->getTotal()}}</h1>
 
                 @else

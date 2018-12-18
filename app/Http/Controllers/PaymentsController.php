@@ -23,6 +23,7 @@ class PaymentsController extends Controller
 {
     // Amount & description uit Order Table halen!
     // echo $request->amount;
+    // Cart ID toevoegen aan metadata!
     
     $user_id = Auth::user()->id;
     $payment = Mollie::api()->payments()->create([
