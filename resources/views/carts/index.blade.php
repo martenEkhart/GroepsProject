@@ -65,15 +65,10 @@
                         </div>
                     </div>
 
-                    {{-- @else
+                  {{-- @else
                         <a href="/address/create">Create new Address</a>
-<<<<<<< HEAD
                     @endif --}}
-                <h1>Total price = ${{$cart->getTotal()}}</h1>
-=======
-                    @endif
                 <h1>Total price = €{{$cart->getTotal()}}</h1>
->>>>>>> 3803f924c9b237dd4b07b9ffa273e36c9bbc833d
 
                 @else
                   <p>Your shopping cart is empty, <a href="../product/">Start your shopping spree!</a></p>
