@@ -157,9 +157,9 @@ public function handle(Request $request) {
 
 public function result(Request $request){
 
-    if (!Auth::user()-id)
+    if (!Auth::user()->id)
     {
-
+        return redirect ("/");
     }
     else
     {
