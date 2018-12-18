@@ -166,8 +166,8 @@ public function result(Request $request){
         $user_id = Auth::user()->id;
     }
     // $payments = Payment::where('user_id',$user_id)->first();
-    $payments = Payment::where('user_id',$user_id)->latest()->first();
-    return view('payment.status')->with('payments', $payments);
+    $payments = Payment::where('user_id',$user_id)->first();
+    return view('payment.status')->with('payments', $payments->reverse());
 }  
 
 
