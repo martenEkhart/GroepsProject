@@ -17,7 +17,7 @@
                                 Payment cancelled
                              @break
                             @case(2)
-                                Payment received!
+                               <p class="feedback_okay">Payment received!</p>
                                 @break
                                 @case(5)
                                 Payment Expired!
