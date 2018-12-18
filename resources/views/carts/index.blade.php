@@ -41,17 +41,12 @@
                         {!! Form::close() !!}
                 
                     </div>
-                    <a href="checkout/{{$user_id}}/{{$zegeenswat[0]->cart_id}} "><b>Finish order</b></a>
 
                     @else
                         <a href="/address/create">Create new Address</a>
                     @endif
                 <h1>Total price = ${{$cart->getTotal()}}</h1>
 
-                @php
-                    $foo = "1.";
-                    echo number_format((float)$foo, 2, '.', '');
-                @endphp
                 @else
                   <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
                 @endif
@@ -105,13 +100,9 @@ function deleteData(item, indexToRemove) {
             if(myJson.id == item){
                 var forDiv = document.getElementsByClassName("for-wrapper");
                 if(forDiv.length <= 1 ) {
-                    alert ("fuck");
                     document.getElementsByClassName("empty_cart").innerHTML = "";
                 }   
                 document.getElementsByClassName("for-wrapper")[indexToRemove].innerHTML = "";
-                console.log("oke");
-            } else {
-                console.log("nietoke");
             }
         });
         }

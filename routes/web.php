@@ -22,7 +22,7 @@ Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
 Route::get('/customisation/manage', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
-
+Route::get('carts/index', 'PagesController@getAddress');
 
 
 
@@ -52,3 +52,5 @@ Route::post('cart/changeamount/{cart_product_id}/{amount}','CartsController@chan
 Route::post('cart/checkout','CartsController@checkoutCart');
 // Route::get('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
 // Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('willem/{start_index}/{amount}/{search}', 'ProductsController@getScrollData');

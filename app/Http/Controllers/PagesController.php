@@ -42,6 +42,11 @@ class PagesController extends Controller
         return view('pages/index' , compact('products', 'category'));
     }
 
+    public function getAddress () {
+
+        $address = Address::where('user_id', $user_id)->get();
+        return view('carts.index')->with('address', $address);
+    }
 
 
     public function getAdmin () {
