@@ -3,8 +3,8 @@
 
 
                         <ul class="list-group">
-                       
-                         @foreach($payments as $payment)
+                            {{$payment->order_id}}
+                         {{-- @foreach($payments as $payment)
                          <div class="for-wrapper">
                         <b>Order id:</b>
                         {{$payment->order_id}}
@@ -22,7 +22,7 @@
                             @case(5)
                             <p class="feedback_warning">Payment Expired!</p>
                             @break
-                            
+                             --}}
                         @endswitch
                      
                         </li>
