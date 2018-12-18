@@ -72,7 +72,7 @@
                 <h1>Total price = €{{$cart->getTotal()}}</h1>
 
                 @else
-                  <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
+                  <p>Your shopping cart is empty, <a href="../product/">Start your shopping spree!</a></p>
                 @endif
             </div>
         </div>
