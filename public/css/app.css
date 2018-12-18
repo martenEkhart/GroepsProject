@@ -40,6 +40,12 @@ html body {
 #paginate {
   margin-top: 30px;
 }
+#feedback_okay{
+  color:green;
+}
+#feedback_warning{
+  color:red;
+}
 
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
