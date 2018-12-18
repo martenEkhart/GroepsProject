@@ -167,6 +167,7 @@ public function result(Request $request){
     }
     // $payments = Payment::where('user_id',$user_id)->first();
     $payments = Payment::where('user_id',$user_id)->get()->reverse()->first();
+    dd ($payments);
     return view('payment.status')->with('payments', $payments);
 }  
 
