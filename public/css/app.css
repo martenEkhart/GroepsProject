@@ -82,6 +82,11 @@ html body {
           box-sizing: border-box;
 }
 
+#feedback_okay{
+  color:green;
+
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

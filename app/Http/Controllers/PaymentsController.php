@@ -156,10 +156,16 @@ public function handle(Request $request) {
 
 
 public function result(Request $request){
-    $user_id = Auth::user()->id;
 
-   $payments = Payment::where('user_id',$user_id)->get();
+    if (!Auth::user()-id)
+    {
 
+    }
+    else
+    {
+        $user_id = Auth::user()->id;
+    }
+    $payments = Payment::where('user_id',$user_id)->get();
     return view('payment.status')->with('payments', $payments);
 }  
 
