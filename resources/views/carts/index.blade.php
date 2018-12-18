@@ -30,7 +30,8 @@
                         <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
                     </ul>
                 
-                    <div class="row">
+                    <div class="container">
+                        <h3>check your address</h3>
                         <div class="col-md-8 col-md-offset-2">
                             <div class="panel panel-default">
                                 {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
@@ -58,13 +59,14 @@
                                 
                                 </div>
                                 @endforeach
+                                
                                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                                 {!!Form::close()!!}
                             </div>
                         </div>
                     </div>
 
-                  @else
+                     @else
                         <a href="/address/create">Create new Address</a>
                     @endif
                 <h1>Total price = €{{$cart->getTotal()}}</h1>
