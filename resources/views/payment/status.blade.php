@@ -3,7 +3,7 @@
 
 
                         <ul class="list-group">
-                            {{$payment->order_id}}
+                            {{$payments->order_id}}
                          {{-- @foreach($payments as $payment)
                          <div class="for-wrapper">
                         <b>Order id:</b>
