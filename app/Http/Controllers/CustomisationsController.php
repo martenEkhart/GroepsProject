@@ -15,15 +15,15 @@ class CustomisationsController extends Controller
         $customisation->x = $customisation.x;
     }
 
-    public function dataToJavascript() {
+    public function dataToJavascript($name) {
         //dd('klkl');
-        $customisations = Customisation::all();
+        $customisations = Customisation::where('name', $name)->get();
+        // dd($customisations);
         return view('customisations.transfer', compact('customisations'));
     }
 
     public function changeData(Request $request) {
      //   return $request->id;
-
   
      $customisation = Customisation::find($request->id);
      $customisation->x = $request->x;
@@ -85,9 +85,24 @@ class CustomisationsController extends Controller
             //dd("be -  -ersa");
             $customisation->save();
         }
-        $customisations = Customisation::pluck('name', 'id');
+        $customisations = Customisation::groupBy('name')->pluck('name', 'id');
+        // dd($customisations);
          return view('customisations.create')->with('customisations', $customisations);
 
+    }
+
+    public function deleteItem(Request $request)
+    {
+        $customisation = Customisation::find($request->id);
+        if($customisation){
+            $customisation->delete();
+            return response($customisation)
+                ->header('Content-Type', 'application/json');
+        }
+        else {
+            return response([])
+                ->header('Content-Type', 'application/json');
+        }
     }
 
     /**

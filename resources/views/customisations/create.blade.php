@@ -16,7 +16,6 @@
     
             </div>
 
-  
         Select image
 
         <div class="form-group">
@@ -31,5 +30,13 @@
         {{Form::submit('Submit', ['class'=>'btn  btn-lg btn-primary'])}}
 
         {!! Form::close() !!}
+
+        @if(count($customisations) > 0)            
+
+            @foreach($customisations as $customisation)
+                <a href="/customisation/manage/{{$customisation}}">{{$customisation}}</a><br>
+            @endforeach
+        @endif
+
 </div>
 @endsection

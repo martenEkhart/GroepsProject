@@ -20,8 +20,9 @@ Route::get('/klant', 'PagesController@getKlant');
 Route::get('/', 'PagesController@getAdds');
 Route::get('admin/index', 'PagesController@getAdmin');
 Route::get('/search', 'ProductsController@search');
-Route::get('/customisation/manage', 'CustomisationsController@dataToJavascript');
+Route::get('/customisation/manage/{name}', 'CustomisationsController@dataToJavascript');
 Route::post('/customisations/changedata', 'CustomisationsController@changeData');
+Route::delete('/customisation/{id}', 'CustomisationsController@deleteItem');
 Route::get('carts/index', 'PagesController@getAddress');
 
 
