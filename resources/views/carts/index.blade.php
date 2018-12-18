@@ -45,7 +45,7 @@
                     @else
                         <a href="/address/create">Create new Address</a>
                     @endif
-                <h1>Total price = ${{$cart->getTotal()}}</h1>
+                <h1>Total price = €{{$cart->getTotal()}}</h1>
 
                 @else
                   <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
