@@ -156,10 +156,18 @@ public function handle(Request $request) {
 
 
 public function result(Request $request){
-    $user_id = Auth::user()->id;
 
-   $payments = Payment::where('user_id',$user_id);
-    return view('payment.status','payments', $payments);
+    if (!Auth::user()->id)
+    {
+        return redirect ("/");
+    }
+    else
+    {
+        $user_id = Auth::user()->id;
+    }
+    // $payments = Payment::where('user_id',$user_id)->first();
+    $payments = Payment::where('user_id',$user_id)->get()->reverse()->first();
+    return view('payment.status')->with('payments', $payments);
 }  
 
 
