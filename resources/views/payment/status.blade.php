@@ -3,7 +3,7 @@
 
 
                         <ul class="list-group">
-                        <b>Order ID:</b> {{$payments->order_id}}<br>
+                        <b>Order ID:</b> {{$payment->order_id}}<br>
                         <b>Payment status:</b>
                         @switch($payment->status)
                             @case(0)
