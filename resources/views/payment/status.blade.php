@@ -23,10 +23,10 @@
                             <p class="feedback_warning">Payment Expired!</p>
                             @break
                              --}}
-                        @endswitch
+                        {{-- @endswitch --}}
                      
                         </li>
                     </div>
-                        @endforeach
+                        {{-- @endforeach --}}
                 </ul>
 @endsection
