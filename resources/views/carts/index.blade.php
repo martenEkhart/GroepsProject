@@ -76,7 +76,7 @@
 >>>>>>> 3803f924c9b237dd4b07b9ffa273e36c9bbc833d
 
                 @else
-                  <p>Your shopping cart is empty, <a href="products/">Start your shopping spree!</a></p>
+                  <p>Your shopping cart is empty, <a href="../product/">Start your shopping spree!</a></p>
                 @endif
             </div>
         </div>
