@@ -29,22 +29,45 @@
                         @endforeach
                         <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
                     </ul>
-                    @if(count($addresses) > 0)
-                    <div class="form-group">
-                        {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
-
-                        {{Form::label('address', 'Category')}}
-            
-                        {{ Form::select('address', $addresses ,null, ['Class' => 'form-control']) }}
-                        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-
-                        {!! Form::close() !!}
                 
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="panel panel-default">
+                                {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
+                    
+                                @if(count($addresses))
+                    
+                                @foreach ($addresses as $address)
+                                {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
+                                
+                                <div class="panel-body" style="margin-top: 20px;">
+                                  <ul class="card" style="max-width: 250px;">
+                                    
+                                    
+                                    <li style="list-style: none;"><h5> {{$address->street}}</h5></li>
+                                    <li style="list-style: none;"><h5> {{$address->house_number}}</h5></li>
+                                    <li style="list-style: none;"><h5> {{$address->city}}</h5></li>
+                                    <li style="list-style: none;"><h5> {{$address->zipcode}}</h5></li>
+                                    <li style="list-style: none;"><h5> {{$address->country}}</h5></li>
+                                    <li style="list-style: none;" ><h5> {{$address->phone_number}}</h5></li>
+                                   
+                                    </ul>
+                                    {{ Form::checkbox('address', $address->id, null, null, array('id'=>'address')) }}
+                                        
+                                   
+                                
+                                </div>
+                                @endforeach
+                                @endif
+                                {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+                                {!!Form::close()!!}
+                            </div>
+                        </div>
                     </div>
 
-                    @else
+                    {{-- @else
                         <a href="/address/create">Create new Address</a>
-                    @endif
+                    @endif --}}
                 <h1>Total price = ${{$cart->getTotal()}}</h1>
 
                 @else

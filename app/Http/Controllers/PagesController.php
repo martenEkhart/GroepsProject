@@ -45,7 +45,7 @@ class PagesController extends Controller
     public function getAddress () {
 
         $address = Address::where('user_id', $user_id)->get();
-        return view('carts.index')->with('address', $address);
+        return view('carts.')->with('address', $address);
     }
 
 
