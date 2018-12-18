@@ -39,7 +39,10 @@ html body {
 
 .feedback_okay{
   color:green;
+}
 
+.feedback_warning{
+  color:red;
 }
 
 /*!
