@@ -22,7 +22,8 @@ class PaymentsController extends Controller
     public function preparePayment(Request $request)
 {
     // Amount & description uit Order Table halen!
-    echo $request->amount;
+    // echo $request->amount;
+    // Cart ID toevoegen aan metadata!
     
     $user_id = Auth::user()->id;
     $payment = Mollie::api()->payments()->create([
@@ -40,7 +41,7 @@ class PaymentsController extends Controller
     'redirectUrl' => route('payment.status'),
     ]);
 
-    $payment = Mollie::api()->payments()->get($payment->id);
+    // $payment = Mollie::api()->payments()->get($payment->id);
 // print_r ($payment);
     // redirect customer to Mollie checkout page
     return redirect($payment->getCheckoutUrl(), 303);
