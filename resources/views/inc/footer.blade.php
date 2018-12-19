@@ -1,9 +1,7 @@
 <div id="foot">
     
-        <p id="copyright" style="margin-top: 150px;"><b>Copyright 2018 &copy; JAAW</b></p>
-        <button type="button" id="contact" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px;">
-          Contact Us</b>
-        </button>
+        <p id="copyright" style="margin-top: 150px;">Copyright 2018 &copy; Just An Affordable WebShop</p>
+        
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -72,7 +70,9 @@
             </div>
           </div>
 
-
+          <button type="button" id="contact" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px;">
+            Contact Us</b>
+          </button>
 
 <a class="footer-social" href="https://github.com/martenEkhart/GroepsProject">
 <i class="fa fa-github" style="font-size:60px;color:black;margin-left: 1%"></i>

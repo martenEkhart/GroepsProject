@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-sm sticky-top " style= "font-size: 22px">
+  <nav class="navbar navbar-expand-sm" style= "font-size: 22px">
         {{-- <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a> --}}
         <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
          <b style="font-size: 28px"><p style="color: black">Menu</p></b>
@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample03" style="color: black">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" id="nav" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/product">Producten</a>
@@ -19,8 +19,10 @@
             @php echo "hoi"; @endphp
             (Cart::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first())
             @endif --}}
+            <li>
             @if(!Auth::guest())
-                <a class="nav-link" style="color: black" href="/cart/{{Auth::user()->id}}">Shopping cart</a>
+                <a class="nav-link" id="cart-logo" href="/cart/{{Auth::user()->id}}"><i class="fas fa-shopping-cart" style="margin:12px;"></i></a>
+               
             @endif
             </li>
             {{-- <li class="nav-item active">
