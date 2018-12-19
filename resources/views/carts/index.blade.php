@@ -31,7 +31,7 @@
                     </ul>
                 
                     <div class="container">
-                        <h3>check your address</h3>
+                        <h3>Please select your address</h3>
                         <div class="col-md-8 col-md-offset-2">
                             <div class="panel panel-default">
                                 {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
@@ -58,6 +58,8 @@
                                    
                                 
                                 </div>
+                                <a href="/address/create">Add a new address</a>
+
                                 @endforeach
                                 
                                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
@@ -67,7 +69,7 @@
                     </div>
 
                      @else
-                        <a href="/address/create">Create new Address</a>
+                     <a href="/address/create">Add a new address</a>
                     @endif
                 <h1>Total price = €{{$cart->getTotal()}}</h1>
 
@@ -77,6 +79,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <script>
     function loadDoc(method, id, myFunction, ct) {
