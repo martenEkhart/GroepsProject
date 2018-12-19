@@ -4,9 +4,9 @@
 
 
  
-        <label id="name" style="font-size: 30px; color:blue; position:absolute; left: 300px; top:570px" ></label>
-        <input style="position:absolute; top:570px; left:500px; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
-         name="ivisible" value="1" checked>Visible<br>
+        <label id="name" style="font-size: 30px; color:blue; position:absolute; " ></label>
+        <input style="position:absolute; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
+         name="ivisible" value="1" checked><br>
 
 
 {{-- <div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
@@ -32,7 +32,7 @@
 </div> --}}
 
 
- <div onresize="fnresize()" id="div0" style="height: 430px; display: grid; grid-template-columns: auto auto; grid-template-rows: 100% ;">
+ <div onresize="fnresize()" id="div0" style="position: fixed; top: 67px; height: 430px; display: grid; grid-template-columns: auto auto; grid-template-rows: 100% ;">
         <div id="div1" class="item1" ></div>
         <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.33% 33.33% 33.33% ;">
           
@@ -114,6 +114,7 @@ function testest(){
   }
   positionRelative();
   markeer();
+ // window.onresize();
 
     window.onload = function(){
         document.getElementById("div0").style.height = window.innerHeight-72   + "px";
