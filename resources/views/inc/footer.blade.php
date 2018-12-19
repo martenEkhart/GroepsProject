@@ -75,6 +75,6 @@
           </button>
 
 <a class="footer-social" href="https://github.com/martenEkhart/GroepsProject">
-<i class="fa fa-github" style="font-size:60px;color:black;margin-left: 1%"></i>
+<i class="fa fa-github" style="font-size:60px;color:black;margin-left: 10px;"></i>
 
     </div>   
