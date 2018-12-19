@@ -1,4 +1,4 @@
-<div class="container" id="foot">
+<div id="foot">
     
         <p id="copyright" style="margin-top: 150px;"><b>Copyright 2018 &copy; JAAW</b></p>
         <button type="button" id="contact" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px;">
