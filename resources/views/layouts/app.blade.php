@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
@@ -22,12 +22,18 @@
         @include('inc.messages')
         <div class="container"> 
         @yield('content')
-        </div>  
+       
+        </div> 
+        @include('inc.backtotop')
+    </div> 
+    {{-- @if(Request::is('/')) --}}
     @include('inc.footer')
+            {{-- @endif --}}
+        
    
-   
+    
   
     
-</div> 
+
 </body>
 </html>
