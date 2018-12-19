@@ -91,6 +91,7 @@
 
     var amount = document.getElementsByName("amount")[ct].value;
     var url = "/cart/changeamount/" + id + "/" + amount;
+   
 
     if (window.XMLHttpRequest) {
         var xhttp = new XMLHttpRequest();
@@ -100,7 +101,8 @@
     // Perform when ajax succesfully finished
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            myFunction(this, ct);
+            var price = JSON.parse(xhttp.responseText);
+            document.getElementById("price").innerHTML = "Total price: €" + price;
         }                    
     }
     xhttp.open(method, url, true);
@@ -125,10 +127,16 @@ function deleteData(item, indexToRemove) {
             }
         })
         .then(response => response.json())
+       
         .then(function(myJson) {
-            console.log(JSON.stringify(myJson));
+            // console.log(JSON.stringify(myJson));
             console.log(myJson);
-            if(myJson.id == item){
+            // console.log(myJson[0].id);
+            if(myJson[0].id == item){
+                var price = myJson[1];
+                console.log(price);
+                document.getElementById("price").innerHTML = "Total price: €" + price;
+
                 var forDiv = document.getElementsByClassName("for-wrapper");
                 if(forDiv.length <= 1 ) {
                     document.getElementsByClassName("empty_cart").innerHTML = "";
@@ -139,42 +147,7 @@ function deleteData(item, indexToRemove) {
         }
 
 
-    function loadDoc(method, id, myFunction, ct) {
-    var amount = document.getElementsByName("amount")[ct].value;
-    var url = "/cart/changeamount/" + id + "/" + amount;
-    var data = document.getElementsByName("amount")[ct].value;
 
-    var obj = new Object();
-    obj.id = id;
-    obj.amount = data;
-    //convert object to json string
-    var string1 = JSON.stringify(obj);
-
-    if (window.XMLHttpRequest) {
-        var xhttp = new XMLHttpRequest();
-    } else {
-        var xhttp = new ActiveXObject();
-    }
-
-
-
-    xhttp.open(method, url, true);
-    console.log(data);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
-    xhttp.send(string1);
-
-
-    // Perform when ajax succesfully finished
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // var a = JSON.parse(xhttp.responseText);
-            console.log(xhttp.responseText);
-            // console.log(Object.keys(a));
-            
-        }                    
-    }
-    } 
 
 </script>
 @endsection

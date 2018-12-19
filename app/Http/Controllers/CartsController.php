@@ -98,15 +98,21 @@ class CartsController extends Controller
         $change_amount = Cart_Product::find($request->cart_product_id);
         $change_amount->amount = $request->amount;
         $change_amount->save();
+        $total_price = Auth::user()->cart->getTotal();
+        return response($total_price)
+        ->header('Content-Type', 'application/json');
         // return $request->succes;
     }
 
     public function deleteFromCart(Request $request)
     {
         $cart_product = Cart_Product::find($request->cart_product_id);
+
         if($cart_product){
             $cart_product->delete();
-            return response($cart_product)
+            $total_price = Auth::user()->cart->getTotal();
+
+            return response([$cart_product,$total_price])
                 ->header('Content-Type', 'application/json');
         }
         else {

@@ -21,6 +21,7 @@
             @endif --}}
             @if(!Auth::guest())
                 <a class="nav-link" style="color: black" href="/cart/{{Auth::user()->id}}">Shopping cart</a>
+               <i class="fas fa-shopping-cart" style="margin:12px;"></i>
             @endif
             </li>
             {{-- <li class="nav-item active">
