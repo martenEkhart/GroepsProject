@@ -1,6 +1,9 @@
 @extends('layouts.custom')
 @section('content')
-<div class="flex-container" style="display:flex; justify-content: space-between;">
+
+
+
+<div class="flex-container" style="display:flex; justify-content: space-between; position: absolute; left:700px; top: 20px">
 
         <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
         <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
@@ -10,7 +13,7 @@
 
 </div>
 
-<div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
+{{-- <div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
 
 
 </div>
@@ -30,15 +33,50 @@
 
         <a href="/customisation/create" target="_parent"><div id="divNew" class="boxnew aNew" onclick="fnNew()">new image</div></a>
 
-</div>
-<button onclick="deleteData(1, 2)">DELETE</button>
+</div> --}}
+
+
+ <div onresize="fnresize()" id="div0" style="height: 430px; display: grid; grid-template-columns: auto auto; grid-template-rows: 100% ;">
+        <div id="div1" class="item1" ></div>
+        <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.33% 33.33% 33.33% ;">
+          
+            <div id="dsize"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
+            </div>
+            <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+            </div>
+            <div id="dmove" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/move.png'); background-size: 100% 100%;">
+            </div>
+            <div id="dlayer" onclick="fnLayer()" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/layer.png'); background-size: 100% 100%;">
+            </div>
+            <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.3% 33.3% 33.3% ;">
+                    <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+                    </div>
+                    <div id="dmove" onclick="fnMove()" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/move.png'); background-size: 100% 100%;">
+                    </div>
+                    <div id="dvorige" onclick="fnTurn(-1)" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/vorige.png'); background-size: 100% 100%;">
+                    </div>
+                    <div id="dvolgende" onclick="fnTurn(1)" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/volgende.png'); background-size: 100% 100%;">
+                    </div>
+                    <div id="div9"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
+                    </div>
+                    <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+                    </div>
+                                       
+           
+            </div>
+            <div id="drotate" onclick="fnRotate()" style="background-color:rgb(176, 250, 225); background-image: url('/images/bg1/rotate.png'); background-size: 100% 100%;">
+             
+        </div>
+      </div>
+      <button onclick="deleteData(1, 2)">DELETE</button>
+
 
 @csrf
-
-<div id="tixt">
-
-</div>
-<canvas id="canvas"  width="1584" height="748" style="position:fixed; display:none"></canvas>
+<div id="tixt" style="position:fixed; left:100px; top: 25px"></div>
+<div id="tixt2" style="position:fixed; left:100px; top: 55px"></div>
+<canvas id="canvas"  width="200" height="200" style="position:absolute;"></canvas>
+<canvas id="websiteBorders"  width="1584" height="748" style="position:absolute; left: 0px; top: 67px; "></canvas>
+<img id="redarrow" src="/images/bg1/boxselect.png" style="left: 40px; top: 40 px; position:absolute; z-index:100000" >
 <script>
 function testest(){
     alert("testst");
@@ -51,8 +89,18 @@ function testest(){
  var mouseHold = false;
  var mouseCorX = 0;
  var mouseCorY = 0;
+ var cddx = 0;
+ var cddy = 0;
 
- var dotted = document.getElementById("dott").getBoundingClientRect();
+ var ccy = 67;
+ var oxf = 147/1536;
+ var oyf = 120/656;
+ var dxf = 445/1536;
+ var dyf = 397/723;
+ var webBorder = document.getElementById("websiteBorders");
+ drawWebsiteBorders();
+ 
+
 
   var tel = 0;
   tixt = document.getElementById("tixt");
@@ -63,26 +111,39 @@ function testest(){
   if (customisations.length == 0) {
       alert("nog niets");
   }
-  createWebsiteBorders();
   for(i=0; i<customisations.length; i++) {
     createImg(i);
   }
+  positionRelative();
+  markeer();
+
+    window.onload = function(){
+        document.getElementById("div0").style.height = window.innerHeight-72   + "px";
+        document.getElementById("div0").style.width = window.innerWidth-5 + "px";
+    }
+
+    window.onresize = function(){
+  //      alert("d");
+
+        document.getElementById("div0").style.height = window.innerHeight -72 + "px";
+        document.getElementById("div0").style.width = window.innerWidth-5 + "px";
+        drawWebsiteBorders();
+         positionRelative();
+         markeer();
+    }
+
+function fnresize(){ 
+}
+   
 
   function markeer() {
-    let canvas = document.getElementById("canvas");
-    canvas.style.display = "block";
-    let i = cim[counter];
-    canvas.width = i.clientWidth + 10;
-    canvas.height = i.clientHeight + 10;
-    canvas.style.left = parseInt(i.style.left) -2+"px"; 
-    canvas.style.top = parseInt(i.style.top) -2 +"px"; 
-    var ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.rect(1,1,i.clientWidth+4, i.clientHeight+4);
-    ctx.stroke();
-// ctx.fillStyle = "#FF0000";
-// ctx.fillRect(20, 20, 150, 100);
-
+   var i = cim[counter];
+    var dimg = document.getElementById("redarrow");
+    dimg.style.left  =  Math.round(parseInt(i.style.left)-10)+"px";
+    dimg.style.top  =  Math.round(parseInt(i.style.top)-10)+"px";
+    dimg.width = i.clientWidth+20;
+    dimg.height = i.clientHeight+20;
+   //tixt.innerHTML = "bud"+cim[counter].style.left;//+ Math.round(parseInt(i.style.left)+i.clientWidth/2);
   }
 
   function createImg(nr) {
@@ -94,29 +155,70 @@ function testest(){
     cim[nr].style.top = c.y +  "px";
     cim[nr].height = c.height;
     cim[nr].width = c.width;
+    cim[nr].style.transform = "rotate(" + c.rotation + "deg)";
     cim[nr].style.zIndex = c.z_layer;
     cim[nr].style.opacity = c.opacity/100;
+//    cim[nr].style.pointerEvents= "none";
+    cim[nr].style.userSelect = "none";
     document.body.appendChild(cim[nr]);
 }
 
-function createWebsiteBorders() {
-    webBorder = document.createElement('img');
-    webBorder.style.position = "absolute";
-    webBorder.src = "../images/customisations/website-borders.png" ;
-    webBorder.style.left = 200+  "px";
-    webBorder.style.top = 180 +  "px";
-    webBorder.height = 230;
-    webBorder.width = 370;
-    webBorder.style.zIndex = 0;
-    webBorder.style.opacity = 1;
-    document.body.appendChild(webBorder);
-}
+    function positionRelative() {
+         for(i=0; i<customisations.length; i++) {
+    //        alert("d");
+            cim[i].style.left = bx + Math.round((customisations[i].x /10000 )*bdx) + "px";
+            cim[i].style.top = by +ccy + Math.round((customisations[i].y /10000 )*bdy) + "px";
+    //         tixt.innerHTML = cim[0].style.top + " " + Math.round(customisations[0].y); 
+            cim[i].width = Math.round(customisations[i].width*window.innerWidth/1536);
+            cim[i].height = Math.round(customisations[i].height*window.innerHeight/723);
+            
+        }
+    }
 
-//  walter_1544627116.jpg
+    function controlDown(x1, y1, x2, y2) {
+        if (((event.clientX >= window.innerWidth*x1)&&(event.clientX <= window.innerWidth*x2))&&
+        ((event.clientY >= (window.innerHeight - ccy)*y1+ccy)&&(event.clientY <= (window.innerHeight - ccy)*y2+ccy))){
+            cddx = (event.clientX - window.innerWidth*x1)/((x2-x1)*window.innerWidth);
+            cddy = (event.clientY - ccy - (window.innerHeight-ccy)*y1)/((y2-y1)*(window.innerHeight-ccy));
+  //          alert("cddx: "+cddx + "  cddy: "+cddy);
+            return true;
+        } else { return false}
+    }
 
+    function doeSave() {
+        markeer();
+        mouseHold = false;
+        customisations[counter].x = Math.round(10000*(parseInt(cim[counter].style.left)-bx)/bdx);
+        customisations[counter].y = Math.round(10000*(parseInt(cim[counter].style.top)-by-ccy)/bdy);
+        // customisations[counter].width = Math.floor(cim[counter].clientWidth/ dxf);
+        // customisations[counter].height = Math.floor(cim[counter].clientHeight/ dyf);
+        customisations[counter].opacity = cim[counter].style.opacity;
+        customisations[counter].z_layer = cim[counter].style.zIndex;
+        if(customisations[counter].opacity > 1) {customisations[counter].opacity = 1}
+        loadDoc('POST', '/customisations/changedata', changeDiv, 'div6',  'name');
+    }
+
+    function essentialButtons(){
+        if (controlDown(1/2,1/3,3/4,2/3)) { 
+            fnMove();
+        }
+        if (controlDown(1/2,0,3/4,1/3)) { 
+            fnBigger();
+        }
+        if (controlDown(1/2,7/9,5/8,8/9)) { 
+            fnTurn(-1);
+        }
+        if (controlDown(5/8,7/9,3/4,8/9)) { 
+            fnTurn(1);
+        }
+    }
+    
     function mouseDown() {
+        essentialButtons();
+//        alert(event.clientX+ "  "+event.clientY);
         if (mouseHold) {
             document.getElementById("canvas").style.display = "none";
+       //     markeer();
             doeSave();
             return
         }
@@ -131,7 +233,7 @@ function createWebsiteBorders() {
                 keuze = i;
             }
         }
-        if (laagste < 1400) {
+        if (laagste < 2400) {
             counter = keuze;     
             fnVolgende(counter);           
             mouseCorX = event.clientX - parseInt(cim[counter].style.left);
@@ -141,18 +243,21 @@ function createWebsiteBorders() {
             return
         }
         
-     tixt.innerHTML = afstandX * afstandX + afstandY * afstandY;
+   
     //    tixt.innerHTML = Math.abs(event.clientX - parseInt(cim[counter].style.left))+ " " +Math.floor(cim[counter].clientWidth);
        //alert(Math.abs(event.clientX - parseInt(cim[counter].style.left) - Math.floor(cim[counter].clientWidth/3))  );
     }   
 
     function mouseMove() {
+     tixt2.innerHTML = event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight+"  div9: "+
+      document.getElementById("div9").clientWidth + " " + document.getElementById("div9").clientHeight+
+       "  div1:"+ document.getElementById("div1").offsetX + " "+document.getElementById("div1").offsetY;// +"px";
+  //  tixt.innerHTML = event.clientX +" " + event.clientY + "   ";
        if (mouseHold) {
-           tixt.innerHTML = cim[counter].style.left = event.clientX + mouseCorX +"px";
            cim[counter].style.left = event.clientX - mouseCorX +"px";
            cim[counter].style.top = event.clientY - mouseCorY +"px";
        }
-
+      markeer();
     }
 
     function fnTurn(nr) {
@@ -173,6 +278,7 @@ function createWebsiteBorders() {
     function fnVolgende(counter) {
          document.getElementById("name").innerHTML = customisations[counter].name;
         document.getElementById("checkbox").checked = customisations[counter].visible;
+        markeer();
     }
 
     function fnMouseZindex() {
@@ -181,15 +287,80 @@ function createWebsiteBorders() {
         // alert(e.clientX);
     }
 
-    function fnMouseOpacity() {
-  //      tixt.innerHTML = event.offsetX/document.getElementById("divTransparency").clientWidth;
-        cim[counter].style.opacity = (event.offsetX/document.getElementById("divTransparency").clientWidth)*1.5-0.05;
+   function fnLayer() {
+        var zdx = event.offsetX/document.getElementById("dlayer").clientWidth;
+        var zdy = event.offsetY/document.getElementById("dlayer").clientHeight;
+        var dez = 0;
+        if (((zdy<0.1)||(zdy>0.9))||(zdx<0.1)) { return}
+        if (zdx < 0.2) 
+        {
+            dez = lowZindex()-1;
+        } else 
+        {
+            if (zdx > 0.85) 
+            {
+                dez = highZindex()+1;
+            } else 
+            {
+                dez = Math.floor((zdx-0.5)*300+40);
+            }
+        }
+        cim[counter].style.zIndex = dez;
+        doeSave();
+    }
 
-       // alert(e.clientX);
+    function highZindex() 
+    {
+        var highZ = -10000;
+        for (i=0; i<cim.length; i++) 
+        {
+            if (cim[i].style.zIndex > highZ) 
+            {
+                highZ = cim[i].style.zIndex;
+            }
+        } 
+        return highZ;
+    }
+
+    function lowZindex() 
+    {
+        let lowZ = 100000;
+        for (i=0; i<cim.length; i++) 
+        {
+            if (cim[i].style.zIndex < lowZ) 
+            {
+                lowZ = cim[i].style.zIndex;
+            }
+        } 
+        return lowZ;
+    }
+
+
+
+    function fnRotate() {
+        var zdx = event.offsetX/document.getElementById("drotate").clientWidth;
+        var zdy = event.offsetY/document.getElementById("drotate").clientHeight;
+        if (((zdy<0.1)||(zdy>0.9))||(zdx<0.1)) { return}
+        var dez = Math.round((zdx-0.5)*40);
+     //   alert(dez);
+        customisations[counter].rotation += dez;
+        cim[counter].style.transform = "rotate(" + customisations[counter].rotation + "deg)";
+        doeSave();
+    }
+
+    function fnTransparency() {
+        let dx = 1-(event.offsetX/document.getElementById("dtransparency").clientWidth);
+        let dy = event.offsetY/document.getElementById("dtransparency").clientHeight;
+        if ((dx>0.9)||(dy>0.9)) { return}
+        dx = dx*2-0.05;
+        if (dx > 1) { dx = 1}
+        cim[counter].style.opacity = dx;
+ //      tixt.innerHTML = document.getElementById("div1").clientWidth+" "+document.getElementById("div1").clientHeight;
+        doeSave();
     }
 
   function fnHor (dx) {
-    if(((parseInt(cim[counter].style.left)<30)&&(dx<0))||((parseInt(cim[counter].style.left)>parseInt(window.innerWidth-150))&&(dx >0))) { return }
+ //   if(((parseInt(cim[counter].style.left)<30)&&(dx<0))||((parseInt(cim[counter].style.left)>parseInt(window.innerWidth-150))&&(dx >0))) { return }
     // customisations[counter].x = parseInt(cim[counter].style.left);
     // cim[counter].style.left = customisations[counter].x+dx +"px";
     cim[counter].style.left = parseInt(cim[counter].style.left)+dx +"px";
@@ -222,41 +393,41 @@ function createWebsiteBorders() {
   }
 
   function fnVert (dy) {
-    if(((parseInt(cim[counter].style.top)<-20)&&(dy<0))||(((parseInt(cim[counter].style.top)+parseInt(cim[counter].height))>window.innerHeight-150)&&(dy >0))) { return }
+ //   if(((parseInt(cim[counter].style.top)<-20)&&(dy<0))||(((parseInt(cim[counter].style.top)+parseInt(cim[counter].height))>window.innerHeight-150)&&(dy >0))) { return }
  //   customisations[counter].y = parseInt(cim[counter].style.top);
     cim[counter].style.top = parseInt(cim[counter].style.top)+dy +"px";
    }
 
+  function fnMove() {
+    // let dx = Math.floor(((event.offsetX-document.getElementById("dsize").clientWidth/2)/document.getElementById("dsize").clientWidth)*70);
+    // let dy = Math.floor(((event.offsetY-document.getElementById("dsize").clientHeight/2)/document.getElementById("dsize").clientHeight)*70);
+    fnHor(Math.round((cddx-0.5)*70));
+    fnVert(Math.round((cddy-0.5)*70));
+    doeSave();
+ //   tixt.innerHTML = dx+" "+dy;
+  }
+ 
   function fnSize(size) {
     if(((parseInt(cim[counter].height)<20)&&(size<1))||((parseInt(cim[counter].style.width)>parseInt(window.innerWidth-100))&&(dx >1))) { return }
     cim[counter].height = cim[counter].height*size;
     cim[counter].width = cim[counter].width*size;
+    markeer();
     }
 
-    function fnSmaller(e) {
-        let dx = (event.offsetX/document.getElementById("divSmaller").clientWidth)/10;
-        fnSize(1/(1+dx));
-
-   }
-
-    function fnBigger(e) {
-        let dx = (event.offsetX/document.getElementById("divBigger").clientWidth)/10;
-        fnSize(1+dx+0.01);
+ 
+    function fnBigger() {
+   //   alert("cddx: "+cddx + "  cddy: "+cddy);
+       if (cddy < 0.2) { return} 
+        
+      //   tixt.innerHTML = ((event.offsetX-document.getElementById("dsize").clientWidth/2)/document.getElementById("dsize").clientWidth)/10;
+      //  let dx = ((event.offsetX-document.getElementById("dsize").clientWidth/2)/document.getElementById("dsize").clientWidth)/2;
+        fnSize(1+(cddx-0.5)/2);
+        customisations[counter].width *= (1+(cddx-0.5)/2);
+        customisations[counter].height *= (1+(cddx-0.5)/2);
+        doeSave();
     }
 
-    function doeSave() {
-        mouseHold = false;
-        customisations[counter].x = parseInt(cim[counter].style.left);
-        customisations[counter].y = parseInt(cim[counter].style.top);
-        customisations[counter].width = cim[counter].clientWidth;
-        customisations[counter].height = cim[counter].clientHeight;
-        customisations[counter].opacity = cim[counter].style.opacity;
-        customisations[counter].z_layer = cim[counter].style.zIndex;
-        if(customisations[counter].opacity > 1) {customisations[counter].opacity = 1}
-        loadDoc('POST', '/customisations/changedata', changeDiv, 'tixt',  'name');
-    }
-
-    function loadDoc(method, url, myFunction, div, input) {
+       function loadDoc(method, url, myFunction, div, input) {
     if (window.XMLHttpRequest) {
         var xhttp = new XMLHttpRequest();
     } else {
@@ -270,7 +441,7 @@ function createWebsiteBorders() {
     xhttp.open(method, url, true);
     if (method == 'POST') {
     //   alert(cim[counter].style.opacity);
-     //   alert(objToString(customisations[counter]));
+       alert(objToString(customisations[counter]));
         var data = objToString(customisations[counter]);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
@@ -297,8 +468,33 @@ function objToString (obj) {
 }
 
 function changeDiv(xhttp, div) {
-    document.getElementById(div).innerHTML = xhttp.responseText;
+  //  document.getElementById(div).innerHTML = xhttp.responseText;
 }
+
+  function drawWebsiteBorders() {
+    bdx = Math.round(0.7 * window.innerWidth/2);
+    bx = Math.round(0.15 * window.innerWidth/2);
+    bdy = Math.round(bdx * (window.innerHeight/window.innerWidth));
+    by = Math.round((window.innerHeight-ccy-bdy)/2)
+     if ((window.innerHeight/window.innerWidth * bdx) > (window.innerHeight - ccy)*0.7) {
+        bdy = Math.round(0.7 * (window.innerHeight-ccy));
+        by = Math.round(0.15 * (window.innerHeight-ccy));
+        bdx = Math.round(bdy * (window.innerWidth/window.innerHeight));
+        by = Math.round((window.innerWidth/2-bdx)/2)
+     }
+    webBorder.width = Math.round(bdx / 0.7);
+    webBorder.height = Math.round(window.innerHeight-ccy);
+    ctx = webBorder.getContext("2d");
+    ctx.clearRect(0, 0, webBorder.width, webBorder.height);
+    ctx.strokeRect(bx,by,bdx,bdy);
+    ctx.font = Math.round(window.innerWidth/300)+10+ "px Verdana";
+    ctx.fillText("website borders", bx+window.innerWidth/150, by+7 + window.innerHeight/50);
+
+
+ //   ctx.stroke();
+//  ctx.fillStyle = "#FF0000";
+//  ctx.fillRect(20, 20, 150, 100);
+ }
 
 function deleteData(item, indexToRemove) {
         return fetch('/customisation/' + item, {
@@ -319,6 +515,7 @@ function deleteData(item, indexToRemove) {
             }
         });
         }
+
 
    </script>
 
