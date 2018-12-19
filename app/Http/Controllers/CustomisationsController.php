@@ -137,7 +137,7 @@ class CustomisationsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $request->file('image_name')->move(public_path('images/customisations'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('/images/customisations'), $fileNameToStore);
             
 
  

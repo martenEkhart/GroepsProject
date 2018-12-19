@@ -5,8 +5,7 @@
 
 <div class="flex-container" style="display:flex; justify-content: space-between; position: absolute; left:700px; top: 20px">
 
-        <button id="btnTurnL" onclick="fnTurn(-1)" style="width: 100px; height: 40px; font-size:20px;" > < </button>
-        <button onclick="fnTurn(1)" style="width: 100px; height: 40px; font-size:20px;"> > </button>
+ 
         <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
         <input style="position:relative; top:-18px; height: 50px; zoom: 3;" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
 
@@ -59,7 +58,7 @@
                     </div>
                     <div id="div9"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+                    <div id="ddelete" onclick="deleteData(1, 2)" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
                     </div>
                                        
            
@@ -68,7 +67,7 @@
              
         </div>
       </div>
-      <button onclick="deleteData(1, 2)">DELETE</button>
+    
 
 
 @csrf
@@ -150,7 +149,7 @@ function fnresize(){
     c = customisations[nr];
     cim[nr] = document.createElement('img');
     cim[nr].style.position = "absolute";
-    cim[nr].src = "../images/customisations/" + c.image_name;
+    cim[nr].src = "/images/customisations/" + c.image_name;
     cim[nr].style.left = c.x+  "px";
     cim[nr].style.top = c.y +  "px";
     cim[nr].height = c.height;
@@ -249,9 +248,9 @@ function fnresize(){
     }   
 
     function mouseMove() {
-     tixt2.innerHTML = event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight+"  div9: "+
+     tixt2.innerHTML = "tixt2 "+event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight+"  div9: "+
       document.getElementById("div9").clientWidth + " " + document.getElementById("div9").clientHeight+
-       "  div1:"+ document.getElementById("div1").offsetX + " "+document.getElementById("div1").offsetY;// +"px";
+       "  ?"+ customisations[counter].image_name  ;
   //  tixt.innerHTML = event.clientX +" " + event.clientY + "   ";
        if (mouseHold) {
            cim[counter].style.left = event.clientX - mouseCorX +"px";
@@ -441,7 +440,7 @@ function fnresize(){
     xhttp.open(method, url, true);
     if (method == 'POST') {
     //   alert(cim[counter].style.opacity);
-       alert(objToString(customisations[counter]));
+    //   alert(objToString(customisations[counter]));
         var data = objToString(customisations[counter]);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
@@ -497,10 +496,12 @@ function changeDiv(xhttp, div) {
  }
 
 function deleteData(item, indexToRemove) {
+    alert("dk");
+     item = customisations[counter].id;
         return fetch('/customisation/' + item, {
             method: 'delete',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         })
         .then(response => response.json())
