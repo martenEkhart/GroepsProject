@@ -35,10 +35,10 @@
                    @if(Auth::user()->authorization_level == 1)
 
                    <li class="nav-item active">
-                     <a class="nav-link" style="color: black" href="/customisation/manage">Customisations</a>
+                     <a class="nav-link" id="nav" style="color: black" href="/customisation/create">Customisations</a>
                    </li>
                    <li class="nav-item active">
-                     <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
+                     <a class="nav-link" id="nav" style="color: black" href="/admin/index">Admin</a>
                    </li>
                   @endif
                   @endif
