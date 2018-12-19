@@ -27,7 +27,8 @@
                         </li>
                     </div>
                         @endforeach
-                        <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
+                        <a href="empty/{{$zegeenswat[0]->cart_id}}" class="btn btn-danger" role="button">Empty your shopping cart</a><br>
+
                     </ul>
                     <h3 id="price">Total price = €{{$cart->getTotal()}}</h3>
                     <br><br>
