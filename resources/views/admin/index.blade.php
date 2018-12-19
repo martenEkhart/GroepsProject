@@ -26,5 +26,5 @@
    </div>
 </div>
    </div> 
-    
+   <div class="container" style="height: 150px;"></div>
    @endsection

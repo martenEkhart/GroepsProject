@@ -15,7 +15,7 @@
 
 </div> --}}
 
-      <h3 id="hoofd"><b>Our latest products</b></h3><hr>
+      <h3 id="hoofd">Our latest products</h3><hr>
       <div class="row" style="margin-top: 30px;">
       @if(count($products))
       @foreach($products as $product)

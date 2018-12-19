@@ -1,7 +1,7 @@
 <div id="foot">
     
-        <p id="copyright" style="margin-top: 150px;"><b>Copyright 2018 &copy; JAAW</b></p>
-        <button type="button" id="contact" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px; padding:10px;">
+        <p id="copyright" style="margin-top: 150px;">Copyright 2018 &copy; Just An Affordable WebShop</p>
+        <button type="button" id="contact" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px;">
           Contact Us</b>
         </button>
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

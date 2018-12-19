@@ -4,8 +4,8 @@
           <h2 class="display-4 font-weight-normal">Just An Affordable <br> WebShop</h2>
           <p class="lead font-weight-normal"></p>
             <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" 
-                role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-outline-dark" data-toggle="collapse" href="#collapseExample" 
+                role="button" aria-expanded="false" aria-controls="collapseExample" id="header-button">
                   About Us
                 </a>
               </p>
