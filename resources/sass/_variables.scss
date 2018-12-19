@@ -20,10 +20,24 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 
+html body {
+    margin: 0;
+    padding: 0;
+}
 
 #header-button {
     font-size: 18px;
    text-align: center;
+}
+
+#cart-logo {
+    font-size: 32px;
+    color: #6574cd;;
+
+}
+
+#nav {
+    margin-top: 12px;
 }
 
 #foot{
@@ -31,10 +45,8 @@ $cyan: #6cb2eb;
 //   height: 140px;
 }
 
-html body {
-    margin: 0;
-    padding: 0;
-}
+
+
 
 #hoofd {
     text-align:center;

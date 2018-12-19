@@ -1,15 +1,24 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);#header-button {
+@import url(https://fonts.googleapis.com/css?family=Nunito);html body {
+  margin: 0;
+  padding: 0;
+}
+
+#header-button {
   font-size: 18px;
   text-align: center;
 }
 
-#foot {
-  background-color: #8484ff75;
+#cart-logo {
+  font-size: 32px;
+  color: #6574cd;
 }
 
-html body {
-  margin: 0;
-  padding: 0;
+#nav {
+  margin-top: 12px;
+}
+
+#foot {
+  background-color: #8484ff75;
 }
 
 #hoofd {
