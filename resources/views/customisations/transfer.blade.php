@@ -3,14 +3,11 @@
 
 
 
-<div class="flex-container" style="display:flex; justify-content: space-between; position: absolute; left:700px; top: 20px">
-
  
-        <label id="name" style="font-size: 30px; color:blue" for="btnTurnL"></label>
-        <input style="position:relative; top:-18px; height: 50px; zoom: 3;" id="checkbox" type="checkbox" name="vehicle3" value="1" checked>Visible<br>
+        <label id="name" style="font-size: 30px; color:blue; position:absolute; left: 300px; top:570px" ></label>
+        <input style="position:absolute; top:570px; left:500px; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
+         name="ivisible" value="1" checked>Visible<br>
 
-
-</div>
 
 {{-- <div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
 
@@ -48,23 +45,25 @@
             <div id="dlayer" onclick="fnLayer()" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/layer.png'); background-size: 100% 100%;">
             </div>
             <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.3% 33.3% 33.3% ;">
-                    <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+                    <div id="d" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243);  background-size: 100% 100%;">
                     </div>
-                    <div id="dmove" onclick="fnMove()" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/move.png'); background-size: 100% 100%;">
+                    <div id="d" onclick="fnMove()" style="background-color:rgb(243, 33, 114); background-size: 100% 100%;">
                     </div>
                     <div id="dvorige" onclick="fnTurn(-1)" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/vorige.png'); background-size: 100% 100%;">
                     </div>
                     <div id="dvolgende" onclick="fnTurn(1)" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/volgende.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="div9"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
+                    <div id="dnew"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/new.png'); background-size: 100% 100%;">
                     </div>
                     <div id="ddelete" onclick="deleteData(1, 2)" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
                     </div>
                                        
            
             </div>
-            <div id="drotate" onclick="fnRotate()" style="background-color:rgb(176, 250, 225); background-image: url('/images/bg1/rotate.png'); background-size: 100% 100%;">
-             
+            <div style="display: grid; grid-template-columns: auto ; grid-template-rows:50% 50% ;">
+                <div id="drotation"  style="background-color:rgb(176, 250, 225); background-image: url('/images/bg1/rotation.png'); background-size: 100% 100%;"></div>
+                <div id="dratio"  style="background-color:rgb(106, 120, 25); background-image: url('/images/bg1/ratio.png'); background-size: 100% 100%;"></div>
+            </div>
         </div>
       </div>
     
@@ -129,6 +128,11 @@ function testest(){
         drawWebsiteBorders();
          positionRelative();
          markeer();
+         document.getElementById("name").style.left =  Math.floor(window.innerWidth/5.3)+"px";
+         document.getElementById("name").style.top =  Math.floor(((window.innerHeight-ccy)/5*4.1))+ccy+"px";
+         document.getElementById("checkbox").style.left =  Math.floor(window.innerWidth/3.5)+"px";
+         document.getElementById("checkbox").style.top =  Math.floor(((window.innerHeight-ccy)/5*3.6 ))+ccy+"px";
+   //      tixt.innerHTML = Math.floor(((window.innerHeigt-ccy)/5*2);
     }
 
 function fnresize(){ 
@@ -248,8 +252,7 @@ function fnresize(){
     }   
 
     function mouseMove() {
-     tixt2.innerHTML = "tixt2 "+event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight+"  div9: "+
-      document.getElementById("div9").clientWidth + " " + document.getElementById("div9").clientHeight+
+     tixt2.innerHTML = "tixt2 "+event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight +
        "  ?"+ customisations[counter].image_name  ;
   //  tixt.innerHTML = event.clientX +" " + event.clientY + "   ";
        if (mouseHold) {

@@ -8,6 +8,14 @@
   text-align: center;
 }
 
+.feedback_okay {
+  color:green;
+}
+
+.feedback_warning {
+  color:red;
+}
+
 #cart-logo {
   font-size: 32px;
   color: #6574cd;

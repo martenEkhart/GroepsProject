@@ -146,9 +146,5 @@ function deleteData(item, indexToRemove) {
             }
         });
         }
-
-
-
-
 </script>
 @endsection
