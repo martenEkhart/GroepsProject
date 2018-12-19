@@ -13,6 +13,10 @@
                
     
                 {{ Form::text('name', '' , ['Class' => 'form-control', 'placeholder' => 'name/description']) }}
+                {{Form::label('fixed','watermark style')}}         
+
+                {{ Form::checkbox('fixed', 'fixed', true) }}
+    
     
             </div>
 
