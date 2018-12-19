@@ -60,9 +60,10 @@
                                 
                                 </div>
                                 
-                                <a href="/address/create">Add a new address</a>
 
                                 @endforeach
+                                <a href="/address/create">Add a new address</a>
+
                                 <br><br>
 
                                 {{Form::submit('Finalize order', ['class'=>'btn btn-primary'])}}
@@ -84,7 +85,7 @@
 </div>
 </div>
 </div>
-<div class="container" style="height: 150px;"></div>
+<div class="container" style="height: 380px;"></div>
 <script>
     function loadDoc(method, id, myFunction) {
 
