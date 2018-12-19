@@ -126,21 +126,8 @@
 </head>
 <body onmousedown="mouseDown()" onmousemove="mouseMove()">
     @include('inc.navbar')
-
+	@yield('content')
    
-    <div class="container" style="margin-top: 10px;" >
-         
-         <div class="row">
-          
-    
-           <div class="col-md-8 col-lg-8" style="padding-top: 10px;"> 
-                    @yield('content')
-    </div>        
-        </div> 
-            </div> 
-
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    
 
 </body>
 </html>
