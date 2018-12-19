@@ -49,7 +49,7 @@
     var newQs = search.replace(/\+/g, " ");
 
     var startIndex = 0;
-    var amount = 1;
+    var amount = 10;
     var hasResponseData = true;
 
     window.onscroll = function (e) {  
@@ -134,7 +134,7 @@
 
     // Initially load some items.
     getData(startIndex, amount, newQs);
-    startIndex++;
+    startIndex += amount;
 
 
     
