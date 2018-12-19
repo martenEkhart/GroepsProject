@@ -29,9 +29,10 @@
                         @endforeach
                         <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
                     </ul>
-                
+                    <h3 id="price">Total price = €{{$cart->getTotal()}}</h3>
+                    <br><br>
                     <div class="container">
-                        <h3>check your address</h3>
+                        <h3>Please select your address</h3>
                         <div class="col-md-8 col-md-offset-2">
                             <div class="panel panel-default">
                                 {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
@@ -58,18 +59,21 @@
                                    
                                 
                                 </div>
-                                @endforeach
                                 
-                                {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+                                <a href="/address/create">Add a new address</a>
+
+                                @endforeach
+                                <br><br>
+
+                                {{Form::submit('Finalize order', ['class'=>'btn btn-primary'])}}
                                 {!!Form::close()!!}
                             </div>
                         </div>
                     </div>
 
                      @else
-                        <a href="/address/create">Create new Address</a>
+                     <a href="/address/create">Add a new address</a>
                     @endif
-                <h1>Total price = €{{$cart->getTotal()}}</h1>
 
                 @else
                   <p>Your shopping cart is empty, <a href="../product/">Start your shopping spree!</a></p>
@@ -77,6 +81,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <script>
     function loadDoc(method, id, myFunction, ct) {
