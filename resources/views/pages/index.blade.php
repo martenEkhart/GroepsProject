@@ -15,7 +15,7 @@
 
 </div> --}}
 
-      <h3 id="hoofd"><b>Our latest products</b></h3>
+      <h3 id="hoofd"><b>Our latest products</b></h3><hr>
       <div class="row" style="margin-top: 30px;">
       @if(count($products))
       @foreach($products as $product)
@@ -24,7 +24,7 @@
       <div class="col-sm" id="product">
         <div class="container"><a id="link" href="/product/{{$product->id}}"><h5><b>{{$product->name}}</b></h5>
         <img id="product-image"  src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail"></a>
-        <b>Price: €</b>{!!$product->price!!}-,</div>
+        <b>Price: €</b>{!!$product->price!!}-,</div><hr>
       </div>
      @endforeach
      @endif

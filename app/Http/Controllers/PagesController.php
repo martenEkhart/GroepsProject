@@ -38,7 +38,7 @@ class PagesController extends Controller
 
     public function getAdds () {
         $category = Category::pluck('name', 'id');
-        $products = Product::orderBy('created_at', 'desc')->paginate(8);
+        $products = Product::orderBy('created_at', 'desc')->paginate(12);
         return view('pages/index' , compact('products', 'category'));
     }
 
