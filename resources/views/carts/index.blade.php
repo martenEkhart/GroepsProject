@@ -17,7 +17,7 @@
                         <ul class="list-group">
                          @foreach($cart->cart_product as $cart_item)
                          <div class="for-wrapper">
-                        <li class="list-group-item"><a href="/product/{{$cart_item->product->id}}"><h4>{{$cart_item->name}}</h4></a>
+                        <li class="list-group-item"><a href="/product/{{$cart_item->product_id}}"><h4>{{$cart_item->product->name}}</h4></a>
                         Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');"></p>                     
                         
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
