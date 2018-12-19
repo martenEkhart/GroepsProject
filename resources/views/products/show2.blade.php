@@ -103,10 +103,11 @@
         htmlContent += '-,<br><b>Product description:</b> '  + product.description; 
         htmlContent += '<br><small><b>Products in stock:</b>  '  + product.stock;
         htmlContent += ' <br><b>Product Added:</b>  ' + product.created_at;
-        htmlContent += ' </small> </a><a href="/" class="btn btn-primary" style="margin-left:90px;">Add to Cart</a><hr>';
+        htmlContent += ' </small> </a><hr>';
         return htmlContent;
     }
     
+ 
 
     function parse_query_string(query) {
         var vars = query.split("&");
