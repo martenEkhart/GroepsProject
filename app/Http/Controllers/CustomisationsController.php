@@ -30,19 +30,12 @@ class CustomisationsController extends Controller
      $customisation->y = $request->y;
      $customisation->width  = $request->width;
      $customisation->height  = $request->height;
+     $customisation->rotation = $request->rotation;
      $customisation->opacity  = floor($request->opacity * 100);
-  //   dd($customisation->opacity);
      $customisation->z_layer  = $request->z_layer;
      $customisation->visible  = $request->visible;
      $customisation->save();
-    //  dd($request->width." ".$request->height);
-    // //  $customisation = Customisation::find($request->id);
-    //  $customisation->x = $request->x;
-    //  $customisation->y = $request->y;
-    //  $customisation->save();
   return $request->x." ".$request->y;
-        // return json_decode($request,true);
-     // return array_values((array)$request);
      
     }
  
@@ -79,10 +72,10 @@ class CustomisationsController extends Controller
             $customisation->y = 0;
             $customisation->width = 200;
             $customisation->height = 200;
+            $customisation->rotation = 0;
             $customisation->z_layer = 0;
             $customisation->opacity = 1;
             $customisation->visible = true;
-            //dd("be -  -ersa");
             $customisation->save();
         }
         $customisations = Customisation::groupBy('name')->pluck('name', 'id');
@@ -144,7 +137,7 @@ class CustomisationsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $request->file('image_name')->move(public_path('images/customisations'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('/images/customisations'), $fileNameToStore);
             
 
  
@@ -159,6 +152,7 @@ class CustomisationsController extends Controller
         $customisation->y = 100;
         $customisation->width = 100;
         $customisation->height = 100;
+        $customisation->rotation = 0;
         $customisation->z_layer = 70;
         $customisation->opacity = 100;
         $customisation->visible = 1;

@@ -21,9 +21,11 @@ class CreateCustomisationsTable extends Migration
             $table->integer('y');
             $table->integer('width');
             $table->integer('height');
+            $table->integer('rotation');
             $table->integer('z_layer');
             $table->integer('opacity');
             $table->boolean('visible');
+            $table->boolean('watermark_style');
             $table->timestamps();
         });
     }

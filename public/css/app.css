@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-#foot {
+@import url(https://fonts.googleapis.com/css?family=Nunito);#foot {
   background-color: #7c7c7c75;
   height: 140px;
 }
@@ -11,7 +10,7 @@ html body {
 
 #hoofd {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 #copyright {
@@ -34,18 +33,12 @@ html body {
 }
 
 #product-image {
-  max-width: 150px;
+  max-width: 160px;
   margin-top: 30px;
 }
 
 #paginate {
   margin-top: 30px;
-}
-.feedback_okay{
-  color:green;
-}
-.feedback_warning{
-  color:red;
 }
 
 /*!
