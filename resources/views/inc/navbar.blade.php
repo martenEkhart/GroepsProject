@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample03" style="color: black">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" id="nav" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/product">Producten</a>
@@ -19,9 +19,10 @@
             @php echo "hoi"; @endphp
             (Cart::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first())
             @endif --}}
+            <li>
             @if(!Auth::guest())
-                <a class="nav-link" style="color: black" href="/cart/{{Auth::user()->id}}">Shopping cart</a>
-               <i class="fas fa-shopping-cart" style="margin:12px;"></i>
+                <a class="nav-link" id="cart-logo" href="/cart/{{Auth::user()->id}}"><i class="fas fa-shopping-cart" style="margin:12px;"></i></a>
+               
             @endif
             </li>
             {{-- <li class="nav-item active">

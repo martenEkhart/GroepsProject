@@ -22,9 +22,9 @@
      
        
       <div class="col-sm" id="product">
-        <div class="container"><a id="link" href="/product/{{$product->id}}"><h5><b>{{$product->name}}</b></h5>
+        <div class="container"><a id="link" href="/product/{{$product->id}}"><h4>{{$product->name}}</h4>
         <img id="product-image"  src="/images/products/{{$product->image_name}}" class="img-fluid img-thumbnail"></a>
-        <b>Price: €</b>{!!$product->price!!}-,</div><hr>
+        Now: €{!!$product->price!!}-,</div><hr>
       </div>
      @endforeach
      @endif
