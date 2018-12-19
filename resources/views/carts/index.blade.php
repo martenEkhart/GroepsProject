@@ -15,10 +15,10 @@
                     @if(count($cart_items))
 
                         <ul class="list-group">
-                         @foreach($cart_items as $cart_item)
+                         @foreach($cart->cart_product as $cart_item)
                          <div class="for-wrapper">
-                        <li class="list-group-item"><a href="/product/{{$zegeenswat[$loop->index]->product_id}}"><h4>{{$cart_item->name}}</h4></a>
-                        Amount:<input type="number" name="amount" min="1" value="{{ $zegeenswat[$loop->index]->amount}}"  onchange="loadDoc('POST' ,'{{$zegeenswat[$loop->index]->id}}', 'getAmount', '{{$loop->index}}');"></p>                     
+                        <li class="list-group-item"><a href="/product/{{$cart_item->product_id}}"><h4>{{$cart_item->product->name}}</h4></a>
+                        Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');"></p>                     
                         
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
@@ -86,10 +86,10 @@
 </div>
 <div class="container" style="height: 150px;"></div>
 <script>
-    function loadDoc(method, id, myFunction, ct) {
+    function loadDoc(method, id, myFunction) {
 
-
-    var amount = document.getElementsByName("amount")[ct].value;
+    var amount = document.getElementById("amount" + id).value;
+    console.log(amount);
     var url = "/cart/changeamount/" + id + "/" + amount;
    
 
@@ -102,12 +102,13 @@
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var price = JSON.parse(xhttp.responseText);
+            console.log(price);
             document.getElementById("price").innerHTML = "Total price: €" + price;
         }                    
     }
     xhttp.open(method, url, true);
     if (method == 'POST') {
-        var data = document.getElementsByName("amount")[ct].value;
+        var data = document.getElementsByName("amount"+id).value;
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.setRequestHeader("X-CSRF-TOKEN", document.querySelector("meta[name='csrf-token']").getAttribute("content"));
         xhttp.send(data);
