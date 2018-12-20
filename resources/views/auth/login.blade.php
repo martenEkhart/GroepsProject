@@ -69,5 +69,5 @@
             </div>
         </div>
     </div>
-</div>
+</div><div class="container" style="margin-top : 500px;"></div>
 @endsection

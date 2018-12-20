@@ -73,8 +73,8 @@
           <button type="button" id="contact" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter"><b style="font-size: 22px;">
             Contact Us</b>
           </button>
-
+{{-- 
 <a class="footer-social" href="https://github.com/martenEkhart/GroepsProject">
-<i class="fa fa-github" style="font-size:60px;color:black;margin-left: 10px;"></i>
+<i class="fa fa-github" style="font-size:60px;color:black;margin-left: 10px;"></i> --}}
 
     </div>   
