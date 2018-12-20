@@ -39,8 +39,11 @@ class PagesController extends Controller
 
     public function getAdds () {
         $tussen = Customisation::first();
-        $tussen->tag = 'kerst';
-        $customisations = Customisation::where('name',$tussen->tag)->get();
+        $customisations = null;
+        if($tussen) {
+            $tussen->tag = 'kerst';
+            $customisations = Customisation::where('name',$tussen->tag)->get();
+        }
         $categories = Category::All();
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
         // return view('pages/index' , compact('products', 'category'));
