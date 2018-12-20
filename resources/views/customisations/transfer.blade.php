@@ -5,8 +5,8 @@
 
  
         <label id="name" style="font-size: 30px; color:blue; position:absolute; " ></label>
-        <input style="position:absolute; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
-         name="ivisible" value="1" checked><br>
+        {{-- <input style="z-index: 1111111108; position:absolute; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
+         name="ivisible" value="1" checked><br> --}}
 
 
 {{-- <div onscroll ="testest()" id="dott" style="left: 0px; top: 0px; width: 300px; height:200px; ">
@@ -36,32 +36,32 @@
         <div id="div1" class="item1" ></div>
         <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.33% 33.33% 33.33% ;">
           
-            <div id="dsize"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
+            <div id="dsize"  style="background-color:#72A2C0; background-image: url('/images/bg1/size.png'); background-size: 100% 100%;">
             </div>
-            <div id="dtransparency" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
+            <div id="dtransparency" onclick="fnTransparency()" style="background-color:#1D65A6; background-image: url('/images/bg1/transparency.png'); background-size: 100% 100%;">
             </div>
-            <div id="dmove" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/move.png'); background-size: 100% 100%;">
+            <div id="dmove" style="background-color:#00743F; background-image: url('/images/bg1/move.png'); background-size: 100% 100%;">
             </div>
-            <div id="dlayer" onclick="fnLayer()" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/layer.png'); background-size: 100% 100%;">
+            <div id="dlayer" onclick="fnLayer()" style="background-color:#06437A; background-image: url('/images/bg1/layer.png'); background-size: 100% 100%;">
             </div>
             <div style="display: grid; grid-template-columns: auto auto; grid-template-rows: 33.3% 33.3% 33.3% ;">
-                    <div id="d" onclick="fnTransparency()" style="background-color:rgb(119, 33, 243);  background-size: 100% 100%;">
+                    <div id="d" onclick="fnTransparency()" style="background-color:#06437A; background-size: 100% 100%;" >
                     </div>
-                    <div id="d" onclick="fnMove()" style="background-color:rgb(243, 33, 114); background-size: 100% 100%;">
+                    <div id="d" onclick="fnMove()" style="background-color:#06437A; background-size: 100% 100%;">
                     </div>
-                    <div id="dvorige" style="background-color:rgb(243, 33, 114); background-image: url('/images/bg1/vorige.png'); background-size: 100% 100%;">
+                    <div id="dvorige" style="background-color:#72A2C0; background-image: url('/images/bg1/vorige.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="dvolgende" style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/volgende.png'); background-size: 100% 100%;">
+                    <div id="dvolgende" style="background-color:#1D65A6; background-image: url('/images/bg1/volgende.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="dnew"  style="background-color:rgb(219, 33, 243); background-image: url('/images/bg1/new.png'); background-size: 100% 100%;">
+                    <div id="dnew"  style="background-color:#F2A104; background-image: url('/images/bg1/new.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="ddelete" onclick="deleteData(1, 2)" style="background-color:rgb(119, 33, 243); background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
+                    <div id="ddelete" onclick="deleteData(1, 2)" style="background-color:#7F5417; background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
                     </div>
                                        
            
             </div>
             <div style="display: grid; grid-template-columns: auto ; grid-template-rows:50% 50% ;">
-                <div id="drotation"  style="background-color:rgb(176, 250, 225); background-image: url('/images/bg1/rotation.png'); background-size: 100% 100%;"></div>
+                <div id="drotation"  style="background-color:#7F171F; background-image: url('/images/bg1/rotation.png'); background-size: 100% 100%;"></div>
                 <div id="dratio"  style="background-color:rgb(106, 120, 25); background-image: url('/images/bg1/ratio.png'); background-size: 100% 100%;"></div>
             </div>
         </div>
@@ -70,8 +70,8 @@
 
 
 @csrf
-<div id="tixt" style="position:fixed; left:100px; top: 25px"></div>
-<div id="tixt2" style="position:fixed; left:100px; top: 55px"></div>
+{{-- <div id="tixt" style="position:fixed; left:100px; top: 25px"></div>
+<div id="tixt2" style="position:fixed; left:100px; top: 55px"></div> --}}
 <canvas id="canvas"  width="200" height="200" style="position:absolute;"></canvas>
 <canvas id="websiteBorders"  width="1584" height="748" style="position:absolute; left: 0px; top: 67px; "></canvas>
 <img id="redarrow" src="/images/bg1/boxselect.png" style="left: 40px; top: 40 px; position:absolute; z-index:100000" >
@@ -101,10 +101,11 @@ function testest(){
 
 
   var tel = 0;
-  tixt = document.getElementById("tixt");
+//   tixt = document.getElementById("tixt");
 
   var customisations = {!! json_encode($customisations->toArray()) !!};
     document.getElementById("name").innerHTML = customisations[counter].name;
+
 
   if (customisations.length == 0) {
       alert("nog niets");
@@ -114,8 +115,7 @@ function testest(){
   }
   positionRelative();
   markeer();
- // window.onresize();
-
+ 
     window.onload = function(){
         document.getElementById("div0").style.height = window.innerHeight-72   + "px";
         document.getElementById("div0").style.width = window.innerWidth-5 + "px";
@@ -129,10 +129,6 @@ function testest(){
         drawWebsiteBorders();
          positionRelative();
          markeer();
-         document.getElementById("name").style.left =  Math.floor(window.innerWidth/5.3)+"px";
-         document.getElementById("name").style.top =  Math.floor(((window.innerHeight-ccy)/5*4.1))+ccy+"px";
-         document.getElementById("checkbox").style.left =  Math.floor(window.innerWidth/3.5)+"px";
-         document.getElementById("checkbox").style.top =  Math.floor(((window.innerHeight-ccy)/5*3.6 ))+ccy+"px";
    //      tixt.innerHTML = Math.floor(((window.innerHeigt-ccy)/5*2);
     }
 
@@ -174,10 +170,16 @@ function fnresize(){
             cim[i].style.left = bx + Math.round((customisations[i].x /10000 )*bdx) + "px";
             cim[i].style.top = by +ccy + Math.round((customisations[i].y /10000 )*bdy) + "px";
     //         tixt.innerHTML = cim[0].style.top + " " + Math.round(customisations[0].y); 
-            cim[i].width = Math.round(customisations[i].width/(c.ratio/1000)*window.innerWidth/1536);
-            cim[i].height = Math.round(customisations[i].height*(c.ratio/1000)*window.innerHeight/723);
+            cim[i].width =  Math.round(customisations[i].width/(customisations[i].ratio/1000)*window.innerWidth/1536);
+            cim[i].height = Math.round(customisations[i].height*(customisations[i].ratio/1000)*window.innerHeight/723);
             
         }
+
+
+        document.getElementById("name").style.left = Math.round(window.innerWidth*2.2/10)+"px";
+        document.getElementById("name").style.top = Math.round(((window.innerHeight-21)*8.5/10)+21)+"px";
+        document.getElementById("name").style.fontSize = Math.round(window.innerHeight/50+window.innerWidth/70)+"px";
+        
     }
 
     function controlDown(x1, y1, x2, y2) {
@@ -261,8 +263,8 @@ function fnresize(){
     }   
 
     function mouseMove() {
-     tixt2.innerHTML = "tixt2 "+event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight +
-       "  ?"+ customisations[counter].image_name  ;
+    //  tixt2.innerHTML = "tixt2 "+event.clientX + " " + event.clientY+"   win: "+ window.innerWidth+ " "+window.innerHeight +
+    //    "  ?"+ customisations[counter].image_name  ;
   //  tixt.innerHTML = event.clientX +" " + event.clientY + "   ";
        if (mouseHold) {
            cim[counter].style.left = event.clientX - mouseCorX +"px";
@@ -417,15 +419,15 @@ function fnresize(){
  
   function fnSize(size) {
     if(((parseInt(cim[counter].height)<20)&&(size<1))||((parseInt(cim[counter].style.width)>parseInt(window.innerWidth-100))&&(dx >1))) { return }
-    cim[counter].height = customisations[counter].height*size*(customisations[counter].ratio/1000);
-    cim[counter].width = customisations[counter].width*size/(customisations[counter].ratio/1000);
+    cim[counter].height = Math.round(customisations[counter].height*size*(customisations[counter].ratio/1000));
+    cim[counter].width = Math.round(customisations[counter].width*size/(customisations[counter].ratio/1000));
     markeer();
     }
 
  
     function fnRatio() {
    //   alert("cddx: "+cddx + "  cddy: "+cddy);
-       tixt.innerHTML = cddx+ " "+(cddx*0.1+0.95);
+   //   tixt.innerHTML = cddx+ " "+(cddx*0.1+0.95);
        if (cddy < 0.2) { return} 
 
         
@@ -433,10 +435,9 @@ function fnresize(){
       //  let dx = ((event.offsetX-document.getElementById("dsize").clientWidth/2)/document.getElementById("dsize").clientWidth)/2;
  
            customisations[counter].ratio =Math.round(customisations[counter].ratio * (cddx*0.1+0.95));
-            tixt.innerHTML =(cddx*0.1+0.99)+"  "+ customisations[counter].ratio;
-        cim[counter].height = customisations[counter].height*customisations[counter].ratio/1000;
-        cim[counter].width = customisations[counter].width/(customisations[counter].ratio/1000);
+      //      tixt.innerHTML =(cddx*0.1+0.99)+"  "+ customisations[counter].ratio;
         doeSave();
+        positionRelative();
     }
 
     function fnBigger() {

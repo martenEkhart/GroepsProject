@@ -163,7 +163,7 @@ class CustomisationsController extends Controller
         $customisation->visible = 1;
         $customisation->tag = 0;
         $customisation->save();
-        return redirect('customisation/manage')->with('success', 'Customisation created');
+        return redirect('customisation/manage/'.$request->name)->with('success', 'Customisation created');
     } else {
         $fileNameToStore = 'noImage.jpg';
     }

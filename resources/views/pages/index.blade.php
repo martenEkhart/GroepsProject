@@ -31,4 +31,36 @@
     <div class="container" id="paginate"> {{$products->links()}}</div>   </div> 
     @yield('categories')
 
+    <script>  
+      var cim = [];        
+      var customisations = {!! json_encode($customisations->toArray()) !!};
+      for(i=0; i<customisations.length; i++) {
+        createImg(i);
+      }
+    
+    
+      function createImg(nr) {
+        c = customisations[nr];
+        cim[nr] = document.createElement('img');
+        if (c.watermark_style) {
+          cim[nr].style.position = "fixed";
+        } else {
+          cim[nr].style.position = "absolute";
+        }
+        
+        cim[nr].src = "../images/customisations/" + c.image_name;
+        cim[nr].style.left = Math.round(c.x/10000*window.innerWidth) +  "px";
+        cim[nr].style.top = Math.round(c.y/10000*window.innerHeight) +  "px";
+        var fac1 = 2.8;
+        cim[nr].height = c.height*fac1;
+        cim[nr].width = c.width*fac1;
+        cim[nr].style.zIndex = c.z_layer;
+        cim[nr].style.opacity = c.opacity/100;
+        cim[nr].style.userSelect = "none";
+        document.body.appendChild(cim[nr]);
+      }
+    
+      
+        </script>
+
 @endsection
