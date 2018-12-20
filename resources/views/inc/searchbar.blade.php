@@ -13,6 +13,7 @@
           <div class="custom-select1">
               @if(count($categories) > 0)
               <select name="categorySelect" id="categories-select">
+                  <option value="0">All categories</option>
                 @foreach($categories as $category)
                   <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
