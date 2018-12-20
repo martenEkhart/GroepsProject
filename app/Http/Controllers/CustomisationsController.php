@@ -75,7 +75,7 @@ class CustomisationsController extends Controller
             $customisation->width = 200;
             $customisation->height = 200;
             $customisation->rotation = 0;
-            $customisation->ratio = 1;
+            $customisation->ratio = 1000;
             $customisation->z_layer = 0;
             $customisation->opacity = 1;
             $customisation->visible = true;
@@ -157,7 +157,7 @@ class CustomisationsController extends Controller
         $customisation->width = 100;
         $customisation->height = 100;
         $customisation->rotation = 0;
-        $customisation->ratio = 1;
+        $customisation->ratio = 1000;
         $customisation->z_layer = 70;
         $customisation->opacity = 100;
         $customisation->visible = 1;

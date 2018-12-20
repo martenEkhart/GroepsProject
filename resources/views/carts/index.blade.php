@@ -18,7 +18,7 @@
                          @foreach($cart->cart_product as $cart_item)
                          <div class="for-wrapper">
                         <li class="list-group-item"><a href="/product/{{$cart_item->product_id}}"><h4>{{$cart_item->product->name}}</h4></a>
-                        Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');"></p>                     
+                        Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');" class="form-control"></p>                     
                         
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
@@ -27,7 +27,8 @@
                         </li>
                     </div>
                         @endforeach
-                        <a href="empty/ {{$zegeenswat[0]->cart_id}}" class="empty_cart">Empty your shopping cart</a><br>
+                        <a href="empty/{{$zegeenswat[0]->cart_id}}" class="btn btn-danger" role="button">Empty your shopping cart</a><br>
+
                     </ul>
                     <h3 id="price">Total price = €{{$cart->getTotal()}}</h3>
                     <br><br>
@@ -36,13 +37,20 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="panel panel-default">
                                 {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
-                    
-                                @if(count($addresses))
-                    
-                                @foreach ($addresses as $address)
-                                {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
                                 
-                                <div class="panel-body" style="margin-top: 20px;">
+
+                                @if(count($addresses))
+                                {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
+                                <select id="address" name="address" class="form-control">
+                                <option value="" selected>Please choose</option>
+                                @foreach ($addresses as $address)
+                               
+
+                                <option value="{{$address->id}}">{{$address->street}} {{$address->house_number}} {{$address->city}}</option>
+                                
+                                
+                                
+                                {{-- <div class="panel-body" style="margin-top: 20px;">
                                   <ul class="card" style="max-width: 250px;">
                                     
                                     
@@ -54,15 +62,15 @@
                                     <li style="list-style: none;" ><h5> {{$address->phone_number}}</h5></li>
                                    
                                     </ul>
-                                    {{ Form::checkbox('address', $address->id, null, null, array('id'=>'address')) }}
-                                        
+                                    {{ Form::checkbox('address', $address->id, null, null, array('id'=>'address')) }} --}}
                                    
                                 
                                 </div>
-                                
+                                @endforeach
+                            </select>        
+
                                 <a href="/address/create">Add a new address</a>
 
-                                @endforeach
                                 <br><br>
 
                                 {{Form::submit('Finalize order', ['class'=>'btn btn-primary'])}}
@@ -84,7 +92,7 @@
 </div>
 </div>
 </div>
-<div class="container" style="height: 150px;"></div>
+<div class="container" style="height: 380px;"></div>
 <script>
     function loadDoc(method, id, myFunction) {
 
