@@ -33,8 +33,12 @@
     <div id="products-container">
 
     <script>  
-      var cim = [];        
+      var cim = []; 
+      @if($customisations)
       var customisations = {!! json_encode($customisations->toArray()) !!};
+      @else
+      var customisations = [];
+      @endif
       for(i=0; i<customisations.length; i++) {
         createImg(i);
       }
