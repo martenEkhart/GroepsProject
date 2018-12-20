@@ -55,7 +55,7 @@
         var fac1 = 2.8;
         cim[nr].height = c.height*fac1;
         cim[nr].width = c.width*fac1;
-        cim[nr].style.zIndex = c.z_layer;
+        cim[nr].style.zIndex = c.z_layer-100;
         cim[nr].style.opacity = c.opacity/100;
         cim[nr].style.userSelect = "none";
         document.body.appendChild(cim[nr]);
