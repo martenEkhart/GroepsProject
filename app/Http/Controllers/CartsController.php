@@ -71,17 +71,20 @@ class CartsController extends Controller
             $this->cart_id = Cart::where('user_id',$user_id)->first();
         }
       // add an item to a cart
-        if (Cart_Product::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first()){
+
+      $add_to_item = Cart_Product::where([
+        'cart_id' => $this->cart_id->id,
+        'product_id' => $product_id
+    ])->first();
+   
+        if ($add_to_item){
             // when product already exists in the cart, add one to the amount
-            $add_to_item = Cart_Product::where([
-                'cart_id' => $this->cart_id->id,
-                'product_id' => $product_id
-            ])->first();
             $add_to_item->amount = $add_to_item->amount +1 ;
             $add_to_item->save();
         }
         else {
             // add new product to cart
+            print_r("dieee");
             $target_cart = $this->cart_id->id;
             $product_to_cart = new Cart_Product;
             $product_to_cart->cart_id = $target_cart;
