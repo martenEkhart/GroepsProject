@@ -15,15 +15,10 @@ class CustomisationsController extends Controller
         $customisation->x = $customisation.x;
     }
 
-    public function dataToJavascript($name) {
+    public function dataToJavascript(Request $request) {
         //dd('klkl');
-        $customisations = Customisation::where('name', $name)->get();
-
-    $allCustomisations = Customisation::All();
-    foreach($allCustomisations as $currentCustomisation) {
-        $currentCustomisation->tag = $name;
-        $currentCustomisation->save();
-    }
+        $customisations = Customisation::where('name', $request->name)->get();
+        $request->session()->put('key', $request->name);
 // dd($customisations);
         return view('customisations.transfer', compact('customisations'));
     }
@@ -170,11 +165,7 @@ class CustomisationsController extends Controller
         $customisation->tag = 0;
         $customisation->save();
 
-        $allCustomisations = Customisation::All();
-        foreach($allCustomisations as $currentCustomisation) {
-            $currentCustomisation->tag = $request->name;
-            $currentCustomisation->save();
-        }
+        $request->session()->put('key',$request->name);
 
             
 

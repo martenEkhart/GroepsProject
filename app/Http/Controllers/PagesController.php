@@ -37,12 +37,10 @@ class PagesController extends Controller
         return view('pages/productenTRaoul', compact('products'));
     }
 
-    public function getAdds () {
-        $tussen = Customisation::first();
-        $customisations = null;
-        if($tussen) {
-            $customisations = Customisation::where('name',$tussen->tag)->get();
-        }
+    public function getAdds (Request $request) {
+        $tussen = $request->session()->get('key');
+        $customisations = Customisation::where('name',$tussen)->get();
+    //    dd($tussen->tag);
         $categories = Category::All();
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
         // return view('pages/index' , compact('products', 'category'));
