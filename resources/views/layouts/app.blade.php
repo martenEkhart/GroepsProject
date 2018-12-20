@@ -17,7 +17,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <title>Just An Affordable WebShop</title>
-    <link rel="icon" type="image/png" href="images/customisations/logo3.ico"/>
+    <link rel="icon" type="image/png" href="images/customisations/logo5.ico"/>
 </head>
 <body>
        
