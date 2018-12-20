@@ -41,7 +41,7 @@
 
                                 @if(count($addresses))
                                 {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
-                                <select id="address" name="address" class="form-control">
+                                <select id="address" name="address" class="form-control" required>
                                 <option value="" selected>Please choose</option>
                                 @foreach ($addresses as $address)
                                

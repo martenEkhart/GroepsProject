@@ -65,11 +65,18 @@ class ProductsController extends Controller
     }
     public function getScrollData(Request $request) 
     {
+        if($request->category == 0){
+            $products = Product::where('name', 'like', '%'.$request->search.'%')
+            ->orWhere('description', 'like', '%'.$request->search.'%')
+            ->limit($request->amount)->offset($request->start_index)->get();
+        } else {
         $products = Product::where('name', 'like', '%'.$request->search.'%')
             ->where('category_id', $request->category)
             ->orWhere('description', 'like', '%'.$request->search.'%')
+            ->where('category_id', $request->category)
             ->limit($request->amount)->offset($request->start_index)->get();
-               return response($products)
+        }
+        return response($products)
             ->header('Content-Type', 'application/json');
     }
 
