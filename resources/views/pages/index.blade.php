@@ -34,7 +34,13 @@
 
     <script>  
       var cim = [];        
-      var customisations = {!! json_encode($customisations->toArray()) !!};
+      if($customisations) {
+        var customisations = {!! json_encode($customisations->toArray()) !!};
+      }
+      else 
+      {
+        var customisations = [];
+      }
       for(i=0; i<customisations.length; i++) {
         createImg(i);
       }
@@ -49,7 +55,7 @@
           cim[nr].style.position = "absolute";
         }
         
-        cim[nr].src = "../images/customisations/" + c.image_name;
+        cim[nr].src = "/images/customisations/" + c.image_name;
         cim[nr].style.left = Math.round(c.x/10000*window.innerWidth) +  "px";
         cim[nr].style.top = Math.round(c.y/10000*window.innerHeight) +  "px";
         var fac1 = 2.8;
