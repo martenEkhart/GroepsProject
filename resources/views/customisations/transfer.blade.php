@@ -54,7 +54,7 @@
                     </div>
                     <div id="dnew"  style="background-color:#F2A104; background-image: url('/images/bg1/new.png'); background-size: 100% 100%;">
                     </div>
-                    <div id="ddelete" onclick="deleteData(1, 2)" style="background-color:#7F5417; background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
+                    <div id="ddelete"  style="background-color:#7F5417; background-image: url('/images/bg1/delete.png'); background-size: 100% 100%;">
                     </div>
                                        
            
@@ -218,9 +218,25 @@ function fnresize(){
         if (controlDown(3/4,5/6,4/4,6/6)) { 
             fnRatio();
         }
+
+        if (controlDown(4/8,8/9,5/8,9/9)) { 
+            fnNewImage();
+        }
+        if (controlDown(5/8,8/9,6/8,9/9)) { 
+            deleteData(customisations[counter].id);
+            cim[counter].style.display = "none";
+            cim.splice(counter,1);
+            customisations.splice(counter,1);
+            if (counter >= 2) {counter--} else {counter++}
+        }
+
         
     }
     
+    function fnNewImage() {
+        window.location.replace("/customisation/create");
+    }
+
     function mouseDown() {
    
 
@@ -518,7 +534,7 @@ function changeDiv(xhttp, div) {
 //  ctx.fillRect(20, 20, 150, 100);
  }
 
-function deleteData(item, indexToRemove) {
+function deleteData(item) {
      item = customisations[counter].id;
         return fetch('/customisation/' + item, {
             method: 'delete',

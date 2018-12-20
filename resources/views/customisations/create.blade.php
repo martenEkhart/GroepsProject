@@ -1,6 +1,6 @@
 @extends('layouts.custom')
 @section('content')
-<a href="/customisation/manage" target="_parent"><button class="box ">Go to your customisations</button></a>
+<a href="/customisation/manage/{{Session::get('key')}}" target="_parent"><button class="box ">Go to your customisations</button></a>
 
 <div class="container">
         {!! Form::open(['action' => ['CustomisationsController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
