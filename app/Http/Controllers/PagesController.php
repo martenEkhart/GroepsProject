@@ -41,7 +41,6 @@ class PagesController extends Controller
         $tussen = Customisation::first();
         $customisations = null;
         if($tussen) {
-            $tussen->tag = 'kerst';
             $customisations = Customisation::where('name',$tussen->tag)->get();
         }
         $categories = Category::All();

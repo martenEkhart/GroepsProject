@@ -18,7 +18,13 @@ class CustomisationsController extends Controller
     public function dataToJavascript($name) {
         //dd('klkl');
         $customisations = Customisation::where('name', $name)->get();
-        // dd($customisations);
+
+    $allCustomisations = Customisation::All();
+    foreach($allCustomisations as $currentCustomisation) {
+        $currentCustomisation->tag = $name;
+        $currentCustomisation->save();
+    }
+// dd($customisations);
         return view('customisations.transfer', compact('customisations'));
     }
 
