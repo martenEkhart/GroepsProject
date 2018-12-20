@@ -2,7 +2,6 @@
 @section('content')
 
 
-
  
         <label id="name" style="font-size: 30px; color:blue; position:absolute; " ></label>
         {{-- <input style="z-index: 1111111108; position:absolute; height: 50px; zoom: 1;" id="checkbox" type="checkbox" 
@@ -70,15 +69,12 @@
 
 
 @csrf
-{{-- <div id="tixt" style="position:fixed; left:100px; top: 25px"></div>
-<div id="tixt2" style="position:fixed; left:100px; top: 55px"></div> --}}
+{{-- <div id="tixt" style="position:fixed; left:100px; top: 25px"></div> --}}
+<div id="tixt2" style="position:fixed; left:100px; top: 55px"></div>
 <canvas id="canvas"  width="200" height="200" style="position:absolute;"></canvas>
 <canvas id="websiteBorders"  width="1584" height="748" style="position:absolute; left: 0px; top: 67px; "></canvas>
 <img id="redarrow" src="/images/bg1/boxselect.png" style="left: 40px; top: 40 px; position:absolute; z-index:100000" >
 <script>
-function testest(){
-    alert("testst");
-}
 
 
  var counter = 0;
@@ -101,7 +97,8 @@ function testest(){
 
 
   var tel = 0;
-//   tixt = document.getElementById("tixt");
+   tixt2 = document.getElementById("tixt2");
+   tixt2.innerHTML ="  dkfjksdj";
 
   var customisations = {!! json_encode($customisations->toArray()) !!};
     document.getElementById("name").innerHTML = customisations[counter].name;
@@ -195,6 +192,7 @@ function fnresize(){
     function doeSave() {
         markeer();
         mouseHold = false;
+        tixt2.innerHTML = "false";
         customisations[counter].x = Math.round(10000*(parseInt(cim[counter].style.left)-bx)/bdx);
         customisations[counter].y = Math.round(10000*(parseInt(cim[counter].style.top)-by-ccy)/bdy);
         // customisations[counter].width = Math.floor(cim[counter].clientWidth/ dxf);
@@ -228,8 +226,11 @@ function fnresize(){
     }
     
     function mouseDown() {
+   
+
         essentialButtons();
 //        alert(event.clientX+ "  "+event.clientY);
+    
         if (mouseHold) {
             document.getElementById("canvas").style.display = "none";
        //     markeer();
@@ -254,6 +255,7 @@ function fnresize(){
             mouseCorY = event.clientY - parseInt(cim[counter].style.top);
             markeer();
             mouseHold = true;
+            tixt2.innerHTML = "true";
             return
         }
         
