@@ -36,6 +36,7 @@ class CustomisationsController extends Controller
      $customisation->opacity  = floor($request->opacity * 100);
      $customisation->z_layer  = $request->z_layer;
      $customisation->visible  = $request->visible;
+     $customisation->watermark_style = 1;
      $customisation->tag = $request->tag;
      $customisation->save();
   return $request->x." ".$request->y;
@@ -80,6 +81,7 @@ class CustomisationsController extends Controller
             $customisation->z_layer = 0;
             $customisation->opacity = 1;
             $customisation->visible = true;
+            $customisation->watermark_style = 1;
             $customisation->tag = 0;
             $customisation->save();
         }
@@ -162,6 +164,7 @@ class CustomisationsController extends Controller
         $customisation->z_layer = 70;
         $customisation->opacity = 100;
         $customisation->visible = 1;
+        $customisation->watermark_style = 1;
         $customisation->tag = 0;
         $customisation->save();
 
