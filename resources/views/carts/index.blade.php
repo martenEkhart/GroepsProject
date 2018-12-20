@@ -18,7 +18,7 @@
                          @foreach($cart->cart_product as $cart_item)
                          <div class="for-wrapper">
                         <li class="list-group-item"><a href="/product/{{$cart_item->product_id}}"><h4>{{$cart_item->product->name}}</h4></a>
-                        Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');"></p>                     
+                        Amount:<input type="number" id="amount{{$cart_item->id}}" min="1" value="{{ $cart_item->amount}}"  onchange="loadDoc('POST' ,'{{$cart_item->id}}', 'getAmount');" class="form-control"></p>                     
                         
                         {{-- {!!Form::open(['action' => ['CartsController@removeFromCart', $zegeenswat[$loop->index]->id], 'method' => 'GET'])!!}
                         {{Form::submit('Remove from shoppingcart', ['class' => 'btn btn-danger btn-lg'])}}
@@ -37,13 +37,20 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="panel panel-default">
                                 {{-- <div class="panel-heading"><a href="/" class="pull-right btn btn-default btn-xs">Go Back</a></div> --}}
-                    
-                                @if(count($addresses))
-                    
-                                @foreach ($addresses as $address)
-                                {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
                                 
-                                <div class="panel-body" style="margin-top: 20px;">
+
+                                @if(count($addresses))
+                                {!! Form::open(['action' => ['CartsController@checkoutCart'], 'method' => 'POST']) !!}
+                                <select id="address" name="address" class="form-control">
+                                <option value="" selected>Please choose</option>
+                                @foreach ($addresses as $address)
+                               
+
+                                <option value="{{$address->id}}">{{$address->street}} {{$address->house_number}} {{$address->city}}</option>
+                                
+                                
+                                
+                                {{-- <div class="panel-body" style="margin-top: 20px;">
                                   <ul class="card" style="max-width: 250px;">
                                     
                                     
@@ -55,14 +62,13 @@
                                     <li style="list-style: none;" ><h5> {{$address->phone_number}}</h5></li>
                                    
                                     </ul>
-                                    {{ Form::checkbox('address', $address->id, null, null, array('id'=>'address')) }}
-                                        
+                                    {{ Form::checkbox('address', $address->id, null, null, array('id'=>'address')) }} --}}
                                    
                                 
                                 </div>
-                                
-
                                 @endforeach
+                            </select>        
+
                                 <a href="/address/create">Add a new address</a>
 
                                 <br><br>

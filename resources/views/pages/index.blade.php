@@ -30,6 +30,7 @@
      @endif
     <div class="container" id="paginate"> {{$products->links()}}</div>   </div> 
     @yield('categories')
+    <div id="products-container">
 
     <script>  
       var cim = [];        

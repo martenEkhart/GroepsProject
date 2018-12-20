@@ -56,6 +56,7 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
+        // dd($request->categorySelect);
         // $search = $request->get('search');        
         // $products = Product::where('name', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->paginate(3);
         // $products->appends(['search' => $search]);
@@ -65,11 +66,10 @@ class ProductsController extends Controller
     public function getScrollData(Request $request) 
     {
         $products = Product::where('name', 'like', '%'.$request->search.'%')
+            ->where('category_id', $request->category)
             ->orWhere('description', 'like', '%'.$request->search.'%')
             ->limit($request->amount)->offset($request->start_index)->get();
-       
-        // dd($products);
-        return response($products)
+               return response($products)
             ->header('Content-Type', 'application/json');
     }
 

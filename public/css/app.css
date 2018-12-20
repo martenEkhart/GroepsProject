@@ -9,17 +9,13 @@ html,
   padding: 0;
 }
 
+#header2 {
+  font-size: 20px;
+}
+
 #header-button {
   font-size: 18px;
   text-align: center;
-}
-
-.feedback_okay {
-  color:green;
-}
-
-.feedback_warning {
-  color:red;
 }
 
 #cart-logo {
@@ -31,10 +27,6 @@ html,
   margin-top: 12px;
 }
 
-#foot {
-  background-color: #8484ff75;
-}
-
 #hoofd {
   text-align: center;
   margin-top: 100px;
@@ -43,11 +35,13 @@ html,
 #copyright {
   font-size: 20px;
   text-align: center;
+  margin-bottom: -40px;
 }
 
 #contact {
   float: right;
   margin-right: 100px;
+  margin-bottom: 4px;
 }
 
 #product {
@@ -104,6 +98,26 @@ html,
 #return-to-top:hover i {
   color: #fff;
   top: 5px;
+}
+
+/* Use a media query to add a break point at 800px: */
+
+@media screen and (max-width: 500px) {
+  #header {
+    font-size: 24px;
+  }
+
+  #header2 {
+    font-size: 13px;
+  }
+
+  #contact {
+    margin-bottom: 10px;
+  }
+
+  #copyright {
+    margin-bottom: 44px;
+  }
 }
 
 /*!

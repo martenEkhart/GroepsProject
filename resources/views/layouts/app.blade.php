@@ -20,6 +20,7 @@
     <link rel="icon" type="image/png" href="images/customisations/logo3.ico"/>
 </head>
 <body>
+       
     <div id='app'></div>
      @include('inc.navbar')
         @include('inc.messages')
