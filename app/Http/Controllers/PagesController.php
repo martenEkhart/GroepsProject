@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Product;
 use App\Category;
+use App\Customisation;
 
 class PagesController extends Controller
 {
@@ -37,10 +38,13 @@ class PagesController extends Controller
     }
 
     public function getAdds () {
+        $tussen = Customisation::first();
+        $tussen->tag = 'kerst';
+        $customisations = Customisation::where('name',$tussen->tag)->get();
         $categories = Category::All();
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
         // return view('pages/index' , compact('products', 'category'));
-        return view('pages.index')->with(['products' => $products, 'categories' => $categories]);
+        return view('pages.index')->with(['products' => $products, 'categories' => $categories, 'customisations' => $customisations]);
 
     }
 

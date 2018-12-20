@@ -163,6 +163,15 @@ class CustomisationsController extends Controller
         $customisation->visible = 1;
         $customisation->tag = 0;
         $customisation->save();
+
+        $allCustomisations = Customisation::All();
+        foreach($allCustomisations as $currentCustomisation) {
+            $currentCustomisation->tag = $request->name;
+            $currentCustomisation->save();
+        }
+
+            
+
         return redirect('customisation/manage/'.$request->name)->with('success', 'Customisation created');
     } else {
         $fileNameToStore = 'noImage.jpg';
