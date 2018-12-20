@@ -23,8 +23,8 @@ class PagesController extends Controller
     public function getIndex () {
         // return view('pages/index');
         $products = Product::All();
-      
-        return view('pages.index')->with('products', $products);
+        $categories = Category::All();
+        return view('pages.index')->with(['products' => $products, 'categories', $categories]);
     }
 
     public function getProducten() {
@@ -37,9 +37,11 @@ class PagesController extends Controller
     }
 
     public function getAdds () {
-        $category = Category::pluck('name', 'id');
+        $categories = Category::All();
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
-        return view('pages/index' , compact('products', 'category'));
+        // return view('pages/index' , compact('products', 'category'));
+        return view('pages.index')->with(['products' => $products, 'categories' => $categories]);
+
     }
 
     public function getAddress () {
