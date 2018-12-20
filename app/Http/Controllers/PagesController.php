@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Product;
 use App\Category;
+use App\Customisation;
 
 class PagesController extends Controller
 {
@@ -23,8 +24,8 @@ class PagesController extends Controller
     public function getIndex () {
         // return view('pages/index');
         $products = Product::All();
-      
-        return view('pages.index')->with('products', $products);
+        $categories = Category::All();
+        return view('pages.index')->with(['products' => $products, 'categories', $categories]);
     }
 
     public function getProducten() {
@@ -37,9 +38,14 @@ class PagesController extends Controller
     }
 
     public function getAdds () {
-        $category = Category::pluck('name', 'id');
+        $tussen = Customisation::first();
+        $tussen->tag = 'kerst';
+        $customisations = Customisation::where('name',$tussen->tag)->get();
+        $categories = Category::All();
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
-        return view('pages/index' , compact('products', 'category'));
+        // return view('pages/index' , compact('products', 'category'));
+        return view('pages.index')->with(['products' => $products, 'categories' => $categories, 'customisations' => $customisations]);
+
     }
 
     public function getAddress () {

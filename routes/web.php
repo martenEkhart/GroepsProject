@@ -55,4 +55,4 @@ Route::post('cart/checkout','CartsController@checkoutCart');
 // Route::get('cart/checkout/{user_id}/{cart_id}','CartsController@checkoutCart');
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('willem/{start_index}/{amount}/{search}', 'ProductsController@getScrollData');
+Route::get('willem/{start_index}/{amount}/{search}/{category}', 'ProductsController@getScrollData');

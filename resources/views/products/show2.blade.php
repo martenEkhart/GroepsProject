@@ -46,6 +46,8 @@
     console.log(query);
     var qs = parse_query_string(query);
     var search = qs.search;
+    console.log(search);
+    console.log(qs.categorySelect);
     var newQs = search.replace(/\+/g, " ");
 
     var startIndex = 0;
@@ -70,7 +72,7 @@
 
         var htmlContent = "";
 
-        fetch('/willem/' + startIndex + '/' + amount + '/' + search, {
+        fetch('/willem/' + startIndex + '/' + amount + '/' + search + '/' + qs.categorySelect, {
             method: 'get',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
