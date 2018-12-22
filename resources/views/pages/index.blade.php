@@ -35,13 +35,14 @@
     <script>  
       var customisations = {!! json_encode($customisations->toArray()) !!};
       
-      var cim = [];        
+      var cim = []; 
+      var fac1 = 2.8;       
       
       for(i=0; i<customisations.length; i++) {
         createImg(i);
       }
-    
-    
+      
+      
       function createImg(nr) {
         c = customisations[nr];
         cim[nr] = document.createElement('img');
@@ -54,14 +55,28 @@
         cim[nr].src = "/images/customisations/" + c.image_name;
         cim[nr].style.left = Math.round(c.x/10000*window.innerWidth) +  "px";
         cim[nr].style.top = Math.round(c.y/10000*window.innerHeight) +  "px";
-        var fac1 = 2.8;
-        cim[nr].height = c.height*fac1;
-        cim[nr].width = c.width*fac1;
-        cim[nr].style.zIndex = c.z_layer-100;
+        cim[nr].height = Math.round(c.height*window.innerHeight/723*fac1*(c.ratio/1000));
+        cim[nr].width = Math.round(c.width*window.innerWidth/1536*fac1/(c.ratio/1000));
+        cim[nr].style.transform = "rotate(" + c.rotation + "deg)";
+        cim[nr].style.zIndex = c.z_layer-400;
         cim[nr].style.opacity = c.opacity/100;
         cim[nr].style.userSelect = "none";
         document.body.appendChild(cim[nr]);
       }
+
+      window.onresize = function() { resizeImages(); } 
+
+      function resizeImages () {
+        for(i=0; i<customisations.length; i++) {
+          c = customisations[i];
+          cim[i].style.left = Math.round(c.x/10000*window.innerWidth) +  "px";
+          cim[i].style.top = Math.round(c.y/10000*window.innerHeight) +  "px";
+          cim[i].height = Math.round(c.height*window.innerHeight/723*fac1*(c.ratio/1000));
+          cim[i].width = Math.round(c.width*window.innerWidth/1536*fac1/(c.ratio/1000));
+
+        }
+      }
+
     
       
         </script>

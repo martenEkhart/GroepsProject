@@ -164,7 +164,7 @@ class CustomisationsController extends Controller
         $customisation->z_layer = 70;
         $customisation->opacity = 100;
         $customisation->visible = 1;
-        $customisation->watermark_style = 1;
+        $customisation->watermark_style = 0;
         $customisation->tag = 0;
         $customisation->save();
 
