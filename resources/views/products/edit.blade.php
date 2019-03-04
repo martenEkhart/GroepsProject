@@ -1,5 +1,7 @@
-@extends('admin.index')
+@extends('layouts.app')
 @section('content')
+
+
 <div class="container">
     {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">

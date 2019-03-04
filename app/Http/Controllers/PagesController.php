@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth; 
+use Auth;
+use App\Product;
+use App\Category;
+use App\Customisation;
 
 class PagesController extends Controller
 {
@@ -19,17 +22,39 @@ class PagesController extends Controller
     }
 
     public function getIndex () {
-        return view('pages/index');
+        // return view('pages/index');
+        $products = Product::All();
+        $categories = Category::All();
+        return view('pages.index')->with(['products' => $products, 'categories', $categories]);
     }
-    
+
     public function getProducten() {
         return view('pages/producten');
     }
-    
-    public function getKlant () {
-        return view('pages/klant');
+
+    public function getProductenTRaoul() {
+      $products = Product::all();
+        return view('pages/productenTRaoul', compact('products'));
     }
-    
+
+    public function getAdds (Request $request) {
+        $tussen = $request->session()->get('key');
+        $customisations = Customisation::where('name',$tussen)->get();
+    //    dd($tussen->tag);
+        $categories = Category::All();
+        $products = Product::orderBy('created_at', 'desc')->paginate(12);
+        // return view('pages/index' , compact('products', 'category'));
+        return view('pages.index')->with(['products' => $products, 'categories' => $categories, 'customisations' => $customisations]);
+
+    }
+
+    public function getAddress () {
+
+        $address = Address::where('user_id', $user_id)->get();
+        return view('carts.')->with('address', $address);
+    }
+
+
     public function getAdmin () {
         if(Auth::user()->authorization_level != 1)
         {

@@ -14,7 +14,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         // add exceptions to auth
-        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'getWillem', 'getScrollData']]);
     }
     /**
      * Display a listing of the resource.
@@ -56,9 +56,28 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->get('search');
-        $products = Product::where('name', 'like', '%'.$search.'%')->paginate(5);
-        return view('inc.customer')->with('products', $products);
+        // dd($request->categorySelect);
+        // $search = $request->get('search');        
+        // $products = Product::where('name', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->paginate(3);
+        // $products->appends(['search' => $search]);
+        // return view('inc.customer')->with('products', $products);
+        return view('products.show2');
+    }
+    public function getScrollData(Request $request) 
+    {
+        if($request->category == 0){
+            $products = Product::where('name', 'like', '%'.$request->search.'%')
+            ->orWhere('description', 'like', '%'.$request->search.'%')
+            ->limit($request->amount)->offset($request->start_index)->get();
+        } else {
+        $products = Product::where('name', 'like', '%'.$request->search.'%')
+            ->where('category_id', $request->category)
+            ->orWhere('description', 'like', '%'.$request->search.'%')
+            ->where('category_id', $request->category)
+            ->limit($request->amount)->offset($request->start_index)->get();
+        }
+        return response($products)
+            ->header('Content-Type', 'application/json');
     }
 
     /**
@@ -69,7 +88,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        
+    
         if(Auth::user()->authorization_level != 1)
         {
             return redirect('/login')->with("error", "Unauthorized authentication");
@@ -81,7 +101,7 @@ class ProductsController extends Controller
             'description' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'image_name' => 'image|nullable|max:1999'
+            'image_name' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1999'
         ]);
 
         // handle file upload
@@ -97,7 +117,7 @@ class ProductsController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
             // $path = $request->file('image_name')->storeAs('public/product_images', $fileNameToStore);
-            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('images/products'), $fileNameToStore);
         } else {
             $fileNameToStore = 'noImage.jpg';
         }
@@ -113,7 +133,7 @@ class ProductsController extends Controller
         $product->stock = $request->stock;
         $product->category_id = $request->category;
         $product->save();
-        return redirect('product')->with('success', 'Product created');
+        return redirect('/admin/index')->with('success', 'Product created');
     }
 
     /**
@@ -178,7 +198,7 @@ class ProductsController extends Controller
             // fileName to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
             // upload the image
-            $request->file('image_name')->move(public_path('product_images'), $fileNameToStore);
+            $request->file('image_name')->move(public_path('images/products'), $fileNameToStore);
         }
 
         // create product
@@ -193,7 +213,7 @@ class ProductsController extends Controller
         $product->category_id = $request->category;
         $product->save();
 
-        return redirect('product')->with('success', 'Product updated');
+        return redirect('/admin/index')->with('success', 'Product updated');
     }
 
     /**
@@ -211,13 +231,13 @@ class ProductsController extends Controller
         $product = Product::find($id);
 
         if($product->image_name != 'noImage.jpg') {
-            if(File::exists('product_images/' . $product->image_name)) {
-                File::delete('product_images/' . $product->image_name);
+            if(File::exists('images/products/' . $product->image_name)) {
+                File::delete('images/products/' . $product->image_name);
             }
         }
         $product->delete();
 
-        return redirect('product')->with('success', 'Product deleted');
+        return redirect('/admin/index')->with('success', 'Product deleted');
 
     }
 }

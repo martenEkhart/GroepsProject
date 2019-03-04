@@ -1,16 +1,29 @@
-  <nav class="navbar navbar-expand-sm sticky-top " style= "font-size: 22px">
+  <nav class="navbar navbar-expand-sm" style= "font-size: 22px; z-index:9999999">
         {{-- <a class="navbar-brand" href="#"style= "color: #32adc3;"><b style= "font-size: 26px;">J.A.A.W</b></a> --}}
         <button class="navbar-toggler btn btn-light btn-lg"  type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
          <b style="font-size: 28px"><p style="color: black">Menu</p></b>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample03" style="color: black">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" id="nav" style="color: black" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {{-- <li class="nav-item active">
+              <a class="nav-link" style="color: black" href="/product">Producten</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" style="color: black" href="/product">Producten</a>
+       
+          
+            {{-- @if ($carts)
+            @php echo "hoi"; @endphp
+            (Cart::where('cart_id',$this->cart_id->id)->first() && Cart_Product::where('product_id',$product_id)->first())
+            @endif --}}
+            <li>
+            @if(!Auth::guest())
+                <a class="nav-link" id="cart-logo" href="/cart/{{Auth::user()->id}}"><i class="fas fa-shopping-cart" style="margin:12px;"></i></a>
+               
+            @endif
             </li>
             {{-- <li class="nav-item active">
               <a class="nav-link" style="color: black" href="/klant">Klant</a>
@@ -18,9 +31,17 @@
             <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/contact">Contact</a>
                   </li> --}}
-                  <li class="nav-item active">
-                    <a class="nav-link" style="color: black" href="/admin/index">Admin</a>
-                  </li>
+                   @if(!Auth::guest())
+                   @if(Auth::user()->authorization_level == 1)
+
+                   <li class="nav-item active">
+                     <a class="nav-link" id="nav" style="color: black" href="/customisation/create">Customisations</a>
+                   </li>
+                   <li class="nav-item active">
+                     <a class="nav-link" id="nav" style="color: black" href="/admin/index">Admin</a>
+                   </li>
+                  @endif
+                  @endif
             {{-- <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
               <div class="dropdown-menu" aria-labelledby="dropdown03">
@@ -46,7 +67,7 @@
                 </li>
             @else
                 <li class="nav-item dropdown">
-                    
+
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>

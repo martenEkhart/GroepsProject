@@ -12,4 +12,22 @@ class Cart extends Model
      public function cart_product() {
         return $this->hasMany('App\Cart_Product');
     }
+    public function address() {
+        return $this->hasMany('App\Address');
+    }
+    public function user() {
+        return $this->hasOne('App\User');
+    }
+    public function getTotal() {
+        $total = 0;
+        foreach($this->cart_product as $cart_product) {
+            $total += $cart_product->amount * $cart_product->product->price;
+        }
+        return $total;
+    }
+    public function deleteAllItems() {
+        foreach($this->cart_product as $cart_product) {
+            $cart_product->delete();
+        }
+    }
 }
