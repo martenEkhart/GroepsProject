@@ -6,7 +6,7 @@ We used Laravel to create an easy way to make CRUD functionality.
 
 We used Bootstrap for the layout.
 
-We used Ajax for search functionality.
+We used AJAX for search functionality.
 
 We made use off the API https://github.com/mollie/laravel-mollie for payment options.
 
