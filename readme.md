@@ -1,3 +1,9 @@
+This is our final Project at CodeGorilla Bootcamp!
+
+We wanted to make a simple website for the small business owner, so they can sell there products easy and change things them self's on the fly. 
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
