@@ -1,6 +1,20 @@
 This is our final Project at CodeGorilla Bootcamp!
 
-We wanted to make a simple website for the small business owner, so they can sell there products easy and change things them self's on the fly. 
+We wanted to make a simple website for the small business owner, so they can sell there products easy and change things them self's on the fly!
+
+We used Laravel to create an easy way to make CRUD functionality.
+
+We used Bootstrap for the layout.
+
+We used Ajax for search functionality.
+
+We made use off the API https://github.com/mollie/laravel-mollie for payment options.
+
+And we used some JavaScript for scroll up buttons. 
+
+
+
+
 
 
 
